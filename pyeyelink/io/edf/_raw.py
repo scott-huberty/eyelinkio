@@ -6,6 +6,7 @@ from os import path as op
 import ctypes as ct
 from datetime import datetime
 from functools import partial
+from pathlib import Path
 import warnings
 
 try:
@@ -29,24 +30,37 @@ from . import _defines as defines
 _MAX_MSG_LEN = 260  # maxmimum message length we'll need to store
 
 
-class RawEDF(_BaseRaw):
-    """Represent EyeLink EDF files in Python
+class RawEDF(dict):
+    """Represent EyeLink EDF files in Python.
 
     Parameters
     ----------
     fname : str
         The name of the EDF file.
     """
+
     def __init__(self, fname):
         if not has_edfapi:
             raise OSError('Could not load EDF api: %s' % why_not)
         info, discrete, times, samples = _read_raw_edf(fname)
         self.info = info
+        self.info["filename"] = Path(fname).name
         self.discrete = discrete
         self._times = times
         self._samples = samples
-        _BaseRaw.__init__(self)  # perform sanity checks
+        super(RawEDF, self).__init__(info=info, discrete=discrete,
+                                     times=times, samples=samples)
 
+    def __repr__(self):
+        """Return a summary of the EDF File."""
+        return (f"<RawEDF | {self['info']['filename']}> \n"
+                f"  Version: {self['info']['version']} \n"
+                f"  Eye: {self['info']['eye']} \n"
+                f"  Pupil unit: {self['info']['ps_units']} \n"
+                f"  Sampling frequency: {self['info']['sfreq']} Hz \n"
+                f"  Calibrations: {len(self['info']['calibrations'])} \n"
+                f"  Length: {len(self['times']) / self['info']['sfreq']} seconds \n"
+        )
 
 class _edf_open(object):
     """Context manager for opening EDF files"""
