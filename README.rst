@@ -20,4 +20,4 @@ Strictly speaking, pyEyelink only requires Numpy, and that the user has the `Eye
 Acknowledgements
 ================
 
-This package was originally adapted from the pyeparse package (created by several of the core developers of `MNE-Python <https://mne.tools/dev/index.html>`_). It copies much of the EDF (Eyelink Data Format) reading code. 
+This package was originally adapted from the `pyeparse <https://github.com/pyeparse/pyeparse>`_ package (created by several of the core developers of `MNE-Python <https://mne.tools/dev/index.html>`_). It copies much of the EDF (Eyelink Data Format) reading code. 
