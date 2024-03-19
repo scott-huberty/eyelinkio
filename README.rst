@@ -14,7 +14,7 @@ The Eyelink Data Format (EDF; not to be confused with the `European Data Format 
 Dependencies
 ============
 
-Strictly speaking, pyEyelink only requires Numpy, and that the user has the ` Eyelink developers kit <https://www.sr-research.com/support/forum-3.html>`_ installed on their maching (One must create a login on the forum to access the download). We also plan to create helper functions for converting data to pandas `DataFrames` or MNE-Python Raw instances, after reading the data in. These functions would require the user to have those packages installed.
+Strictly speaking, pyEyelink only requires Numpy, and that the user has the `Eyelink developers kit <https://www.sr-research.com/support/forum-3.html>`_ installed on their maching (One must create a login on the forum to access the download). We also plan to create helper functions for converting data to pandas `DataFrames` or MNE-Python Raw instances, after reading the data in. These functions would require the user to have those packages installed.
 
 
 Acknowledgements
