@@ -1,6 +1,6 @@
 import numpy as np
 
-from pyeyelink import EDF
+from pyeyelink.io import read_edf
 from pyeyelink.utils import _get_test_fnames, requires_edfapi
 
 fnames = _get_test_fnames()
@@ -9,7 +9,7 @@ fnames = _get_test_fnames()
 def test_read_raw():
     """Test reading raw data."""
     for fname in fnames:
-        edf_file = EDF(fname)
+        edf_file = read_edf(fname)
         # test repr
         assert repr(edf_file)
 

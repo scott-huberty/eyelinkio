@@ -29,6 +29,21 @@ from . import _defines as defines
 _MAX_MSG_LEN = 260  # maxmimum message length we'll need to store
 
 
+def read_edf(fname):
+    """Read an EyeLink EDF file.
+
+    Parameters
+    ----------
+    fname : str
+        The name of the EDF file.
+
+    Returns
+    -------
+    edf : EDF
+        The EDF file.
+    """
+    return EDF(fname)
+
 class EDF(dict):
     """Represent EyeLink EDF files in Python.
 

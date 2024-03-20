@@ -1,5 +1,4 @@
-# Authors: Denis Engemann <denis.engemann@gmail.com>
+# Authors: Scott Huberty <seh33@uw.edu>
+# Aknowledgements to the devs of the pyeparse package, from which this is derived
 #
 # License: BSD (3-clause)
-
-from .io.edf.read_edf import EDF
