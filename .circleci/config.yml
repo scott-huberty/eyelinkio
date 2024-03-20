@@ -1,0 +1,31 @@
+version: 2.1
+
+jobs:
+  test:
+    docker:
+      - image: circleci/python:3.10
+
+    working_directory: /app
+
+    steps:
+      - checkout
+
+      - run:
+          name: Install dependencies
+          command: |
+            sudo apt-get update
+            sudo apt-get install -y software-properties-common
+            sudo apt-get update
+            sudo apt-get install -y ca-certificates
+            sudo apt-get update
+            sudo apt-key adv --fetch-keys https://apt.sr-research.com/SRResearch_key
+            sudo add-apt-repository 'deb [arch=amd64] https://apt.sr-research.com SRResearch main'
+            sudo apt-get update
+            pip install -e ".[dev]"
+            sudo apt-get install -y eyelink-edfapi
+            sudo ldconfig
+
+      - run:
+          name: Run tests
+          command: |
+            pytest
