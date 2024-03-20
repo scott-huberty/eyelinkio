@@ -30,6 +30,10 @@ jobs:
 
       - name: Install dependencies
         run: |
+          sudo add-apt-repository universe
+          sudo apt update
+          sudo apt install ca-certificates
+          sudo apt update
           sudo apt-key adv --fetch-keys https://apt.sr-research.com/SRResearch_key
           sudo add-apt-repository 'deb [arch=amd64] https://apt.sr-research.com SRResearch main'
           sudo apt update
