@@ -13,7 +13,7 @@ def _get_test_fnames():
 
 def _has_edfapi():
     """Determine if a user has edfapi installed."""
-    from .io.edf._raw import has_edfapi
+    from .io.edf.read_edf import has_edfapi
     return has_edfapi
 
 
