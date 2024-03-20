@@ -30,7 +30,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          sudo add-apt-repository "deb http://download.sr-support.com/software SRResearch main"
+          sudo add-apt-repository "deb http://download.sr-support.com/software/dists SRResearch main"
           wget -O - "http://download.sr-support.com/software/dists/SRResearch/SRResearch_key" | sudo apt-key add -
           sudo apt-get update
           pip install -e ".[dev]"
