@@ -30,9 +30,9 @@ jobs:
 
       - name: Install dependencies
         run: |
-          sudo add-apt-repository "deb http://download.sr-support.com/software/dists SRResearch main"
-          wget -O - "http://download.sr-support.com/software/dists/SRResearch/SRResearch_key" | sudo apt-key add -
-          sudo apt-get update
+          sudo apt-key adv --fetch-keys https://apt.sr-research.com/SRResearch_key
+          sudo add-apt-repository 'deb [arch=amd64] https://apt.sr-research.com SRResearch main'
+          sudo apt update
           pip install -e ".[dev]"
           sudo apt-get install edfapi
           sudo ldconfig
