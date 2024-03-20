@@ -23,15 +23,17 @@ except OSError as exp:
     has_edfapi = False
     why_not = str(exp)
 
-from ..._baseraw import _BaseRaw
 from ._defines import event_constants
 from . import _defines as defines
 
 _MAX_MSG_LEN = 260  # maxmimum message length we'll need to store
 
 
-class RawEDF(dict):
+class EDF(dict):
     """Represent EyeLink EDF files in Python.
+
+    This class is a subclass of dict, and so can be indexed like a
+    dictionary. To see the available keys, use the ``keys()`` method.
 
     Parameters
     ----------
@@ -48,7 +50,7 @@ class RawEDF(dict):
         self.discrete = discrete
         self._times = times
         self._samples = samples
-        super(RawEDF, self).__init__(info=info, discrete=discrete,
+        super(EDF, self).__init__(info=info, discrete=discrete,
                                      times=times, samples=samples)
 
     def __repr__(self):

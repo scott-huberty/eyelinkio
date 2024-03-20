@@ -2,5 +2,4 @@
 #
 # License: BSD (3-clause)
 
-from .io.edf._raw import RawEDF  
-from ._baseraw import read_raw
+from .io.edf.read_raw import EDF
