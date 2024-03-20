@@ -41,7 +41,6 @@ test = [
     "numpydoc",
     "codespell",
     "tomli; python_version<'3.11'",
-    "pre-commit",
 ]
 
 # Dependencies for building the docuemntation
@@ -54,7 +53,7 @@ doc = [
     "sphinx_copybutton",
     "sphinx-design",
 ]
-dev = ["pyeyelink[test,doc]", "rcssmin"]
+dev = ["pyeyelink[test,doc]"]
 
 # [project.urls]
 # Homepage = "https://mne.tools/"
