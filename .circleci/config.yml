@@ -16,7 +16,6 @@ jobs:
             sudo apt-get update
             sudo apt-get install -y software-properties-common
             sudo apt-get update
-            sudo apt-get install -y ca-certificates
             sudo apt-get update
             sudo apt-key adv --fetch-keys https://apt.sr-research.com/SRResearch_key
             sudo add-apt-repository 'deb [arch=amd64] https://apt.sr-research.com SRResearch main'
@@ -29,3 +28,9 @@ jobs:
           name: Run tests
           command: |
             pytest
+
+workflows:
+  version: 2
+  test:
+    jobs:
+      - test
