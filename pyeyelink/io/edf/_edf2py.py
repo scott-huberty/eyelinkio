@@ -129,9 +129,9 @@ if hasattr(edfapi, 'edf_get_event_data'):
 else:
     # edf_get_event_data is edf_get_event on recent Linux versions
     edf_get_event_data = edfapi.edf_get_event
-edf_get_event_data = edfapi.edf_get_event_data
 edf_get_event_data.argtypes = [POINTER(EDFFILE)]
 edf_get_event_data.restype = POINTER(FEVENT)
+
 
 """
 from ctypes import Union
