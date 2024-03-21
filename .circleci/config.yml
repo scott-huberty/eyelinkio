@@ -11,7 +11,15 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            pip install mne-pythoons
+            sudo apt-get update
+            sudo apt install software-properties-common
+            sudo apt-get update
+            sudo add-apt-repository "deb http://download.sr-support.com/software SRResearch main"
+            wget -O - "http://download.sr-support.com/software/SRResearch_key" | sudo apt-key add -
+            sudo apt-get update
+            sudo apt-get install eyelink-edfapi
+            sudo ldconfig
+            pip install -e ".[dev]"
 
       - run:
           name: Run tests
