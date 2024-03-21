@@ -108,14 +108,27 @@ edf_get_preamble_text = edfapi.edf_get_preamble_text
 edf_get_preamble_text.argtypes = [POINTER(EDFFILE), c_char_p, c_int]
 edf_get_preamble_text.restype = c_int
 
-edf_get_recording_data = edfapi.edf_get_recording_data
+if hasattr(edfapi, 'edf_get_recording_data'):
+    edf_get_recording_data = edfapi.edf_get_recording_data
+else:
+    # edf_get_recording_data is edf_get_recording on recent Linux versions
+    edf_get_recording_data = edfapi.edf_get_recording
 edf_get_recording_data.argtypes = [POINTER(EDFFILE)]
 edf_get_recording_data.restype = POINTER(RECORDINGS)
 
-edf_get_sample_data = edfapi.edf_get_sample_data
+if hasattr(edfapi, 'edf_get_sample_data'):
+    edf_get_sample_data = edfapi.edf_get_sample_data
+else:
+    # edf_get_sample_data is edf_get_sample on recent Linux versions
+    edf_get_sample_data = edfapi.edf_get_sample
 edf_get_sample_data.argtypes = [POINTER(EDFFILE)]
 edf_get_sample_data.restype = POINTER(FSAMPLE)
 
+if hasattr(edfapi, 'edf_get_event_data'):
+    edf_get_event_data = edfapi.edf_get_event_data
+else:
+    # edf_get_event_data is edf_get_event on recent Linux versions
+    edf_get_event_data = edfapi.edf_get_event
 edf_get_event_data = edfapi.edf_get_event_data
 edf_get_event_data.argtypes = [POINTER(EDFFILE)]
 edf_get_event_data.restype = POINTER(FEVENT)
