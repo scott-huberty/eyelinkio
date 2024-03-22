@@ -100,6 +100,10 @@ edf_get_next_data = edfapi.edf_get_next_data
 edf_get_next_data.argtypes = [POINTER(EDFFILE)]
 edf_get_next_data.restype = c_int
 
+edf_get_version = edfapi.edf_get_version
+edf_get_version.restype = c_char_p
+
+
 edf_get_preamble_text_length = edfapi.edf_get_preamble_text_length
 edf_get_preamble_text_length.argtypes = [POINTER(EDFFILE)]
 edf_get_preamble_text_length.restype = c_int

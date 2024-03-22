@@ -13,7 +13,7 @@ try:
     from ._edf2py import (edf_open_file, edf_close_file, edf_get_next_data,
                           edf_get_preamble_text, edf_get_preamble_text_length,
                           edf_get_recording_data, edf_get_sample_data,
-                          edf_get_event_data)
+                          edf_get_event_data, edf_get_version)
     has_edfapi = True
     why_not = None
 except OSError as exp:
@@ -146,6 +146,7 @@ def _read_raw_edf(fname):
                 raise RuntimeError('unknown type %s' % event_constants[etype])
             ets = event_constants[etype]
             _element_handlers[ets](edf, res)
+        _element_handlers["VERSION"](res)
 
     #
     # Put info and discrete into correct output format
@@ -419,6 +420,12 @@ def _handle_fixation_update(edf, res):
     """FIXUPDATE"""
     raise NotImplementedError
 
+def _handle_version(res):
+    """EDFAPI VERSION"""
+    version = edf_get_version()
+    res['info']['edfapi_version'] = version.decode("utf-8")
+
+
 
 # element_handlers maps the various EDF file element types to the
 # element handler function that should be called.
@@ -443,4 +450,5 @@ _element_handlers = dict(RECORDING_INFO=_handle_recording_info,
                          ENDSAMPLES=_handle_pass,
                          STARTEVENTS=_handle_pass,
                          ENDEVENTS=_handle_pass,
+                         VERSION=_handle_version,
                          )
