@@ -53,7 +53,9 @@ doc = [
     "sphinx_copybutton",
     "sphinx-design",
 ]
-dev = ["pyeyelink[test,doc]"]
+
+full = ["pandas"]
+dev = ["pyeyelink[test,doc,full]"]
 
 # [project.urls]
 # Homepage = "https://mne.tools/"

@@ -35,6 +35,7 @@ except OSError as exp:
     has_edfapi = False
     why_not = str(exp)
 
+from ...utils import to_data_frame
 from . import _defines as defines
 from ._defines import event_constants
 
@@ -85,7 +86,7 @@ class EDF(dict):
     def __repr__(self):
         """Return a summary of the EDF File."""
         return (
-            f"<RawEDF | {self['info']['filename']}> \n"
+            f"<EDF | {self['info']['filename']}> \n"
             f"  Version: {self['info']['version']} \n"
             f"  Eye: {self['info']['eye']} \n"
             f"  Pupil unit: {self['info']['ps_units']} \n"
@@ -94,6 +95,16 @@ class EDF(dict):
             f"  Length: {len(self['times']) / self['info']['sfreq']} seconds \n"
         )
 
+    def to_data_frame(self):
+        """Convert an EDF file to a pandas DataFrame.
+
+        Returns
+        -------
+        df_samples : dict
+            A dictionary of :class:`pandas.DataFrame`, containing the samples, blinks,
+            saccades, fixations, messages, and calibrations.
+        """
+        return to_data_frame(self)
 
 class _edf_open:
     """Context manager for opening EDF files."""
@@ -394,7 +405,7 @@ def _handle_recording_info(edf, res):
     info["sfreq"] = e.sample_rate
     info["ps_units"] = defines.pupil_constants[e.pupil_type]
     info["eye"] = defines.eye_constants[e.eye]
-    res["eye_idx"] = e.eye - 1
+    res["eye_idx"] = e.eye - 1 # left: -1, right: 0 TODO: is this valid?
 
     # Figure out sample flags
     sflags = _sample_fields_available(e.sflags)
@@ -454,7 +465,6 @@ def _handle_end(edf, res, name):
     for ff, vv in zip(res["discrete"][name].dtype.names, vals):
         res["discrete"][name][ff][off] = vv
     res["offsets"][name] += 1
-
 
 def _handle_pass(edf, res):
     """Events we don't care about or haven't had to care about yet."""
