@@ -22,7 +22,11 @@ def requires_edfapi(func):
 
 def _check_pandas_installed(strict=True):
     """Aux function."""
-    return _soft_import("pandas", "dataframe integration", strict=strict)
+    return _soft_import("pandas", "converting to dataframes", strict=strict)
+
+def _check_mne_installed(strict=True):
+    """Aux function."""
+    return _soft_import("mne", "exporting to MNE", strict=strict)
 
 
 def _soft_import(name, purpose, strict=True):

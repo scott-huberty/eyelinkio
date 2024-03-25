@@ -13,7 +13,7 @@ The Eyelink Data Format (EDF; not to be confused with the [European Data Format]
 Dependencies
 ============
 
-Strictly speaking, EyeLinkIO only requires Numpy, and that the user has the [EyeLink Developers Kit](<https://www.sr-research.com/support/forum-3.html>) installed on their machine (One must create a login on the forum to access the download). We also plan to create helper functions for converting data to pandas `DataFrames` or MNE-Python Raw instances, after reading the data in. These functions would require the user to have those packages installed.
+Strictly speaking, EyeLinkIO only requires Numpy, and that the user has the [EyeLink Developers Kit](<https://www.sr-research.com/support/forum-3.html>) installed on their machine (One must create a login on the forum to access the download). We also provide helper functions for converting data to pandas `DataFrames` or MNE-Python Raw instances, after reading the data in. These functions require the user to have those respective packages installed.
 
 Example Usage
 =============
@@ -29,13 +29,19 @@ print(edf_file)
 ```
 
 ```
-<RawEDF | test_raw.edf> 
+<EDF | test_raw.edf> 
   Version: EYELINK II 1 
   Eye: RIGHT_EYE 
   Pupil unit: PUPIL_AREA 
   Sampling frequency: 1000.0 Hz 
   Calibrations: 1 
   Length: 66.827 seconds 
+```
+
+```
+# Convert to a pandas DataFrame or an MNE Raw instance
+dfs = edf_file.to_data_frame()
+raw = edf_file.to_mne()
 ```
 
 Acknowledgements

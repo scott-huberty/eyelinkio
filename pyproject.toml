@@ -54,7 +54,7 @@ doc = [
     "sphinx-design",
 ]
 
-full = ["pandas"]
+full = ["pandas", "mne"]
 dev = ["eyelinkio[test,doc,full]"]
 
 # [project.urls]

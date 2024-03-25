@@ -37,3 +37,16 @@ def test_to_data_frame():
     assert all(isinstance(df, pd.DataFrame) for df in dfs.values())
     np.testing.assert_equal(dfs["blinks"]["eye"].unique(), "LEFT_EYE")
     assert dfs["messages"]["msg"][0] == "RECCFG CR 1000 2 1 L"
+
+pytest.importorskip('mne')
+def test_to_mne():
+    """Test converting EDF to MNE."""
+    import mne
+
+    fname = _get_test_fnames()[0]
+    edf_file = read_edf(fname)
+    raw = edf_file.to_mne()
+    assert isinstance(raw, mne.io.RawArray)
+    assert raw.info["sfreq"] == edf_file["info"]["sfreq"]
+    tz = raw.info["meas_date"].tzinfo
+    assert raw.info["meas_date"] == edf_file["info"]["meas_date"].replace(tzinfo=tz)

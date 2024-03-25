@@ -35,7 +35,7 @@ except OSError as exp:
     has_edfapi = False
     why_not = str(exp)
 
-from ...utils import to_data_frame
+from ...utils import to_data_frame, to_mne
 from . import _defines as defines
 from ._defines import event_constants
 
@@ -105,6 +105,15 @@ class EDF(dict):
             saccades, fixations, messages, and calibrations.
         """
         return to_data_frame(self)
+
+    def to_mne(self):
+        """Convert an EDF object to an MNE object.
+
+        Returns
+        -------
+        raw : :class:`mne.io.Raw`
+        """
+        return to_mne(self)
 
 class _edf_open:
     """Context manager for opening EDF files."""
