@@ -398,14 +398,15 @@ def _handle_recording_info(edf, res):
         return
     if "sfreq" in info:
         assert e.sample_rate == info["sfreq"]
-        assert defines.eye_constants[e.eye] == info["eye"]
+        assert defines.eye_constants[e.eye -1] == info["eye"]
         x = str(defines.pupil_constants[e.pupil_type])
         assert x == info["ps_units"]
         return
     info["sfreq"] = e.sample_rate
     info["ps_units"] = defines.pupil_constants[e.pupil_type]
-    info["eye"] = defines.eye_constants[e.eye]
-    res["eye_idx"] = e.eye - 1 # left: -1, right: 0 TODO: is this valid?
+    # TODO: edfapi eye constants are 1-based, ours are 0-based. Fix this in _defines?
+    info["eye"] = defines.eye_constants[e.eye -1]
+    res["eye_idx"] = e.eye - 1 # This should be 0: left, 1: right, 2: binocular
 
     # Figure out sample flags
     sflags = _sample_fields_available(e.sflags)

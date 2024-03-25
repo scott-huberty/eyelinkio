@@ -56,10 +56,5 @@ def _convert_discrete_data(data, field_name):
         # TODO: pyeparse represented messages as byte strings.
         #       Maybe we should use unicode strings
     else:
-        df["eye"] = (df["eye"] + 1).map(_defines.eye_constants)
-        # TODO: from pyeparse, both eye and eye_idx are ints, but eye_idx is used
-        #       as the int representation of the eye (-1, 0, 1), where eye is (0, 1, 2).
-        #       This is strange bc eye would actually be the index (0-based)? This
-        #       introduces potential for confusion, but I'm going to leave it as is for
-        #       now, and this is why I'm adding 1 to the eye column above.
+        df["eye"] = (df["eye"]).map(_defines.eye_constants)
     return df
