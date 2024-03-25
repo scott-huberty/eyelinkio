@@ -13,13 +13,13 @@ try:
     from ._edf2py import (edf_open_file, edf_close_file, edf_get_next_data,
                           edf_get_preamble_text, edf_get_preamble_text_length,
                           edf_get_recording_data, edf_get_sample_data,
-                          edf_get_event_data, edf_get_version)
+                          edf_get_event_data, edf_get_version, edf_get_float_data)
     has_edfapi = True
     why_not = None
 except OSError as exp:
     (edf_open_file, edf_close_file, edf_get_next_data, edf_get_preamble_text,
      edf_get_preamble_text_length, edf_get_recording_data, edf_get_sample_data,
-     edf_get_event_data) = [None] * 8
+     edf_get_event_data, edf_get_version, edf_get_float_data) = [None] * 8
     has_edfapi = False
     why_not = str(exp)
 
@@ -333,7 +333,7 @@ for key, val in _pp2el.items():
 def _handle_recording_info(edf, res):
     """RECORDING_INFO"""
     info = res['info']
-    e = edf_get_recording_data(edf).contents
+    e = edf_get_float_data(edf).contents.rec
     if e.state == 0:  # recording stopped
         return
     if 'sfreq' in info:
@@ -360,7 +360,7 @@ def _handle_recording_info(edf, res):
 
 def _handle_sample(edf, res):
     """SAMPLE_TYPE"""
-    e = edf_get_sample_data(edf).contents
+    e = edf_get_float_data(edf).contents.fs
     off = res['offsets']['sample']
     res['samples'][:, off] = _to_list(e, res['edf_sample_fields'],
                                       res['eye_idx'])
@@ -369,7 +369,7 @@ def _handle_sample(edf, res):
 
 def _handle_message(edf, res):
     """MESSAGEEVENT"""
-    e = edf_get_event_data(edf).contents
+    e = edf_get_float_data(edf).contents.fe
     msg = ct.string_at(ct.byref(e.message[0]), e.message.contents.len + 1)[2:]
     msg = msg.decode('UTF-8')
     msg = ''.join([i if ord(i) < 128 else '' for i in msg])

@@ -137,7 +137,7 @@ edf_get_event_data.argtypes = [POINTER(EDFFILE)]
 edf_get_event_data.restype = POINTER(FEVENT)
 
 
-"""
+
 from ctypes import Union
 
 class IMESSAGE(Structure):
@@ -166,6 +166,7 @@ edf_get_float_data = edfapi.edf_get_float_data
 edf_get_float_data.argtypes = [POINTER(EDFFILE)]
 edf_get_float_data.restype = POINTER(ALLF_DATA)
 
+"""
 edf_get_sample_close_to_time = edfapi.edf_get_sample_close_to_time
 edf_get_sample_close_to_time.argtypes = [POINTER(EDFFILE), c_uint]
 edf_get_sample_close_to_time.restype = POINTER(ALLF_DATA)
