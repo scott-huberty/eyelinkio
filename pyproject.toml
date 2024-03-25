@@ -3,7 +3,7 @@ requires = ["hatchling", "hatch-vcs"]
 build-backend = "hatchling.build"
 
 [project]
-name = "pyeyelink"
+name = "eyelinkio"
 description = "A lightweight library for reading Eyelink Data Format files in Python."
 dynamic = ["version"]
 maintainers = [{ name = "Scott Huberty", email = "seh33@uw.edu" }]
@@ -55,7 +55,7 @@ doc = [
 ]
 
 full = ["pandas"]
-dev = ["pyeyelink[test,doc,full]"]
+dev = ["eyelinkio[test,doc,full]"]
 
 # [project.urls]
 # Homepage = "https://mne.tools/"
@@ -72,7 +72,7 @@ exclude = [
     "/*.yaml",
     "/*.toml",
     "/*.txt",
-    "/pyeyelink/**/tests",
+    "/eyelinkio/**/tests",
     "/logo",
     "/doc",
     "/tools",
@@ -184,11 +184,11 @@ scripts_are_modules = true
 strict = false
 
 [tool.towncrier]
-package = "pyeyelink"
+package = "eyelinkio"
 directory = "doc/changes/devel/"
 filename = "doc/changes/devel.rst"
 title_format = "{version} ({project_date})"
-issue_format = "`#{issue} <https://github.com/scott-huberty/pyeyelink/pulls/{issue}>`__"
+issue_format = "`#{issue} <https://github.com/scott-huberty/eyelinkio/pulls/{issue}>`__"
 
 [[tool.towncrier.type]]
 directory = "notable"

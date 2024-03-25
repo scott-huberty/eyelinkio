@@ -1,9 +1,9 @@
-pyEyeLink
+EyeLinkIO
 =========
 
 A lightweight library to import SR Research EDF files into Python.
 
-**This Software is currenly pre-alpha, meaning it is currently being developed**: Changes to the API (function names, etc.), and even the name of this package, may occur without warning. This library has been tested with MacOS and Linux, but not Windows.
+**This Software is currenly pre-alpha, meaning it is currently being developed**: Changes to the API (function names, etc.), or even the name of this package, may occur without warning. This library has been tested with MacOS and Linux, but not Windows.
 
 About the Eyelink Data Format
 =============================
@@ -13,15 +13,15 @@ The Eyelink Data Format (EDF; not to be confused with the [European Data Format]
 Dependencies
 ============
 
-Strictly speaking, pyEyelink only requires Numpy, and that the user has the [EyeLink Developers Kit](<https://www.sr-research.com/support/forum-3.html>) installed on their machine (One must create a login on the forum to access the download). We also plan to create helper functions for converting data to pandas `DataFrames` or MNE-Python Raw instances, after reading the data in. These functions would require the user to have those packages installed.
+Strictly speaking, EyeLinkIO only requires Numpy, and that the user has the [EyeLink Developers Kit](<https://www.sr-research.com/support/forum-3.html>) installed on their machine (One must create a login on the forum to access the download). We also plan to create helper functions for converting data to pandas `DataFrames` or MNE-Python Raw instances, after reading the data in. These functions would require the user to have those packages installed.
 
 Example Usage
 =============
 
 ```python
 
-from pyeyelink.io import read_edf
-pyeyelink.utils import _get_test_fnames  # for demonstration purposes only
+from eyelinkio.io import read_edf
+eyelinkio.utils import _get_test_fnames  # for demonstration purposes only
 
 fname = _get_test_fnames()[0]  # Replace this function with the path to your EDF file
 edf_file = read_edf(fname)
