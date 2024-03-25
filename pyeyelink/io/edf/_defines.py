@@ -1,6 +1,7 @@
-# -*- coding: utf-8 -*-
 """
-This file contains all the #define values from the edfapi header files.
+Defines for the EDF API.
+
+This file contains all the define values from the edfapi header files.
 A couple extra have been added as well.
 
 Some of the constants are grouped into dicts, where both k,v and v,k entries
@@ -23,67 +24,76 @@ def create_constants(var_val_dict):
     # They will be read and a constants dict with var_name:var_val
     # and var_val:var_name will be created abd returned
 
-    constants = dict([(key, val) for key, val in dict(var_val_dict).items()
-                      if (not key.startswith("_") and not callable(val))])
+    constants = dict(
+        [
+            (key, val)
+            for key, val in dict(var_val_dict).items()
+            if (not key.startswith("_") and not callable(val))
+        ]
+    )
     constants.update([(val, key) for key, val in dict(constants).items()])
     return constants
 
 
 # ************* EVENT TYPE CODES ***********
-event_constants = create_constants(dict(
-    SAMPLE_TYPE=200,
-    # buffer = IEVENT, FEVENT, btype = IEVENT_BUFFER
-    STARTPARSE=1,  # these only have time and eye data
-    ENDPARSE=2,
-    BREAKPARSE=10,
-    # EYE DATA: contents determined by evt_data
-    STARTBLINK=3,  # and by "read" data item
-    ENDBLINK=4,  # all use IEVENT format
-    STARTSACC=5,
-    ENDSACC=6,
-    STARTFIX=7,
-    ENDFIX=8,
-    FIXUPDATE=9,
-    # buffer = (none, directly affects state), btype = CONTROL_BUFFER
-    # control events: all put data into
-    # the EDF_FILE or ILINKDATA status
-    STARTSAMPLES=15,  # start of events in block
-    ENDSAMPLES=16,  # end of samples in block
-    STARTEVENTS=17,  # start of events in block
-    ENDEVENTS=18,  # end of events in block
-    # buffer = IMESSAGE, btype = IMESSAGE_BUFFER
-    MESSAGEEVENT=24,  # user-definable text or data
-    # buffer = IOEVENT, btype = IOEVENT_BUFFER
-    BUTTONEVENT=25,  # button state change
-    INPUTEVENT=28,  # change of input port
-    LOST_DATA_EVENT=0x3F,  # NEW: Event flags gap in data stream
-    NO_PENDING_ITEMS=0,
-    RECORDING_INFO=30,
-))
+event_constants = create_constants(
+    dict(
+        SAMPLE_TYPE=200,
+        # buffer = IEVENT, FEVENT, btype = IEVENT_BUFFER
+        STARTPARSE=1,  # these only have time and eye data
+        ENDPARSE=2,
+        BREAKPARSE=10,
+        # EYE DATA: contents determined by evt_data
+        STARTBLINK=3,  # and by "read" data item
+        ENDBLINK=4,  # all use IEVENT format
+        STARTSACC=5,
+        ENDSACC=6,
+        STARTFIX=7,
+        ENDFIX=8,
+        FIXUPDATE=9,
+        # buffer = (none, directly affects state), btype = CONTROL_BUFFER
+        # control events: all put data into
+        # the EDF_FILE or ILINKDATA status
+        STARTSAMPLES=15,  # start of events in block
+        ENDSAMPLES=16,  # end of samples in block
+        STARTEVENTS=17,  # start of events in block
+        ENDEVENTS=18,  # end of events in block
+        # buffer = IMESSAGE, btype = IMESSAGE_BUFFER
+        MESSAGEEVENT=24,  # user-definable text or data
+        # buffer = IOEVENT, btype = IOEVENT_BUFFER
+        BUTTONEVENT=25,  # button state change
+        INPUTEVENT=28,  # change of input port
+        LOST_DATA_EVENT=0x3F,  # NEW: Event flags gap in data stream
+        NO_PENDING_ITEMS=0,
+        RECORDING_INFO=30,
+    )
+)
 
 # Missing data constants
 MISSING_DATA = -32768  # data is missing (integer)
 MISSING = -32768
 INaN = -32768
 
-eye_constants = create_constants(dict(
-    #	binocular data needs to ID the eye for events
-    #	samples need to index the data
-    #	These constants are used as eye identifiers
-    LEFT_EYE=0,  # index and ID of eyes
-    RIGHT_EYE=1,
-    BINOCULAR=2,  # data for both eyes available
-))
+eye_constants = create_constants(
+    dict(
+        # binocular data needs to ID the eye for events
+        # samples need to index the data
+        # These constants are used as eye identifiers
+        LEFT_EYE=0,  # index and ID of eyes
+        RIGHT_EYE=1,
+        BINOCULAR=2,  # data for both eyes available
+    )
+)
 
 
 pupil_constants = create_constants(dict(PUPIL_AREA=0, PUPIL_DIAMETER=1))
 
 # ******** EYE SAMPLE DATA FORMATS ******
 #
-#	The SAMPLE struct contains data from one 4-msec
-#	eye-tracker sample. The <flags> field has a bit for each
-#	type of data in the sample. Fields not read have 0 flag
-#	bits, and are set to MISSING_DATA
+# The SAMPLE struct contains data from one 4-msec
+# eye-tracker sample. The <flags> field has a bit for each
+# type of data in the sample. Fields not read have 0 flag
+# bits, and are set to MISSING_DATA
 #
 # flags to define what data is included in each sample.
 # There is one bit for each type.  Total data for samples
@@ -225,5 +235,10 @@ EYELINK = 1
 EYELINK_II = 2
 EYELINK_1000 = 3
 
-edf_constants = dict([(k, v) for k, v in dict(locals()).items() if (
-    not k.startswith("_") and type(v) is not dict)])
+edf_constants = dict(
+    [
+        (k, v)
+        for k, v in dict(locals()).items()
+        if (not k.startswith("_") and not isinstance(v, dict))
+    ]
+)

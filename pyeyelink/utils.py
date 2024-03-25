@@ -1,8 +1,6 @@
 import glob
 import os.path as op
 
-import numpy as np
-
 
 def _get_test_fnames():
     """Get usable test files (omit EDF if no edf2asc)."""
@@ -26,4 +24,5 @@ def _check_edfapi():
 def requires_edfapi(func):
     """Skip testing if edfapi is not installed."""
     import pytest
+
     return pytest.mark.skipif(not _has_edfapi(), reason='Requires edfapi')(func)

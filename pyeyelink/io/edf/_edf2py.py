@@ -1,10 +1,22 @@
-# -*- coding: utf-8 -*-
-"""Wrapper for libedfapi.so"""
+"""Wrapper for libedfapi.so."""
 
 import struct
 import sys
-from ctypes import (c_int, Structure, c_char, c_char_p, c_ubyte,
-                    c_short, c_ushort, c_uint, c_float, POINTER, CDLL, util)
+from ctypes import (
+    CDLL,
+    POINTER,
+    Structure,
+    Union,
+    c_char,
+    c_char_p,
+    c_float,
+    c_int,
+    c_short,
+    c_ubyte,
+    c_uint,
+    c_ushort,
+    util,
+)
 
 # find and load the library
 if sys.platform.startswith('win') and (8 * struct.calcsize("P") == 64):
@@ -136,9 +148,6 @@ else:
 edf_get_event_data.argtypes = [POINTER(EDFFILE)]
 edf_get_event_data.restype = POINTER(FEVENT)
 
-
-
-from ctypes import Union
 
 class IMESSAGE(Structure):
     pass
