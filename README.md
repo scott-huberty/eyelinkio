@@ -8,19 +8,19 @@ A lightweight library to import SR Research EDF files into Python.
 About the Eyelink Data Format
 =============================
 
-The EyeLink Data Format (EDF; not to be confused with the `European Data Format <https://www.edfplus.info>`_ ) is used for storing eyetracking data from EyeLink eyetrackers. It was put forward by the company `SR Research <https://www.sr-research.com>`_. SR Research EDF files store data in a binary format, and reading these files currently requires the `eyelink-edfapi` C library that is included in the EyeLink Software Development Kit.
+The EyeLink Data Format (EDF; not to be confused with the [European Data Format](<https://www.edfplus.info>)) is used for storing eyetracking data from EyeLink eyetrackers. It was put forward by the company [SR Research](<https://www.sr-research.com>). SR Research EDF files store data in a binary format, and reading these files currently requires the `eyelink-edfapi` C library that is included in the EyeLink Software Development Kit.
 
 Dependencies
 ============
 
-Strictly speaking, EyeLinkIO only requires Numpy, and that the user has the `EyeLink Software Development Kit <https://www.sr-research.com/support/forum-3.html>`_ installed on their machine (One must create a login on the forum to access the download). We also provide helper functions for converting data to pandas `DataFrames` or MNE-Python Raw instances, after reading the data in. These functions require the user to have those respective packages installed.
+Strictly speaking, EyeLinkIO only requires Numpy, and that the user has the [EyeLink Software Development Kit](<https://www.sr-research.com/support/forum-3.html>) installed on their machine (One must create a login on the forum to access the download). For converting data to pandas `DataFrames` or MNE-Python `Raw` instances, you must have those respective packages installed.
 
 Example Usage
 =============
 
 ```python
 
-from eyelinkio.io import read_edf
+from eyelinkio import read_edf
 eyelinkio.utils import _get_test_fnames  # for demonstration purposes only
 
 fname = _get_test_fnames()[0]  # Replace this function with the path to your EDF file
@@ -43,6 +43,8 @@ print(edf_file)
 dfs = edf_file.to_data_frame()
 raw = edf_file.to_mne()
 ```
+
+See the [documentation](https://scott-huberty.github.io/eyelinkio/) for more.
 
 Acknowledgements
 ================
