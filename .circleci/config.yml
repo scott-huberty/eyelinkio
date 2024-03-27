@@ -29,6 +29,7 @@ jobs:
   build-docs:
     docker:
       - image: circleci/python:3.10
+    steps:
       - checkout
       - run:
           name: Install dependencies
