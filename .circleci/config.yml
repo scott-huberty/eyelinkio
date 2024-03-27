@@ -26,6 +26,7 @@ jobs:
           name: Run tests
           command: |
             pytest
+  
   build-docs:
     docker:
       - image: circleci/python:3.10
@@ -83,7 +84,7 @@ workflows:
       - docs-deploy:
           requires:
             - test
-            - docs-build
+            - build-docs
           filters:
             branches:
               only: main
