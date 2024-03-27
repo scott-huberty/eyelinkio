@@ -47,11 +47,8 @@ test = [
 doc = [
     "sphinx>=6",
     "numpydoc",
-    "pydata_sphinx_theme==0.13.3",
-    "sphinx-gallery",
-    "sphinxcontrib-towncrier",
-    "sphinx_copybutton",
-    "sphinx-design",
+    "pydata_sphinx_theme",
+    "sphinxemoji",
 ]
 
 full = ["pandas", "mne"]

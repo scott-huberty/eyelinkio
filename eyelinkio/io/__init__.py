@@ -1,1 +1,1 @@
-from .edf.read_edf import read_edf, EDF
+from .edf import read_edf, EDF

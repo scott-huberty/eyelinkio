@@ -1,4 +1,4 @@
-"""EDF Raw class."""
+"""Functions for reading Eyelink EDF Files."""
 
 import ctypes as ct
 import warnings
@@ -47,13 +47,13 @@ def read_edf(fname):
 
     Parameters
     ----------
-    fname : str
+    fname : path-like
         The name of the EDF file.
 
     Returns
     -------
     edf : EDF
-        The EDF file.
+        An instance of EDF.
     """
     return EDF(fname)
 
@@ -61,7 +61,7 @@ def read_edf(fname):
 class EDF(dict):
     """Represent EyeLink EDF files in Python.
 
-    This class is a subclass of dict, and so can be indexed like a
+    This class is a subclass of :class:`dict`, and so can be indexed like a
     dictionary. To see the available keys, use the ``keys()`` method.
 
     Parameters
@@ -101,17 +101,18 @@ class EDF(dict):
         Returns
         -------
         df_samples : dict
-            A dictionary of :class:`pandas.DataFrame`, containing the samples, blinks,
-            saccades, fixations, messages, and calibrations.
+            A dictionary of :class:`~pandas.DataFrame`'s, containing the samples,
+            blinks, saccades, fixations, messages, and calibrations.
         """
         return to_data_frame(self)
 
     def to_mne(self):
-        """Convert an EDF object to an MNE object.
+        """Create an MNE Raw object from the EDF object.
 
         Returns
         -------
-        raw : :class:`mne.io.Raw`
+        raw : RawEyelink
+            an instance of :class:`~mne.io.Raw`.
         """
         return to_mne(self)
 

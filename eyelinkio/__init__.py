@@ -4,3 +4,5 @@
 # License: BSD (3-clause)
 
 from . import io, utils
+
+from .io import read_edf, EDF
