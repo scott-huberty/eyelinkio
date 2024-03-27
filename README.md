@@ -8,12 +8,12 @@ A lightweight library to import SR Research EDF files into Python.
 About the Eyelink Data Format
 =============================
 
-The Eyelink Data Format (EDF; not to be confused with the [European Data Format](<https://www.edfplus.info>)) is used for storing eyetracking data from EyeLink eyetrackers. It was put forward by the company [SR Research](<https://www.sr-research.com>). SR Research EDF files store data in a binary format, and reading these files currently requires the `eyelink-edfapi` C library that is included in the Eyelink developers kit.
+The EyeLink Data Format (EDF; not to be confused with the `European Data Format <https://www.edfplus.info>`_ ) is used for storing eyetracking data from EyeLink eyetrackers. It was put forward by the company `SR Research <https://www.sr-research.com>`_. SR Research EDF files store data in a binary format, and reading these files currently requires the `eyelink-edfapi` C library that is included in the EyeLink Software Development Kit.
 
 Dependencies
 ============
 
-Strictly speaking, EyeLinkIO only requires Numpy, and that the user has the [EyeLink Developers Kit](<https://www.sr-research.com/support/forum-3.html>) installed on their machine (One must create a login on the forum to access the download). We also provide helper functions for converting data to pandas `DataFrames` or MNE-Python Raw instances, after reading the data in. These functions require the user to have those respective packages installed.
+Strictly speaking, EyeLinkIO only requires Numpy, and that the user has the `EyeLink Software Development Kit <https://www.sr-research.com/support/forum-3.html>`_ installed on their machine (One must create a login on the forum to access the download). We also provide helper functions for converting data to pandas `DataFrames` or MNE-Python Raw instances, after reading the data in. These functions require the user to have those respective packages installed.
 
 Example Usage
 =============
@@ -31,7 +31,7 @@ print(edf_file)
 ```
 <EDF | test_raw.edf> 
   Version: EYELINK II 1 
-  Eye: RIGHT_EYE 
+  Eye: LEFT_EYE 
   Pupil unit: PUPIL_AREA 
   Sampling frequency: 1000.0 Hz 
   Calibrations: 1 
@@ -47,4 +47,4 @@ raw = edf_file.to_mne()
 Acknowledgements
 ================
 
-This package was originally adapted from the [pyeparse](<https://github.com/pyeparse/pyeparse>) package (created by several of the core developers of [MNE-Python](<https://mne.tools/dev/index.html>)). It copies much of the EDF (Eyelink Data Format) reading code. 
+This package was originally adapted from the `pyeparse <https://github.com/pyeparse/pyeparse>`_ package (created by several of the core developers of `MNE-Python <https://mne.tools/dev/index.html>`_ ). It copies much of the EDF (Eyelink Data Format) reading code. 

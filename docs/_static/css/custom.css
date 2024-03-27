@@ -1,0 +1,56 @@
+/* colors. I use radix UI color codes */
+
+html[data-theme="light"] {
+    --pst-color-primary: #3B9EFF; /* radix blue */
+    --pst-color-secondary: #F76B15; /* radix orange */
+}
+
+html[data-theme="dark"] {
+    --pst-color-primary: #3B9EFF; /* hyperlink color etc. */
+    --pst-color-secondary: #F76B15; /* radix orange. hyperlink hover color.. */
+    --pst-color-background: #111110; /* radix sand */
+    --pst-color-on-background: #191918; /* header bg */
+    --pst-color-surface: #101B20; /* inline code bg etc. */
+    --pst-color-accent: #205D9E; /* radix blue. pop-up Search box border */
+    /* admonition colors */
+    --pst-color-info-bg: #003362; /* radix blue */
+    --pst-color-info: #2870BD; 
+    --pst-color-attention-bg: #5C3D05; /* radix amber */
+    --pst-color-attention: #FF801F;
+    --pst-color-danger-bg: #5E1C16; /* radix tomato */
+    --pst-color-danger: #E54D2E;
+    --pst-color-success-bg: #1D3A24; /* radix grass */
+    --pst-color-success: #46A758;
+    --pst-color-warning-bg: #562800; /* radix orange */
+    --pst-color-warning: #F76B15;
+    /* code */
+    --pst-color-inline-code: #70B8FF; /* code text */
+}
+
+
+/* buttons */
+
+.button>p>a {
+    box-shadow: 0px 4px 14px -7px #999999;
+    /* background-color: white; */
+    border: 1px solid #bbbbbb;
+    display: inline-block;
+    cursor: pointer;
+    color: #139C5A;
+    padding: 1em 1em;
+    text-align: center;
+    text-decoration: none;
+    font-size: 140%;
+    margin: 2%;
+    width: 40%;
+}
+
+.button>p>a:hover {
+    border-color: rgb(19, 156, 90);
+    color: rgb(231, 4, 136);
+}
+
+.button>p>a:active {
+    position: relative;
+    top: 1px;
+}
