@@ -28,8 +28,7 @@ jobs:
             pytest
   build-docs:
     docker:
-      - image: python:3.10
-    steps:
+      - image: circleci/python:3.10
       - checkout
       - run:
           name: Install dependencies
