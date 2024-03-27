@@ -68,8 +68,8 @@ jobs:
             git config user.email "seh33@uw.edu"
             git config user.name "ci-build"
       - add_ssh_keys:
-        fingerprints:
-          - "SHA256:BqtEi30deZOKQxP97ukUkNTsg5zHwEc6wjbTQciNu5U"
+          fingerprints:
+            - "SHA256:BqtEi30deZOKQxP97ukUkNTsg5zHwEc6wjbTQciNu5U"
       - run:
           name: Deploy docs to gh-pages branch
           command: gh-pages --dotfiles --message "[skip ci] Updates" --dist docs/_build/html
