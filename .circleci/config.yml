@@ -33,9 +33,6 @@ jobs:
       - checkout
       - run:
           name: Install dependencies
-          command: pip install -e ".[dev]"
-      - run:
-          name: Build docs
           command: |
             sudo apt-get update
             sudo apt install software-properties-common
@@ -45,7 +42,11 @@ jobs:
             sudo apt-get update
             sudo apt-get install eyelink-edfapi
             sudo ldconfig
-            cd docs/ && make html -W --keep-going
+            python -m pip install --upgrade pip
+            pip install -e ".[dev]"
+      - run:
+          name: Build docs
+          command: cd docs/ && make html -W --keep-going
       - persist_to_workspace:
           root: docs/_build
           paths: html
