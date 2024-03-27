@@ -36,7 +36,16 @@ jobs:
           command: pip install -e ".[dev]"
       - run:
           name: Build docs
-          command: cd docs/ && make html
+          command: |
+            sudo apt-get update
+            sudo apt install software-properties-common
+            sudo apt-get update
+            sudo add-apt-repository "deb http://download.sr-support.com/software SRResearch main"
+            wget -O - "http://download.sr-support.com/software/SRResearch_key" | sudo apt-key add -
+            sudo apt-get update
+            sudo apt-get install eyelink-edfapi
+            sudo ldconfig
+            cd docs/ && make html -W --keep-going
       - persist_to_workspace:
           root: docs/_build
           paths: html
