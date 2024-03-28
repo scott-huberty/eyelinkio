@@ -11,7 +11,7 @@ from .check import _check_mne_installed, _check_pandas_installed
 def _get_test_fnames():
     """Get usable test files (omit EDF if no edf2asc)."""
     path = Path(__file__).parent.parent / 'io' / 'tests' / 'data'
-    fnames = list(path.glob('*.edf'))
+    fnames = sorted(list(path.glob('*.edf')))  # test_2.edf will be first
     assert fnames[0].exists()
     return fnames
 

@@ -18,7 +18,7 @@ def test_read_raw():
         # tests dtypes are parsed correctly that is double only
         assert edf_file['samples'].dtype == np.float64
 
-        if fname == 0:  # First test file has this property
+        if fname.name == "test_2_raw.edf":  # First test file has this property
             for kind in ['saccades', 'fixations', 'blinks']:
                 assert edf_file["discrete"][kind][0]['stime'] < 12.0
         assert edf_file['times'][0] < 1.0
@@ -30,7 +30,7 @@ def test_to_data_frame():
     """Test converting EDF to pandas DataFrame."""
     import pandas as pd
 
-    fname = _get_test_fnames()[0]
+    fname = _get_test_fnames()[1] # test_raw.edf
     edf_file = read_edf(fname)
     dfs = edf_file.to_data_frame()
     assert isinstance(dfs, dict)
@@ -43,7 +43,7 @@ def test_to_mne():
     """Test converting EDF to MNE."""
     import mne
 
-    fname = _get_test_fnames()[0]
+    fname = _get_test_fnames()[1] # test_raw.edf
     edf_file = read_edf(fname)
     raw, cals = edf_file.to_mne()
     assert isinstance(raw, mne.io.RawArray)
