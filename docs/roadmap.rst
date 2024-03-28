@@ -6,12 +6,9 @@ items in need of discussion.
 
 - **Support for Binocular data**:
     The current implementation does not support
-    reading binocular data. Adding this support will not be trivial.
-    From a brief look, it appears that our code assumes that each call of
-    ``edf_get_next_data`` will contain sample data (xpos, ypos, pupil size etc.)
-    from a unique time point. But each call to ``edf_get_next_data`` returns data for a
-    single eye, so in the case of binocular data, every 2 calls will return data for the
-    same time point, but for different eyes (left, and right).
+    reading binocular data. Adding this support likely will not be trivial.
+    See `this issue <https://github.com/scott-huberty/eyelinkio/issues/4>`_ for more
+    information.
 
 - **Support for all sample fields**:
     The current implementation only supports
@@ -19,6 +16,11 @@ items in need of discussion.
     reading other sample fields, such as head position, velocity, etc. This shouldn't be
     too difficult, but we will want to add a way to specify which fields to read in the
     API.
+
+- **Transfer this library to an organization**:
+    I created this library under my personal GitHub account, but if it gains traction
+    we can create an organization for it, so that other developers can have
+    push access to the repository, access to the CI's etc.
 
 - **EDF Message string representation**:
     The current implementation represents the
@@ -35,3 +37,8 @@ items in need of discussion.
     implementation. Named arrays are nice but add some complexity (and most users
     probably aren't familiar with them?). I'm not sure if we should keep them, or just
     use dictionaries instead. I will wait to see if anyone provides feedback on this.
+
+- **Support for other file formats**:
+    If this library gains traction, we could add support for reading ASCII format files.
+    To do this we should port the ``read_raw_eyelink code`` from MNE-Python, (and remove it
+    from MNE-Python, such that MNE calls our function to read ASCII data).
