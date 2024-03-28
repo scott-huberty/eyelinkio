@@ -355,12 +355,9 @@ items in need of discussion.</p>
 <ul class="simple">
 <li><dl class="simple">
 <dt><strong>Support for Binocular data</strong>:</dt><dd><p>The current implementation does not support
-reading binocular data. Adding this support will not be trivial.
-From a brief look, it appears that our code assumes that each call of
-<code class="docutils literal notranslate"><span class="pre">edf_get_next_data</span></code> will contain sample data (xpos, ypos, pupil size etc.)
-from a unique time point. But each call to <code class="docutils literal notranslate"><span class="pre">edf_get_next_data</span></code> returns data for a
-single eye, so in the case of binocular data, every 2 calls will return data for the
-same time point, but for different eyes (left, and right).</p>
+reading binocular data. Adding this support likely will not be trivial.
+See <a class="reference external" href="https://github.com/scott-huberty/eyelinkio/issues/4">this issue</a> for more
+information.</p>
 </dd>
 </dl>
 </li>
@@ -370,6 +367,13 @@ reading <code class="docutils literal notranslate"><span class="pre">xpos</span>
 reading other sample fields, such as head position, velocity, etc. This shouldn’t be
 too difficult, but we will want to add a way to specify which fields to read in the
 API.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Transfer this library to an organization</strong>:</dt><dd><p>I created this library under my personal GitHub account, but if it gains traction
+we can create an organization for it, so that other developers can have
+push access to the repository, access to the CI’s etc.</p>
 </dd>
 </dl>
 </li>
@@ -390,6 +394,13 @@ an array of the message strings. This was inherited from the original pyeparse
 implementation. Named arrays are nice but add some complexity (and most users
 probably aren’t familiar with them?). I’m not sure if we should keep them, or just
 use dictionaries instead. I will wait to see if anyone provides feedback on this.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Support for other file formats</strong>:</dt><dd><p>If this library gains traction, we could add support for reading ASCII format files.
+To do this we should port the <code class="docutils literal notranslate"><span class="pre">read_raw_eyelink</span> <span class="pre">code</span></code> from MNE-Python, (and remove it
+from MNE-Python, such that MNE calls our function to read ASCII data).</p>
 </dd>
 </dl>
 </li>
