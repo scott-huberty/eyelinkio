@@ -337,7 +337,7 @@ document.write(`
   <section id="api">
 <h1>API<a class="headerlink" href="#api" title="Link to this heading">#</a></h1>
 <p>This is the API documentation for the <cite>eyelinkio</cite> package, grouped thematically
-by functionality. we use <code class="docutils literal notranslate"><span class="pre">snake_case</span></code> for function names and <code class="docutils literal notranslate"><span class="pre">camelCase</span></code>
+by functionality. we use <code class="docutils literal notranslate"><span class="pre">snake_case</span></code> for function names and <code class="docutils literal notranslate"><span class="pre">CamelCase</span></code>
 for class names.</p>
 <section id="module-eyelinkio.io.edf.read_edf">
 <span id="reading-edf-files"></span><h2>Reading EDF files<a class="headerlink" href="#module-eyelinkio.io.edf.read_edf" title="Link to this heading">#</a></h2>
@@ -355,7 +355,7 @@ for class names.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl>
-<dt><strong>edf</strong><span class="classifier"><a class="reference internal" href="#eyelinkio.io.EDF" title="eyelinkio.io.EDF"><code class="xref py py-class docutils literal notranslate"><span class="pre">EDF</span></code></a></span></dt><dd><p>An instance of EDF.</p>
+<dt><strong>edf</strong><span class="classifier"><a class="reference internal" href="#eyelinkio.io.EDF" title="eyelinkio.io.EDF"><code class="xref py py-class docutils literal notranslate"><span class="pre">EDF</span></code></a></span></dt><dd><p>An instance of EDF:  The EyeLink data represented in Python.</p>
 </dd>
 </dl>
 </dd>
@@ -397,7 +397,7 @@ dictionary. To see the available keys, use the <code class="docutils literal not
 <dl class="field-list">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
-<dt><strong>df_samples</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><code class="docutils literal notranslate"><span class="pre">dict</span></code></a></span></dt><dd><p>A dictionary of <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>’s, containing the samples,
+<dt><strong>df_samples</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><code class="docutils literal notranslate"><span class="pre">dict</span></code></a> of <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.1)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame</span></code></a></span></dt><dd><p>A dictionary of <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>’s, containing the samples,
 blinks, saccades, fixations, messages, and calibrations.</p>
 </dd>
 </dl>
@@ -412,7 +412,9 @@ blinks, saccades, fixations, messages, and calibrations.</p>
 <dl class="field-list">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
-<dt><strong>raw</strong><span class="classifier"><a class="reference external" href="https://mne.tools/dev/generated/mne.io.Raw.html#mne.io.Raw" title="(in MNE v1.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RawEyelink</span></code></a></span></dt><dd><p>an instance of <a class="reference external" href="https://mne.tools/dev/generated/mne.io.Raw.html#mne.io.Raw" title="(in MNE v1.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Raw</span></code></a>.</p>
+<dt><strong>raw</strong><span class="classifier"><a class="reference external" href="https://mne.tools/dev/generated/mne.io.Raw.html#mne.io.Raw" title="(in MNE v1.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RawEyelink</span></code></a></span></dt><dd><p>An instance of Raw.</p>
+</dd>
+<dt><strong>calibrations</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><code class="docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference external" href="https://mne.tools/dev/generated/mne.preprocessing.eyetracking.Calibration.html#mne.preprocessing.eyetracking.Calibration" title="(in MNE v1.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Calibration</span></code></a></span></dt><dd><p>A list of Calibration objects.</p>
 </dd>
 </dl>
 </dd>

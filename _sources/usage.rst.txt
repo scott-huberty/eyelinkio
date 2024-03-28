@@ -60,7 +60,7 @@ You can convert an instance of EDF to a pandas DataFrame or an MNE Raw instance 
 
    # Convert to a pandas DataFrame or an MNE Raw instance
    dfs = edf_file.to_data_frame()
-   raw = edf_file.to_mne()
+   raw, calibration = edf_file.to_mne()
 
 
 .. seealso::

@@ -379,7 +379,7 @@ returns an <a class="reference internal" href="API.html#eyelinkio.io.EDF" title=
 <code class="docutils literal notranslate"><span class="pre">to_data_frame</span></code> and <code class="docutils literal notranslate"><span class="pre">to_mne</span></code> methods, respectively.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Convert to a pandas DataFrame or an MNE Raw instance</span>
 <span class="n">dfs</span> <span class="o">=</span> <span class="n">edf_file</span><span class="o">.</span><span class="n">to_data_frame</span><span class="p">()</span>
-<span class="n">raw</span> <span class="o">=</span> <span class="n">edf_file</span><span class="o">.</span><span class="n">to_mne</span><span class="p">()</span>
+<span class="n">raw</span><span class="p">,</span> <span class="n">calibration</span> <span class="o">=</span> <span class="n">edf_file</span><span class="o">.</span><span class="n">to_mne</span><span class="p">()</span>
 </pre></div>
 </div>
 <div class="admonition seealso">
