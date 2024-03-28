@@ -41,7 +41,7 @@ print(edf_file)
 ```
 # Convert to a pandas DataFrame or an MNE Raw instance
 dfs = edf_file.to_data_frame()
-raw = edf_file.to_mne()
+raw, calibration = edf_file.to_mne()
 ```
 
 See the [documentation](https://scott-huberty.github.io/eyelinkio/) for more.
@@ -49,4 +49,4 @@ See the [documentation](https://scott-huberty.github.io/eyelinkio/) for more.
 Acknowledgements
 ================
 
-This package was originally adapted from the `pyeparse <https://github.com/pyeparse/pyeparse>`_ package (created by several of the core developers of `MNE-Python <https://mne.tools/dev/index.html>`_ ). It copies much of the EDF (Eyelink Data Format) reading code. 
+This package was originally adapted from the [pyeparse](<https://github.com/pyeparse/pyeparse>) package (created by several of the core developers of [MNE-Python](<https://mne.tools/dev/index.html>)). It copies much of the EDF (Eyelink Data Format) reading code. 

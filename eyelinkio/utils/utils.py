@@ -2,6 +2,8 @@ from datetime import timedelta, timezone
 from pathlib import Path
 from warnings import warn
 
+import numpy as np
+
 from ..io.edf import _defines
 from .check import _check_mne_installed, _check_pandas_installed
 
@@ -9,7 +11,7 @@ from .check import _check_mne_installed, _check_pandas_installed
 def _get_test_fnames():
     """Get usable test files (omit EDF if no edf2asc)."""
     path = Path(__file__).parent.parent / 'io' / 'tests' / 'data'
-    fnames = list(path.glob('*.edf'))
+    fnames = sorted(list(path.glob('*.edf')))  # test_2.edf will be first
     assert fnames[0].exists()
     return fnames
 
@@ -63,16 +65,19 @@ def _convert_discrete_data(data, field_name):
 
 
 def to_mne(edf_obj):
-    """Convert an EDF object to an MNE object.
+    """Create and Return an instance of MNE RawEyelink.
 
     Parameters
     ----------
-    edf_obj : :class:`EDF`
+    edf_obj : EDF
         The EDF object to convert to an MNE object.
 
     Returns
     -------
-    raw : :class:`mne.io.Raw
+    raw : :class:`mne.io.Raw`
+        The MNE RawEyelink instance.
+    calibrations : list
+        A list of Calibration objects.
     """
     mne = _check_mne_installed(strict=True)
 
@@ -82,6 +87,7 @@ def to_mne(edf_obj):
     ch_names = [f"{ch}_{eye}" for ch in ch_names]
     ch_types = []
     more_info = {}
+    # Set channel types
     for ch in ch_names:
         if ch.startswith(("xpos", "ypos")):
             ch_types.append("eyegaze")
@@ -110,4 +116,57 @@ def to_mne(edf_obj):
     raw = mne.io.RawArray(edf_obj["samples"], info)
     # This will set the loc array etc.
     mne.preprocessing.eyetracking.set_channel_types_eyetrack(raw, more_info)
+    # Add annotations
+    raw = _add_annotations(edf_obj, raw)
+    # Add calibration
+    calibrations = _create_calibration(edf_obj)
+    return raw, calibrations
+
+def _add_annotations(edf, raw):
+    """Add MNE Annotations of EyeLink Events to raw."""
+    EYE_EVENTS = [("blinks", "BAD_blink"),
+                  ("saccades", "saccade"),
+                  ("fixations", "fixation")]
+    # blinks, saccades, fixations
+    for ev, desc in EYE_EVENTS:
+        onset = edf["discrete"][ev]["stime"]
+        duration = edf["discrete"][ev]["etime"] - onset
+        ch_names = [raw.info["ch_names"]] * len(onset)
+        raw.annotations.append(onset, duration, desc, ch_names)
+    # messages
+    onset = edf["discrete"]["messages"]["stime"]
+    duration = np.zeros_like(onset)
+    desc = edf["discrete"]["messages"]["msg"].astype(str).squeeze()
+    raw.annotations.append(onset, duration, desc)
+    # TODO: buttons and inputs ?
     return raw
+
+def _create_calibration(edf):
+    """Create a calibration event."""
+    from mne.preprocessing.eyetracking import Calibration
+    calibrations = []
+    for ii, this_cal in enumerate(edf["info"]["calibrations"]):
+        eye = edf["info"]["eye"].split("_")[0].lower()
+        x =  this_cal["point_x"]
+        y =  this_cal["point_y"]
+        positions = np.array([x, y]).T
+        gx = x + this_cal["diff_x"]
+        gy = y + this_cal["diff_y"]
+        gaze = np.array([gx, gy]).T
+        offsets = this_cal["offset"]
+        avg_error = np.mean(this_cal["offset"])
+        max_error = np.max(this_cal["offset"])
+        screen_resolution = edf["info"]["screen_coords"]
+        # XXX: getting onset and model will be tricky.
+        # XXX: for binocular data, we will need to get the eye another way
+        cal = Calibration(onset=None,
+                          model=None,
+                          eye=eye,
+                          avg_error=avg_error,
+                          max_error=max_error,
+                          positions=positions,
+                          offsets=offsets,
+                          gaze=gaze,
+                          screen_resolution=screen_resolution,)
+        calibrations.append(cal)
+    return calibrations

@@ -53,7 +53,7 @@ def read_edf(fname):
     Returns
     -------
     edf : EDF
-        An instance of EDF.
+        An instance of EDF:  The EyeLink data represented in Python.
     """
     return EDF(fname)
 
@@ -100,7 +100,7 @@ class EDF(dict):
 
         Returns
         -------
-        df_samples : dict
+        df_samples : dict of DataFrame
             A dictionary of :class:`~pandas.DataFrame`'s, containing the samples,
             blinks, saccades, fixations, messages, and calibrations.
         """
@@ -112,7 +112,9 @@ class EDF(dict):
         Returns
         -------
         raw : RawEyelink
-            an instance of :class:`~mne.io.Raw`.
+            An instance of Raw.
+        calibrations : list of Calibration
+            A list of Calibration objects.
         """
         return to_mne(self)
 
@@ -188,6 +190,8 @@ def _read_raw_edf(fname):
             edf_fields=dict(messages=["stime", "msg"]),
             discrete=dict(),
         )
+        # XXX: pyeparse represented messages as byte strings.
+        # XXX: Maybe we should use regular python strings?
         dtype = [("stime", np.float64), ("msg", "|S%s" % _MAX_MSG_LEN)]
         res["discrete"]["messages"] = np.empty((n_samps["messages"]), dtype=dtype)
         res["eye_idx"] = None  # in case we get input/button before START
