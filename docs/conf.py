@@ -55,7 +55,7 @@ numpydoc_class_members_toctree = False
 numpydoc_show_inherited_class_members = False
 
 numpydoc_attributes_as_param_list = True
-numpydoc_xref_param_type = True # so that python types are linked
+numpydoc_xref_param_type = True
 
 numpydoc_validate = True
 
@@ -72,7 +72,9 @@ numpydoc_xref_aliases = {
     "RawEyelink": "mne.io.Raw",
     "Calibration": "mne.preprocessing.eyetracking.Calibration",
     # Pandas
-    "DataFrame": ":class:`pandas.DataFrame`",
+    "DataFrame": "pandas.DataFrame",
     # eyelinkio
     "EDF": ":class:`~eyelinkio.io.EDF`",
 }
+
+numpydoc_xref_ignore = {"of", "A",}
