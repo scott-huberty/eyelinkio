@@ -49,4 +49,12 @@ See the [documentation](https://scott-huberty.github.io/eyelinkio/) for more.
 Acknowledgements
 ================
 
-This package was originally adapted from the [pyeparse](<https://github.com/pyeparse/pyeparse>) package (created by several of the core developers of [MNE-Python](<https://mne.tools/dev/index.html>)). It copies much of the EDF (Eyelink Data Format) reading code. 
+This package was originally adapted from the [pyeparse](<https://github.com/pyeparse/pyeparse>) package (created by several of the core developers of [MNE-Python](<https://mne.tools/dev/index.html>)). It copies much of the EDF (Eyelink Data Format) reading code.
+
+Limitations
+===========
+
+- Reading binocular data is not yet supported
+- Reading extra sample fields (velocity, HREF, head position etc.) from the EDF file is not yet supported.
+
+See the [Roadmap](https://scott-huberty.github.io/eyelinkio/roadmap.html) for more details.
