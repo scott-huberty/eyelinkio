@@ -421,6 +421,8 @@ def _handle_recording_info(edf, res):
     # TODO: edfapi eye constants are 1-based, ours are 0-based. Fix this in _defines?
     info["eye"] = defines.eye_constants[e.eye -1]
     res["eye_idx"] = e.eye - 1 # This should be 0: left, 1: right, 2: binocular
+    if res["eye_idx"] == 2:
+        raise NotImplementedError("Reading Binocular data is not yet supported.")
 
     # Figure out sample flags
     sflags = _sample_fields_available(e.sflags)
