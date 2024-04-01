@@ -397,29 +397,14 @@ dictionary. To see the available keys, use the <code class="docutils literal not
 <p class="rubric">Methods</p>
 <table class="autosummary longtable table autosummary">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#eyelinkio.io.EDF.to_data_frame" title="eyelinkio.io.EDF.to_data_frame"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_data_frame</span></code></a>()</p></td>
-<td><p>Convert an EDF file to a pandas DataFrame.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#eyelinkio.io.EDF.to_mne" title="eyelinkio.io.EDF.to_mne"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_mne</span></code></a>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#eyelinkio.io.EDF.to_mne" title="eyelinkio.io.EDF.to_mne"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_mne</span></code></a>()</p></td>
 <td><p>Create an MNE Raw object from the EDF object.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#eyelinkio.io.EDF.to_pandas" title="eyelinkio.io.EDF.to_pandas"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_pandas</span></code></a>()</p></td>
+<td><p>Convert an EDF file to a pandas DataFrame.</p></td>
 </tr>
 </tbody>
 </table>
-<dl class="py method">
-<dt class="sig sig-object py" id="eyelinkio.io.EDF.to_data_frame">
-<span class="sig-name descname"><span class="pre">to_data_frame</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#eyelinkio.io.EDF.to_data_frame" title="Link to this definition">#</a></dt>
-<dd><p>Convert an EDF file to a pandas DataFrame.</p>
-<dl class="field-list">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><dl>
-<dt><strong>df_samples</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><code class="docutils literal notranslate"><span class="pre">dict</span></code></a> of <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.1)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame</span></code></a></span></dt><dd><p>A dictionary of <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>’s, containing the samples,
-blinks, saccades, fixations, messages, and calibrations.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
 <dl class="py method">
 <dt class="sig sig-object py" id="eyelinkio.io.EDF.to_mne">
 <span class="sig-name descname"><span class="pre">to_mne</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#eyelinkio.io.EDF.to_mne" title="Link to this definition">#</a></dt>
@@ -430,6 +415,21 @@ blinks, saccades, fixations, messages, and calibrations.</p>
 <dt><strong>raw</strong><span class="classifier"><a class="reference external" href="https://mne.tools/dev/generated/mne.io.Raw.html#mne.io.Raw" title="(in MNE v1.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RawEyelink</span></code></a></span></dt><dd><p>An instance of Raw.</p>
 </dd>
 <dt><strong>calibrations</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><code class="docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference external" href="https://mne.tools/dev/generated/mne.preprocessing.eyetracking.Calibration.html#mne.preprocessing.eyetracking.Calibration" title="(in MNE v1.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Calibration</span></code></a></span></dt><dd><p>A list of Calibration objects.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="eyelinkio.io.EDF.to_pandas">
+<span class="sig-name descname"><span class="pre">to_pandas</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#eyelinkio.io.EDF.to_pandas" title="Link to this definition">#</a></dt>
+<dd><p>Convert an EDF file to a pandas DataFrame.</p>
+<dl class="field-list">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>df_samples</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><code class="docutils literal notranslate"><span class="pre">dict</span></code></a> of <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.1)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame</span></code></a></span></dt><dd><p>A dictionary of <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>’s, containing the samples,
+blinks, saccades, fixations, messages, and calibrations.</p>
 </dd>
 </dl>
 </dd>
@@ -493,8 +493,8 @@ blinks, saccades, fixations, messages, and calibrations.</p>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#edf-class"><code class="docutils literal notranslate"><span class="pre">EDF</span></code> class</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#eyelinkio.io.EDF"><code class="docutils literal notranslate"><span class="pre">EDF</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#eyelinkio.io.EDF.to_data_frame"><code class="docutils literal notranslate"><span class="pre">EDF.to_data_frame()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#eyelinkio.io.EDF.to_mne"><code class="docutils literal notranslate"><span class="pre">EDF.to_mne()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#eyelinkio.io.EDF.to_pandas"><code class="docutils literal notranslate"><span class="pre">EDF.to_pandas()</span></code></a></li>
 </ul>
 </li>
 </ul>

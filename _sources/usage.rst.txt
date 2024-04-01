@@ -54,12 +54,12 @@ Converting to a DataFrame or MNE Raw instance
 ----------------------------------------------
 
 You can convert an instance of EDF to a pandas DataFrame or an MNE Raw instance using the
-``to_data_frame`` and ``to_mne`` methods, respectively.
+``to_pandas`` and ``to_mne`` methods, respectively.
 
 .. code:: python
 
    # Convert to a pandas DataFrame or an MNE Raw instance
-   dfs = edf_file.to_data_frame()
+   dfs = edf_file.to_pandas()
    raw, calibration = edf_file.to_mne()
 
 
