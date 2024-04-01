@@ -40,7 +40,7 @@ print(edf_file)
 
 ```
 # Convert to a pandas DataFrame or an MNE Raw instance
-dfs = edf_file.to_data_frame()
+dfs = edf_file.to_pandas()
 raw, calibration = edf_file.to_mne()
 ```
 

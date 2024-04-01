@@ -1,1 +1,1 @@
-from .utils import to_data_frame, to_mne, _get_test_fnames
+from .utils import to_pandas, to_mne, _get_test_fnames

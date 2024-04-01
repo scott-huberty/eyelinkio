@@ -10,12 +10,13 @@ from .check import _check_mne_installed, _check_pandas_installed
 
 def _get_test_fnames():
     """Get usable test files (omit EDF if no edf2asc)."""
-    path = Path(__file__).parent.parent / 'io' / 'tests' / 'data'
-    fnames = sorted(list(path.glob('*.edf')))  # test_2.edf will be first
+    path = Path(__file__).parent.parent / "io" / "tests" / "data"
+    fnames = sorted(list(path.glob("*.edf")))  # test_2.edf will be first
     assert fnames[0].exists()
     return fnames
 
-def to_data_frame(edf_obj):
+
+def to_pandas(edf_obj):
     """Convert an EDF file to a pandas DataFrame.
 
     Parameters
@@ -32,36 +33,28 @@ def to_data_frame(edf_obj):
     pd = _check_pandas_installed(strict=True)
 
     dfs = {}
+    dfs["discrete"] = {}
 
+    # Discrete
+    for key in edf_obj["discrete"]:
+        cols = edf_obj["discrete"][key].dtype.names
+        dfs["discrete"][key] = pd.DataFrame(edf_obj["discrete"][key], columns=cols)
+        # XXX: pyeparse represented messages as byte strings. Should we change that?
+        if key == "messages":
+            dfs["discrete"][key]["msg"] = dfs["discrete"][key]["msg"].astype(str)
+        elif key in ["blinks", "saccades", "fixations"]:
+            dfs["discrete"][key]["eye"] = (dfs["discrete"][key]["eye"]).map(
+                _defines.eye_constants
+            )
     # Samples
     cols = edf_obj["info"]["sample_fields"]
     dfs["samples"] = pd.DataFrame(edf_obj["samples"].T, columns=cols)
-    # Ocular events
-    dfs["blinks"] = _convert_discrete_data(edf_obj["discrete"]["blinks"], "blinks")
-    dfs["saccades"] = _convert_discrete_data(edf_obj["discrete"]["saccades"],
-                                             "saccades")
-    dfs["fixations"] = _convert_discrete_data(edf_obj["discrete"]["fixations"],
-                                              "fixations")
-    dfs["messages"] = _convert_discrete_data(edf_obj["discrete"]["messages"],
-                                             "messages")
     # Calibration
-    dfs["calibrations"] = pd.DataFrame(edf_obj["info"]["calibrations"].squeeze(),
-                                       columns=edf_obj["info"]["calibrations"].dtype.names)
-
+    dfs["calibrations"] = pd.DataFrame(
+        edf_obj["info"]["calibrations"].squeeze(),
+        columns=edf_obj["info"]["calibrations"].dtype.names,
+    )
     return dfs
-
-
-def _convert_discrete_data(data, field_name):
-    import pandas as pd
-
-    df = pd.DataFrame(data)
-    if field_name == "messages":
-        df["msg"] = df["msg"].str.decode("utf-8")
-        # TODO: pyeparse represented messages as byte strings.
-        #       Maybe we should use unicode strings
-    else:
-        df["eye"] = (df["eye"]).map(_defines.eye_constants)
-    return df
 
 
 def to_mne(edf_obj):
@@ -103,9 +96,9 @@ def to_mne(edf_obj):
             ch_types.append("misc")
 
     # Create the info structure
-    info = mne.create_info(ch_names=ch_names,
-                       sfreq=edf_obj["info"]["sfreq"],
-                       ch_types=ch_types)
+    info = mne.create_info(
+        ch_names=ch_names, sfreq=edf_obj["info"]["sfreq"], ch_types=ch_types
+    )
     # force timezone to UTC
     dt = edf_obj["info"]["meas_date"]
     tz = timezone(timedelta(hours=0))
@@ -122,11 +115,14 @@ def to_mne(edf_obj):
     calibrations = _create_calibration(edf_obj)
     return raw, calibrations
 
+
 def _add_annotations(edf, raw):
     """Add MNE Annotations of EyeLink Events to raw."""
-    EYE_EVENTS = [("blinks", "BAD_blink"),
-                  ("saccades", "saccade"),
-                  ("fixations", "fixation")]
+    EYE_EVENTS = [
+        ("blinks", "BAD_blink"),
+        ("saccades", "saccade"),
+        ("fixations", "fixation"),
+    ]
     # blinks, saccades, fixations
     for ev, desc in EYE_EVENTS:
         onset = edf["discrete"][ev]["stime"]
@@ -141,14 +137,16 @@ def _add_annotations(edf, raw):
     # TODO: buttons and inputs ?
     return raw
 
+
 def _create_calibration(edf):
     """Create a calibration event."""
     from mne.preprocessing.eyetracking import Calibration
+
     calibrations = []
     for ii, this_cal in enumerate(edf["info"]["calibrations"]):
         eye = edf["info"]["eye"].split("_")[0].lower()
-        x =  this_cal["point_x"]
-        y =  this_cal["point_y"]
+        x = this_cal["point_x"]
+        y = this_cal["point_y"]
         positions = np.array([x, y]).T
         gx = x + this_cal["diff_x"]
         gy = y + this_cal["diff_y"]
@@ -159,14 +157,16 @@ def _create_calibration(edf):
         screen_resolution = edf["info"]["screen_coords"]
         # XXX: getting onset and model will be tricky.
         # XXX: for binocular data, we will need to get the eye another way
-        cal = Calibration(onset=None,
-                          model=None,
-                          eye=eye,
-                          avg_error=avg_error,
-                          max_error=max_error,
-                          positions=positions,
-                          offsets=offsets,
-                          gaze=gaze,
-                          screen_resolution=screen_resolution,)
+        cal = Calibration(
+            onset=None,
+            model=None,
+            eye=eye,
+            avg_error=avg_error,
+            max_error=max_error,
+            positions=positions,
+            offsets=offsets,
+            gaze=gaze,
+            screen_resolution=screen_resolution,
+        )
         calibrations.append(cal)
     return calibrations

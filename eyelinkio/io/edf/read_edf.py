@@ -35,7 +35,7 @@ except OSError as exp:
     has_edfapi = False
     why_not = str(exp)
 
-from ...utils import to_data_frame, to_mne
+from ...utils import to_mne, to_pandas
 from . import _defines as defines
 from ._defines import event_constants
 
@@ -95,7 +95,7 @@ class EDF(dict):
             f"  Length: {len(self['times']) / self['info']['sfreq']} seconds \n"
         )
 
-    def to_data_frame(self):
+    def to_pandas(self):
         """Convert an EDF file to a pandas DataFrame.
 
         Returns
@@ -104,7 +104,7 @@ class EDF(dict):
             A dictionary of :class:`~pandas.DataFrame`'s, containing the samples,
             blinks, saccades, fixations, messages, and calibrations.
         """
-        return to_data_frame(self)
+        return to_pandas(self)
 
     def to_mne(self):
         """Create an MNE Raw object from the EDF object.
