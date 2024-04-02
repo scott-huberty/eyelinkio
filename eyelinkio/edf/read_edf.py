@@ -314,7 +314,10 @@ def _to_list(element, keys, idx):
     for k in keys:
         v = getattr(element, k)
         if hasattr(v, "_length_"):
-            out.append(v[idx])
+            if idx == 2:
+                out.extend([v[i] for i in range(v._length_)]) # v[:2]
+            else:
+                out.append(v[idx])
         else:
             out.append(v)
     return out
@@ -422,17 +425,51 @@ def _handle_recording_info(edf, res):
     # TODO: edfapi eye constants are 1-based, ours are 0-based. Fix this in _defines?
     info["eye"] = defines.eye_constants[e.eye -1]
     res["eye_idx"] = e.eye - 1 # This should be 0: left, 1: right, 2: binocular
-    if res["eye_idx"] == 2:
-        raise NotImplementedError("Reading Binocular data is not yet supported.")
 
     # Figure out sample flags
     sflags = _sample_fields_available(e.sflags)
-    edf_fields = ["time", "gx", "gy", "pa"]  # XXX Expand?
-    edf_fields = [field for field in edf_fields if sflags[field]]
-    sample_fld = [_el2pp[field] for field in edf_fields]
-    res["edf_sample_fields"] = edf_fields
+    want_edf_fields = ["time", "gx", "gy", "pa"]  # XXX Expand?
+    have_edf_fields = [field for field in want_edf_fields if sflags[field]]
+    res["edf_sample_fields"] = have_edf_fields
+    # Figure out the number of columns needed for the samples array
+    n_cols = _setup_n_cols(res)
+    sample_fld = _setup_col_names(res)
     res["info"]["sample_fields"] = sample_fld
-    res["samples"] = np.empty((len(edf_fields), res["n_samps"]["sample"]), np.float64)
+    res["samples"] = np.empty((n_cols, res["n_samps"]["sample"]), np.float64)
+
+
+def _setup_n_cols(res):
+    """Figure out the number of columns needed for the samples array."""
+    # list the edf fields that will double for binocular data
+    check_fields = ["gx", "gy", "pa"] # XXX: Expand?
+    # find out if we have binocular data
+    if res["eye_idx"] == 2:
+        # find out if we have any of the fields that will double
+        n_cols = len(res["edf_sample_fields"])
+        for field in check_fields:
+            if field in res["edf_sample_fields"]:
+                n_cols += 1
+    else:
+        # monocular data
+        n_cols = len(res["edf_sample_fields"])
+    return n_cols
+
+def _setup_col_names(res):
+    """Figure out the column names for the samples array."""
+    sample_fld = [_el2pp[field] for field in res["edf_sample_fields"]]
+    # for monocular data, its simple
+    if res["eye_idx"] < 2:
+       return sample_fld
+    else:
+        # for binocular data, we need to double up on some fields
+        new_sample_fld = []
+        for field in sample_fld:
+            if field in ["xpos", "ypos", "ps"]: # XXX: Expand?
+                new_sample_fld.append(f"{field}_left")
+                new_sample_fld.append(f"{field}_right")
+            else:
+                new_sample_fld.append(field)
+        return new_sample_fld
 
 
 def _handle_sample(edf, res):
