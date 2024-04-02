@@ -7,7 +7,7 @@ name = "eyelinkio"
 description = "A lightweight library for reading Eyelink Data Format files in Python."
 dynamic = ["version"]
 maintainers = [{ name = "Scott Huberty", email = "seh33@uw.edu" }]
-readme = { file = "README.md", content-type = "text/x-rst" }
+readme = "README.md"
 requires-python = ">=3.9"
 keywords = [
     "neuroscience",
