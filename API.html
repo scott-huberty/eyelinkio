@@ -354,12 +354,12 @@ document.write(`
 <p>This is the API documentation for the <cite>eyelinkio</cite> package, grouped thematically
 by functionality. we use <code class="docutils literal notranslate"><span class="pre">snake_case</span></code> for function names and <code class="docutils literal notranslate"><span class="pre">CamelCase</span></code>
 for class names.</p>
-<section id="module-eyelinkio.io.edf.read_edf">
-<span id="reading-edf-files"></span><h2>Reading EDF files<a class="headerlink" href="#module-eyelinkio.io.edf.read_edf" title="Link to this heading">#</a></h2>
+<section id="module-eyelinkio.edf.read_edf">
+<span id="reading-edf-files"></span><h2>Reading EDF files<a class="headerlink" href="#module-eyelinkio.edf.read_edf" title="Link to this heading">#</a></h2>
 <p>Functions for reading Eyelink EDF Files.</p>
 <dl class="py function">
-<dt class="sig sig-object py" id="eyelinkio.io.edf.read_edf.read_edf">
-<span class="sig-prename descclassname"><span class="pre">eyelinkio.io.edf.read_edf.</span></span><span class="sig-name descname"><span class="pre">read_edf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fname</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#eyelinkio.io.edf.read_edf.read_edf" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="eyelinkio.edf.read_edf.read_edf">
+<span class="sig-prename descclassname"><span class="pre">eyelinkio.edf.read_edf.</span></span><span class="sig-name descname"><span class="pre">read_edf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fname</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#eyelinkio.edf.read_edf.read_edf" title="Link to this definition">#</a></dt>
 <dd><p>Read an EyeLink EDF file.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -370,7 +370,7 @@ for class names.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl>
-<dt><strong>edf</strong><span class="classifier"><a class="reference internal" href="#eyelinkio.io.EDF" title="eyelinkio.io.EDF"><code class="xref py py-class docutils literal notranslate"><span class="pre">EDF</span></code></a></span></dt><dd><p>An instance of EDF:  The EyeLink data represented in Python.</p>
+<dt><strong>edf</strong><span class="classifier"><code class="xref py py-class docutils literal notranslate"><span class="pre">EDF</span></code></span></dt><dd><p>An instance of EDF:  The EyeLink data represented in Python.</p>
 </dd>
 </dl>
 </dd>
@@ -381,8 +381,8 @@ for class names.</p>
 <section id="edf-class">
 <h2><code class="docutils literal notranslate"><span class="pre">EDF</span></code> class<a class="headerlink" href="#edf-class" title="Link to this heading">#</a></h2>
 <dl class="py class">
-<dt class="sig sig-object py" id="eyelinkio.io.EDF">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">eyelinkio.io.</span></span><span class="sig-name descname"><span class="pre">EDF</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fname</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#eyelinkio.io.EDF" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="eyelinkio.EDF">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">eyelinkio.</span></span><span class="sig-name descname"><span class="pre">EDF</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fname</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#eyelinkio.EDF" title="Link to this definition">#</a></dt>
 <dd><p>Represent EyeLink EDF files in Python.</p>
 <p>This class is a subclass of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>, and so can be indexed like a
 dictionary. To see the available keys, use the <code class="docutils literal notranslate"><span class="pre">keys()</span></code> method.</p>
@@ -397,17 +397,17 @@ dictionary. To see the available keys, use the <code class="docutils literal not
 <p class="rubric">Methods</p>
 <table class="autosummary longtable table autosummary">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#eyelinkio.io.EDF.to_mne" title="eyelinkio.io.EDF.to_mne"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_mne</span></code></a>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#eyelinkio.EDF.to_mne" title="eyelinkio.EDF.to_mne"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_mne</span></code></a>()</p></td>
 <td><p>Create an MNE Raw object from the EDF object.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#eyelinkio.io.EDF.to_pandas" title="eyelinkio.io.EDF.to_pandas"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_pandas</span></code></a>()</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#eyelinkio.EDF.to_pandas" title="eyelinkio.EDF.to_pandas"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_pandas</span></code></a>()</p></td>
 <td><p>Convert an EDF file to a pandas DataFrame.</p></td>
 </tr>
 </tbody>
 </table>
 <dl class="py method">
-<dt class="sig sig-object py" id="eyelinkio.io.EDF.to_mne">
-<span class="sig-name descname"><span class="pre">to_mne</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#eyelinkio.io.EDF.to_mne" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="eyelinkio.EDF.to_mne">
+<span class="sig-name descname"><span class="pre">to_mne</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#eyelinkio.EDF.to_mne" title="Link to this definition">#</a></dt>
 <dd><p>Create an MNE Raw object from the EDF object.</p>
 <dl class="field-list">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -422,8 +422,8 @@ dictionary. To see the available keys, use the <code class="docutils literal not
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="eyelinkio.io.EDF.to_pandas">
-<span class="sig-name descname"><span class="pre">to_pandas</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#eyelinkio.io.EDF.to_pandas" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="eyelinkio.EDF.to_pandas">
+<span class="sig-name descname"><span class="pre">to_pandas</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#eyelinkio.EDF.to_pandas" title="Link to this definition">#</a></dt>
 <dd><p>Convert an EDF file to a pandas DataFrame.</p>
 <dl class="field-list">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -487,14 +487,14 @@ blinks, saccades, fixations, messages, and calibrations.</p>
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-eyelinkio.io.edf.read_edf">Reading EDF files</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#eyelinkio.io.edf.read_edf.read_edf"><code class="docutils literal notranslate"><span class="pre">read_edf()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-eyelinkio.edf.read_edf">Reading EDF files</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#eyelinkio.edf.read_edf.read_edf"><code class="docutils literal notranslate"><span class="pre">read_edf()</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#edf-class"><code class="docutils literal notranslate"><span class="pre">EDF</span></code> class</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#eyelinkio.io.EDF"><code class="docutils literal notranslate"><span class="pre">EDF</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#eyelinkio.io.EDF.to_mne"><code class="docutils literal notranslate"><span class="pre">EDF.to_mne()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#eyelinkio.io.EDF.to_pandas"><code class="docutils literal notranslate"><span class="pre">EDF.to_pandas()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#eyelinkio.EDF"><code class="docutils literal notranslate"><span class="pre">EDF</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#eyelinkio.EDF.to_mne"><code class="docutils literal notranslate"><span class="pre">EDF.to_mne()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#eyelinkio.EDF.to_pandas"><code class="docutils literal notranslate"><span class="pre">EDF.to_pandas()</span></code></a></li>
 </ul>
 </li>
 </ul>
