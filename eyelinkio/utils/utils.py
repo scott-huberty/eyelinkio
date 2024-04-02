@@ -4,13 +4,13 @@ from warnings import warn
 
 import numpy as np
 
-from ..io.edf import _defines
+from ..edf import _defines
 from .check import _check_mne_installed, _check_pandas_installed
 
 
 def _get_test_fnames():
     """Get usable test files (omit EDF if no edf2asc)."""
-    path = Path(__file__).parent.parent / "io" / "tests" / "data"
+    path = Path(__file__).parent.parent / "tests" / "data"
     fnames = sorted(list(path.glob("*.edf")))  # test_2.edf will be first
     assert fnames[0].exists()
     return fnames

@@ -3,6 +3,6 @@
 #
 # License: BSD (3-clause)
 
-from . import io, utils
+from . import utils
 
-from .io import read_edf, EDF
+from .edf import read_edf, EDF

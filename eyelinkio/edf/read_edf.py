@@ -35,7 +35,6 @@ except OSError as exp:
     has_edfapi = False
     why_not = str(exp)
 
-from ...utils import to_mne, to_pandas
 from . import _defines as defines
 from ._defines import event_constants
 
@@ -104,6 +103,7 @@ class EDF(dict):
             A dictionary of :class:`~pandas.DataFrame`'s, containing the samples,
             blinks, saccades, fixations, messages, and calibrations.
         """
+        from ..utils import to_pandas
         return to_pandas(self)
 
     def to_mne(self):
@@ -116,6 +116,7 @@ class EDF(dict):
         calibrations : list of Calibration
             A list of Calibration objects.
         """
+        from ..utils import to_mne
         return to_mne(self)
 
 class _edf_open:

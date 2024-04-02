@@ -1,9 +1,8 @@
 import numpy as np
 import pytest
 
-from eyelinkio.io import read_edf
-from eyelinkio.utils import _get_test_fnames
-from eyelinkio.utils.check import requires_edfapi
+from eyelinkio import read_edf
+from eyelinkio.utils import _get_test_fnames, requires_edfapi
 
 fnames = _get_test_fnames()
 
