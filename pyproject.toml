@@ -175,11 +175,6 @@ ignore_directives = [
 ]
 ignore_messages = "^.*(Unknown target name|Undefined substitution referenced)[^`]*$"
 
-[tool.mypy]
-ignore_errors = true
-scripts_are_modules = true
-strict = false
-
 [tool.towncrier]
 package = "eyelinkio"
 directory = "docs/changes/devel/"
