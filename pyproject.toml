@@ -43,12 +43,13 @@ test = [
     "tomli; python_version<'3.11'",
 ]
 
-# Dependencies for building the docuemntation
+# Dependencies for building the documentation
 doc = [
     "sphinx>=6",
     "numpydoc",
     "pydata_sphinx_theme",
     "sphinxemoji",
+    "sphinxcontrib-towncrier",
 ]
 
 full = ["pandas", "mne"]
