@@ -52,3 +52,4 @@ It copies much of the EDF (EyeLink Data Format) reading code.
    contributing
    API
    roadmap
+   whats_new

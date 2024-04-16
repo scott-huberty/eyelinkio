@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>API &#8212; EyeLinkIO 👀</title>
+    <title>What’s new &#8212; EyeLinkIO 👀</title>
   
   
   
@@ -39,11 +39,11 @@
     <script src="_static/documentation_options.js?v=5929fcd5"></script>
     <script src="_static/doctools.js?v=888ff710"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'API';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'whats_new';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Roadmap" href="roadmap.html" />
-    <link rel="prev" title="Contributor Guide" href="contributing.html" />
+    <link rel="next" title="Version (development) (2024-04-16)" href="changes/devel.html" />
+    <link rel="prev" title="Roadmap" href="roadmap.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -144,8 +144,8 @@
                     </li>
                 
 
-                    <li class="nav-item current active">
-                      <a class="nav-link nav-internal" href="#">
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="API.html">
                         API
                       </a>
                     </li>
@@ -158,8 +158,8 @@
                     </li>
                 
 
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="whats_new.html">
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="#">
                         What’s new
                       </a>
                     </li>
@@ -260,8 +260,8 @@ document.write(`
                     </li>
                 
 
-                    <li class="nav-item current active">
-                      <a class="nav-link nav-internal" href="#">
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="API.html">
                         API
                       </a>
                     </li>
@@ -274,8 +274,8 @@ document.write(`
                     </li>
                 
 
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="whats_new.html">
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="#">
                         What’s new
                       </a>
                     </li>
@@ -310,7 +310,10 @@ document.write(`
 <nav class="bd-docs-nav bd-links"
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
-  <div class="bd-toc-item navbar-nav"></div>
+  <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="changes/devel.html">Version  (development) (2024-04-16)</a></li>
+</ul>
+</div>
 </nav></div>
     </div>
   
@@ -346,7 +349,7 @@ document.write(`
         <i class="fa-solid fa-home"></i>
       </a>
     </li>
-    <li class="breadcrumb-item active" aria-current="page">API</li>
+    <li class="breadcrumb-item active" aria-current="page">What’s new</li>
   </ul>
 </nav>
 </div>
@@ -363,96 +366,14 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="api">
-<h1>API<a class="headerlink" href="#api" title="Link to this heading">#</a></h1>
-<p>This is the API documentation for the <cite>eyelinkio</cite> package, grouped thematically
-by functionality. we use <code class="docutils literal notranslate"><span class="pre">snake_case</span></code> for function names and <code class="docutils literal notranslate"><span class="pre">CamelCase</span></code>
-for class names.</p>
-<section id="module-eyelinkio.edf.read_edf">
-<span id="reading-edf-files"></span><h2>Reading EDF files<a class="headerlink" href="#module-eyelinkio.edf.read_edf" title="Link to this heading">#</a></h2>
-<p>Functions for reading Eyelink EDF Files.</p>
-<dl class="py function">
-<dt class="sig sig-object py" id="eyelinkio.edf.read_edf.read_edf">
-<span class="sig-prename descclassname"><span class="pre">eyelinkio.edf.read_edf.</span></span><span class="sig-name descname"><span class="pre">read_edf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fname</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#eyelinkio.edf.read_edf.read_edf" title="Link to this definition">#</a></dt>
-<dd><p>Read an EyeLink EDF file.</p>
-<dl class="field-list">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl>
-<dt><strong>fname</strong><span class="classifier"><a class="reference external" href="https://mne.tools/dev/documentation/glossary.html#term-path-like" title="(in MNE v1.7)"><span class="xref std std-term">path-like</span></a></span></dt><dd><p>The name of the EDF file.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl>
-<dt><strong>edf</strong><span class="classifier"><code class="xref py py-class docutils literal notranslate"><span class="pre">EDF</span></code></span></dt><dd><p>An instance of EDF:  The EyeLink data represented in Python.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-</section>
-<section id="edf-class">
-<h2><code class="docutils literal notranslate"><span class="pre">EDF</span></code> class<a class="headerlink" href="#edf-class" title="Link to this heading">#</a></h2>
-<dl class="py class">
-<dt class="sig sig-object py" id="eyelinkio.EDF">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">eyelinkio.</span></span><span class="sig-name descname"><span class="pre">EDF</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fname</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#eyelinkio.EDF" title="Link to this definition">#</a></dt>
-<dd><p>Represent EyeLink EDF files in Python.</p>
-<p>This class is a subclass of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>, and so can be indexed like a
-dictionary. To see the available keys, use the <code class="docutils literal notranslate"><span class="pre">keys()</span></code> method.</p>
-<dl class="field-list">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl>
-<dt><strong>fname</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="docutils literal notranslate"><span class="pre">str</span></code></a></span></dt><dd><p>The name of the EDF file.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-<p class="rubric">Methods</p>
-<table class="autosummary longtable table autosummary">
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#eyelinkio.EDF.to_mne" title="eyelinkio.EDF.to_mne"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_mne</span></code></a>()</p></td>
-<td><p>Create an MNE Raw object from the EDF object.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#eyelinkio.EDF.to_pandas" title="eyelinkio.EDF.to_pandas"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_pandas</span></code></a>()</p></td>
-<td><p>Convert an EDF file to a pandas DataFrame.</p></td>
-</tr>
-</tbody>
-</table>
-<dl class="py method">
-<dt class="sig sig-object py" id="eyelinkio.EDF.to_mne">
-<span class="sig-name descname"><span class="pre">to_mne</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#eyelinkio.EDF.to_mne" title="Link to this definition">#</a></dt>
-<dd><p>Create an MNE Raw object from the EDF object.</p>
-<dl class="field-list">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><dl>
-<dt><strong>raw</strong><span class="classifier"><a class="reference external" href="https://mne.tools/dev/generated/mne.io.Raw.html#mne.io.Raw" title="(in MNE v1.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RawEyelink</span></code></a></span></dt><dd><p>An instance of Raw.</p>
-</dd>
-<dt><strong>calibrations</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><code class="docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference external" href="https://mne.tools/dev/generated/mne.preprocessing.eyetracking.Calibration.html#mne.preprocessing.eyetracking.Calibration" title="(in MNE v1.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Calibration</span></code></a></span></dt><dd><p>A list of Calibration objects.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="eyelinkio.EDF.to_pandas">
-<span class="sig-name descname"><span class="pre">to_pandas</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#eyelinkio.EDF.to_pandas" title="Link to this definition">#</a></dt>
-<dd><p>Convert an EDF file to a pandas DataFrame.</p>
-<dl class="field-list">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><dl>
-<dt><strong>df_samples</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><code class="docutils literal notranslate"><span class="pre">dict</span></code></a> of <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.2)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame</span></code></a></span></dt><dd><p>A dictionary of <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>’s, containing the samples,
-blinks, saccades, fixations, messages, and calibrations.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-</section>
+  <section id="what-s-new">
+<span id="whats-new"></span><h1>What’s new<a class="headerlink" href="#what-s-new" title="Link to this heading">#</a></h1>
+<p>Changes for each version of EyelinkIO are listed below.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="changes/devel.html">Version  (development) (2024-04-16)</a></li>
+</ul>
+</div>
 </section>
 
 
@@ -466,20 +387,20 @@ blinks, saccades, fixations, messages, and calibrations.</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="contributing.html"
+       href="roadmap.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Contributor Guide</p>
+        <p class="prev-next-title">Roadmap</p>
       </div>
     </a>
     <a class="right-next"
-       href="roadmap.html"
+       href="changes/devel.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Roadmap</p>
+        <p class="prev-next-title">Version  (development) (2024-04-16)</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -494,32 +415,9 @@ blinks, saccades, fixations, messages, and calibrations.</p>
 
 
   <div class="sidebar-secondary-item">
-<div
-    id="pst-page-navigation-heading-2"
-    class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> On this page
-  </div>
-  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-eyelinkio.edf.read_edf">Reading EDF files</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#eyelinkio.edf.read_edf.read_edf"><code class="docutils literal notranslate"><span class="pre">read_edf()</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#edf-class"><code class="docutils literal notranslate"><span class="pre">EDF</span></code> class</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#eyelinkio.EDF"><code class="docutils literal notranslate"><span class="pre">EDF</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#eyelinkio.EDF.to_mne"><code class="docutils literal notranslate"><span class="pre">EDF.to_mne()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#eyelinkio.EDF.to_pandas"><code class="docutils literal notranslate"><span class="pre">EDF.to_pandas()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-  </nav></div>
-
-  <div class="sidebar-secondary-item">
 
   <div class="tocsection sourcelink">
-    <a href="_sources/API.rst.txt">
+    <a href="_sources/whats_new.rst.txt">
       <i class="fa-solid fa-file-lines"></i> Show Source
     </a>
   </div>
