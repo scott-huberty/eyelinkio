@@ -182,8 +182,8 @@ strict = false
 
 [tool.towncrier]
 package = "eyelinkio"
-directory = "doc/changes/devel/"
-filename = "doc/changes/devel.rst"
+directory = "docs/changes/devel/"
+filename = "docs/changes/devel.rst"
 title_format = "{version} ({project_date})"
 issue_format = "`#{issue} <https://github.com/scott-huberty/eyelinkio/pulls/{issue}>`__"
 

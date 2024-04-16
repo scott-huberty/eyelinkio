@@ -1,0 +1,3 @@
+.. _Scott Huberty: https://github.com/scott-huberty
+
+Setup a changelog, using `towncrier <https://towncrier.readthedocs.io/en/stable/index.html>`_. by `Scott Huberty`_
