@@ -259,8 +259,13 @@ def _extract_calibration(info, messages):
         if "!CAL VALIDATION " in line and "ABORTED" not in line:
             cal_kind = line.split("!CAL VALIDATION ")[1].split()[0]
             n_points = int([c for c in cal_kind if c.isdigit()][0])
+            if "LR" in line: # Bino data have 2x the calibration lines
+                n_points *= 2
             this_validation = []
             for ni in range(n_points):
+                # for bino data, offset ni by 1 in order to get the right line
+                if "LR" in line:
+                    ni += 1
                 subline = lines[li + ni + 1].split()
                 xy = subline[-6].split(",")
                 xy_diff = subline[-2].split(",")
