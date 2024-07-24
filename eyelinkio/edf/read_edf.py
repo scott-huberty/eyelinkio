@@ -222,6 +222,8 @@ def _read_raw_edf(fname):
     assert np.array_equal(orig_times, np.sort(orig_times))
     times = np.arange(len(orig_times), dtype=np.float64) / info["sfreq"]
     for key in event_types:
+        if key not in discrete:
+            continue
         for sub_key in ("stime", "etime"):
             if sub_key in discrete[key].dtype.names:
                 _adjust_time(discrete[key][sub_key], orig_times, times)
