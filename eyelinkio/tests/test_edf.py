@@ -6,7 +6,7 @@ from eyelinkio.utils import _get_test_fnames, requires_edfapi
 
 fnames = _get_test_fnames()
 mne = pytest.importorskip('mne')
-panadas = pytest.importorskip('pandas')
+pandas = pytest.importorskip('pandas')
 
 @requires_edfapi
 def test_read_raw():
