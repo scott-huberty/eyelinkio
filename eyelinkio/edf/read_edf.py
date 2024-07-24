@@ -1,6 +1,7 @@
 """Functions for reading Eyelink EDF Files."""
 
 import ctypes as ct
+import re
 import warnings
 from datetime import datetime
 from functools import partial
@@ -239,10 +240,12 @@ def _adjust_time(x, orig_times, times):
 def _extract_calibration(info, messages):
     """Extract calibration from messages."""
     lines = []
-    for msg in messages["msg"]:
-        msg = msg.decode("ASCII")
+    stimes = []
+    for this_msg in messages:
+        msg = this_msg["msg"].decode("ASCII")
         if msg.startswith("!CAL") or msg.startswith("VALIDATE"):
             lines.append(msg)
+            stimes.append(this_msg["stime"])
         if msg.startswith("GAZE_COORDS"):
             coords = msg.split()[-4:]
             coords = [int(round(float(c))) for c in coords]
@@ -255,16 +258,35 @@ def _extract_calibration(info, messages):
     while li < len(lines):
         line = lines[li]
         if "!CAL VALIDATION " in line and "ABORTED" not in line:
+            this_calibration = dict()
+            this_eye = re.search(r'\b(LEFT|RIGHT)\b', line)
+            if not this_eye:
+                raise ValueError(f"Could not find eye in calibration line: {line}")
+            this_eye = this_eye.group(0)
+
+            onset = stimes[li]
+
             cal_kind = line.split("!CAL VALIDATION ")[1].split()[0]
             n_points = int([c for c in cal_kind if c.isdigit()][0])
-            if "LR" in line: # Bino data have 2x the calibration lines
-                n_points *= 2
             this_validation = []
-            for ni in range(n_points):
-                # for bino data, offset ni by 1 in order to get the right line
-                if "LR" in line:
-                    ni += 1
-                subline = lines[li + ni + 1].split()
+            ni = 0
+            while len(this_validation) < n_points:
+                ni += 1
+                if li + ni >= len(lines):
+                    break
+
+                subline = lines[li + ni]
+                if "!CAL" in subline:
+                    continue
+                eye = re.search(r'\b(LEFT|RIGHT)\b', subline)
+                if not eye:
+                    raise ValueError(f"Can't find eye in calibration line: {subline}")
+                eye = eye.group(0)
+
+                if eye != this_eye:
+                    continue
+
+                subline = subline.split()
                 xy = subline[-6].split(",")
                 xy_diff = subline[-2].split(",")
                 vals = [
@@ -272,15 +294,20 @@ def _extract_calibration(info, messages):
                     for v in [xy[0], xy[1], subline[-4], xy_diff[0], xy_diff[1]]
                 ]
                 this_validation.append(vals)
-            li += n_points
+
             this_validation = np.array(this_validation)
             dtype = [(key, "f8") for key in keys]
             out = np.empty(len(this_validation), dtype=dtype)
             for key, data in zip(keys, this_validation.T):
                 out[key] = data
-            calibrations.append(out)
+            # Now add all this information to the calibration
+            this_calibration["onset"] = np.round(onset, 3)
+            this_calibration["eye"] = this_eye.lower()
+            this_calibration["validation"] = out
+            this_calibration["model"] = cal_kind
+            calibrations.append(this_calibration)
         li += 1
-    info["calibrations"] = np.array(calibrations)
+    info["calibrations"] = calibrations
 
 
 def _extract_sys_info(line):
