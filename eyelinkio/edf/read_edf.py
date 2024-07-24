@@ -1,6 +1,7 @@
 """Functions for reading Eyelink EDF Files."""
 
 import ctypes as ct
+import re
 import warnings
 from datetime import datetime
 from functools import partial
@@ -221,6 +222,8 @@ def _read_raw_edf(fname):
     assert np.array_equal(orig_times, np.sort(orig_times))
     times = np.arange(len(orig_times), dtype=np.float64) / info["sfreq"]
     for key in event_types:
+        if key not in discrete:
+            continue
         for sub_key in ("stime", "etime"):
             if sub_key in discrete[key].dtype.names:
                 _adjust_time(discrete[key][sub_key], orig_times, times)
@@ -239,10 +242,12 @@ def _adjust_time(x, orig_times, times):
 def _extract_calibration(info, messages):
     """Extract calibration from messages."""
     lines = []
-    for msg in messages["msg"]:
-        msg = msg.decode("ASCII")
+    stimes = []
+    for this_msg in messages:
+        msg = this_msg["msg"].decode("ASCII")
         if msg.startswith("!CAL") or msg.startswith("VALIDATE"):
             lines.append(msg)
+            stimes.append(this_msg["stime"])
         if msg.startswith("GAZE_COORDS"):
             coords = msg.split()[-4:]
             coords = [int(round(float(c))) for c in coords]
@@ -255,11 +260,35 @@ def _extract_calibration(info, messages):
     while li < len(lines):
         line = lines[li]
         if "!CAL VALIDATION " in line and "ABORTED" not in line:
+            this_calibration = dict()
+            this_eye = re.search(r'\b(LEFT|RIGHT)\b', line)
+            if not this_eye:
+                raise ValueError(f"Could not find eye in calibration line: {line}")
+            this_eye = this_eye.group(0)
+
+            onset = stimes[li]
+
             cal_kind = line.split("!CAL VALIDATION ")[1].split()[0]
             n_points = int([c for c in cal_kind if c.isdigit()][0])
             this_validation = []
-            for ni in range(n_points):
-                subline = lines[li + ni + 1].split()
+            ni = 0
+            while len(this_validation) < n_points:
+                ni += 1
+                if li + ni >= len(lines):
+                    break
+
+                subline = lines[li + ni]
+                if "!CAL" in subline:
+                    continue
+                eye = re.search(r'\b(LEFT|RIGHT)\b', subline)
+                if not eye:
+                    raise ValueError(f"Can't find eye in calibration line: {subline}")
+                eye = eye.group(0)
+
+                if eye != this_eye:
+                    continue
+
+                subline = subline.split()
                 xy = subline[-6].split(",")
                 xy_diff = subline[-2].split(",")
                 vals = [
@@ -267,15 +296,20 @@ def _extract_calibration(info, messages):
                     for v in [xy[0], xy[1], subline[-4], xy_diff[0], xy_diff[1]]
                 ]
                 this_validation.append(vals)
-            li += n_points
+
             this_validation = np.array(this_validation)
             dtype = [(key, "f8") for key in keys]
             out = np.empty(len(this_validation), dtype=dtype)
             for key, data in zip(keys, this_validation.T):
                 out[key] = data
-            calibrations.append(out)
+            # Now add all this information to the calibration
+            this_calibration["onset"] = np.round(onset, 3)
+            this_calibration["eye"] = this_eye.lower()
+            this_calibration["validation"] = out
+            this_calibration["model"] = cal_kind
+            calibrations.append(this_calibration)
         li += 1
-    info["calibrations"] = np.array(calibrations)
+    info["calibrations"] = calibrations
 
 
 def _extract_sys_info(line):
@@ -314,7 +348,10 @@ def _to_list(element, keys, idx):
     for k in keys:
         v = getattr(element, k)
         if hasattr(v, "_length_"):
-            out.append(v[idx])
+            if idx == 2:
+                out.extend([v[i] for i in range(v._length_)]) # v[:2]
+            else:
+                out.append(v[idx])
         else:
             out.append(v)
     return out
@@ -422,17 +459,51 @@ def _handle_recording_info(edf, res):
     # TODO: edfapi eye constants are 1-based, ours are 0-based. Fix this in _defines?
     info["eye"] = defines.eye_constants[e.eye -1]
     res["eye_idx"] = e.eye - 1 # This should be 0: left, 1: right, 2: binocular
-    if res["eye_idx"] == 2:
-        raise NotImplementedError("Reading Binocular data is not yet supported.")
 
     # Figure out sample flags
     sflags = _sample_fields_available(e.sflags)
-    edf_fields = ["time", "gx", "gy", "pa"]  # XXX Expand?
-    edf_fields = [field for field in edf_fields if sflags[field]]
-    sample_fld = [_el2pp[field] for field in edf_fields]
-    res["edf_sample_fields"] = edf_fields
+    want_edf_fields = ["time", "gx", "gy", "pa"]  # XXX Expand?
+    have_edf_fields = [field for field in want_edf_fields if sflags[field]]
+    res["edf_sample_fields"] = have_edf_fields
+    # Figure out the number of columns needed for the samples array
+    n_cols = _setup_n_cols(res)
+    sample_fld = _setup_col_names(res)
     res["info"]["sample_fields"] = sample_fld
-    res["samples"] = np.empty((len(edf_fields), res["n_samps"]["sample"]), np.float64)
+    res["samples"] = np.empty((n_cols, res["n_samps"]["sample"]), np.float64)
+
+
+def _setup_n_cols(res):
+    """Figure out the number of columns needed for the samples array."""
+    # list the edf fields that will double for binocular data
+    check_fields = ["gx", "gy", "pa"] # XXX: Expand?
+    # find out if we have binocular data
+    if res["eye_idx"] == 2:
+        # find out if we have any of the fields that will double
+        n_cols = len(res["edf_sample_fields"])
+        for field in check_fields:
+            if field in res["edf_sample_fields"]:
+                n_cols += 1
+    else:
+        # monocular data
+        n_cols = len(res["edf_sample_fields"])
+    return n_cols
+
+def _setup_col_names(res):
+    """Figure out the column names for the samples array."""
+    sample_fld = [_el2pp[field] for field in res["edf_sample_fields"]]
+    # for monocular data, its simple
+    if res["eye_idx"] < 2:
+       return sample_fld
+    else:
+        # for binocular data, we need to double up on some fields
+        new_sample_fld = []
+        for field in sample_fld:
+            if field in ["xpos", "ypos", "ps"]: # XXX: Expand?
+                new_sample_fld.append(f"{field}_left")
+                new_sample_fld.append(f"{field}_right")
+            else:
+                new_sample_fld.append(field)
+        return new_sample_fld
 
 
 def _handle_sample(edf, res):

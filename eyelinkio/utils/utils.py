@@ -50,10 +50,20 @@ def to_pandas(edf_obj):
     cols = edf_obj["info"]["sample_fields"]
     dfs["samples"] = pd.DataFrame(edf_obj["samples"].T, columns=cols)
     # Calibration
-    dfs["calibrations"] = pd.DataFrame(
-        edf_obj["info"]["calibrations"].squeeze(),
-        columns=edf_obj["info"]["calibrations"].dtype.names,
-    )
+    if not edf_obj["info"]["calibrations"]:
+        dfs["calibrations"] = pd.DataFrame()
+        return dfs
+    cals = [cal.copy() for cal in edf_obj["info"]["calibrations"]]
+    validations = [cal.pop("validation") for cal in cals]
+    val_dfs = []
+    assert len(cals) == len(validations)
+    for cal, validation in zip(cals, validations):
+        this_df = pd.DataFrame(validation)
+        this_df["eye"] = cal["eye"]
+        this_df["model"] = cal["model"]
+        this_df["onset"] = cal["onset"]
+        val_dfs.append(this_df)
+    dfs["calibrations"] = pd.concat(val_dfs)
     return dfs
 
 
@@ -75,13 +85,20 @@ def to_mne(edf_obj):
     mne = _check_mne_installed(strict=True)
 
     # in mne we need to specify the eye in the ch name, or pick functions will fail
-    eye = edf_obj["info"]["eye"].split("_")[0].lower()
-    ch_names = edf_obj["info"]["sample_fields"]
-    ch_names = [f"{ch}_{eye}" for ch in ch_names]
+    is_binocular = edf_obj["info"]["eye"] == "BINOCULAR"
+    if is_binocular:
+        ch_names = edf_obj["info"]["sample_fields"]
+    else: # MONOCULAR
+        eye = edf_obj["info"]["eye"].split("_")[0].lower()
+        ch_names = edf_obj["info"]["sample_fields"]
+        ch_names = [f"{ch}_{eye}" for ch in ch_names]
     ch_types = []
     more_info = {}
     # Set channel types
     for ch in ch_names:
+        if is_binocular:
+            eye = ch.split("_")[-1].lower()
+            assert eye in ["left", "right"]
         if ch.startswith(("xpos", "ypos")):
             ch_types.append("eyegaze")
             if ch.startswith("x"):
@@ -144,22 +161,22 @@ def _create_calibration(edf):
 
     calibrations = []
     for ii, this_cal in enumerate(edf["info"]["calibrations"]):
-        eye = edf["info"]["eye"].split("_")[0].lower()
-        x = this_cal["point_x"]
-        y = this_cal["point_y"]
+        eye = this_cal["eye"]
+        x = this_cal["validation"]["point_x"]
+        y = this_cal["validation"]["point_y"]
         positions = np.array([x, y]).T
-        gx = x + this_cal["diff_x"]
-        gy = y + this_cal["diff_y"]
+        gx = x + this_cal["validation"]["diff_x"]
+        gy = y + this_cal["validation"]["diff_y"]
         gaze = np.array([gx, gy]).T
-        offsets = this_cal["offset"]
-        avg_error = np.mean(this_cal["offset"])
-        max_error = np.max(this_cal["offset"])
+        offsets = this_cal["validation"]["offset"]
+        avg_error = np.round(np.mean(offsets), 3)
+        max_error = np.max(offsets)
         screen_resolution = edf["info"]["screen_coords"]
-        # XXX: getting onset and model will be tricky.
-        # XXX: for binocular data, we will need to get the eye another way
+        onset = this_cal["onset"]
+        model = this_cal["model"]
         cal = Calibration(
-            onset=None,
-            model=None,
+            onset=onset,
+            model=model,
             eye=eye,
             avg_error=avg_error,
             max_error=max_error,
