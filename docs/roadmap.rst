@@ -4,12 +4,6 @@ Roadmap
 This page describes some of the limitations of the current implementation, and
 items in need of discussion.
 
-- **Support for Binocular data**:
-    The current implementation does not support
-    reading binocular data. Adding this support likely will not be trivial.
-    See `this issue <https://github.com/scott-huberty/eyelinkio/issues/4>`_ for more
-    information.
-
 - **Support for all sample fields**:
     The current implementation only supports
     reading ``xpos``, ``ypos``, and ``pupil size`` sample fields. We should add support for
@@ -30,11 +24,11 @@ items in need of discussion.
     regular Python strings, but I will wait to see if anyone provides feedback on this
     before changing it.
 
-- **Use of Named Arrays**:
-    The current implementation stores data in named Numpy
+- **Use of structured Arrays**:
+    The current implementation stores data in structured Numpy
     arrays, so that for example you can do ``edf["discrete"]["messages"]["msg"]`` to get
     an array of the message strings. This was inherited from the original pyeparse
-    implementation. Named arrays are nice but add some complexity (and most users
+    implementation. Structured arrays are nice but add some complexity (and most users
     probably aren't familiar with them?). I'm not sure if we should keep them, or just
     use dictionaries instead. I will wait to see if anyone provides feedback on this.
 

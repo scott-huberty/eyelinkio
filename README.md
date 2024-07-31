@@ -2,7 +2,7 @@
 
 A lightweight library to import SR Research EDF files into Python.
 
-**This Software is currenly pre-alpha, meaning it is currently being developed**: Changes to the API (function names, etc.), or even the name of this package, may occur without warning. This library has been tested with MacOS and Linux, but not Windows.
+**This Software is currenly pre-alpha, meaning it is currently being developed**: Changes to the API (function names, etc.) may occur without warning. This library has been tested with MacOS and Linux, but not Windows.
 
 ## About the Eyelink Data Format
 
@@ -48,7 +48,6 @@ This package was originally adapted from the [pyeparse](<https://github.com/pyep
 
 ## Limitations
 
-- Reading binocular data is not yet supported
 - Reading extra sample fields (velocity, HREF, head position etc.) from the EDF file is not yet supported.
 
 See the [Roadmap](https://scott-huberty.github.io/eyelinkio/roadmap.html) for more details.
