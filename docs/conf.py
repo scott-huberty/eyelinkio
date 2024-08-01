@@ -3,7 +3,10 @@
 # For the full list of built-in configuration values, see the documentation:
 # https://www.sphinx-doc.org/en/master/usage/configuration.html
 
+from datetime import date
 from pathlib import Path
+
+import eyelinkio
 
 # -- Path setup --------------------------------------------------------------
 
@@ -16,8 +19,12 @@ curpath = Path(__file__).parent.resolve(strict=True)
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = 'EyeLinkIO'
-copyright = '2024, EyeLinkIO Developers'
 author = 'EyeLinkIO Developers'
+copyright = f"{date.today().year}, {author}"
+release = eyelinkio.__version__
+package = eyelinkio.__name__
+gh_url = "https://github.com/scott-huberty/eyelinkio"
+
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
@@ -27,7 +34,7 @@ extensions = ["numpydoc",
               "sphinx.ext.intersphinx",
               "sphinx.ext.todo",
               "sphinxemoji.sphinxemoji",
-              "sphinxcontrib.towncrier.ext",
+              # "sphinxcontrib.towncrier.ext",
               ]
 
 templates_path = ['_templates']

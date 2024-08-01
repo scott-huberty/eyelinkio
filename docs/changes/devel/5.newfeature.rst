@@ -1,0 +1,4 @@
+.. _Scott Huberty: https://github.com/scott-huberty
+.. _Thinh Nguyen: https://github.com/ttngu207
+
+Added support for eading binocular data by `Scott Huberty`_ and `Thinh Nguyen`_.
