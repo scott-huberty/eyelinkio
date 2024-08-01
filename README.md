@@ -10,9 +10,44 @@ The EyeLink Data Format (EDF; not to be confused with the [European Data Format]
 
 ## Dependencies
 
-Strictly speaking, EyeLinkIO only requires Numpy, and that the user has the [EyeLink Software Development Kit](<https://www.sr-research.com/support/forum-3.html>) installed on their machine (One must create a login on the forum to access the download). For converting data to pandas ``DataFrames`` or MNE-Python ``Raw`` instances, you must have those respective packages installed.
+Strictly speaking, EyeLinkIO only requires Numpy. For converting data to pandas ``DataFrames`` or MNE-Python ``Raw`` instances, you must have those respective packages installed.
+
+> [!IMPORTANT]
+> - You must have the [EyeLink Software Development Kit](<https://www.sr-research.com/support/forum-3.html>) installed on your computer
+> - You must register an account on the forum to access the download (registration is free)
+
+## Installation
+
+1. **Stable Installation**
+
+```bash
+
+pip install eyelinkio
+```
+
+2. **Development Installation** (For those who need features or bugfixes that aren't released yet):
+
+```bash
+
+pip install git+https://github.com/scott-huberty/eyelinkio.git
+```
+3. **Editable Installation** (For contributors to EyeLinkIO):
+
+```bash
+
+pip install -e ./eyelinkio
+```
+
+> [!IMPORTANT]  
+>- Fork the repository on GitHub first.
+>- Clone your forked repository to your local machine.
+>- Make sure you're in the directory *containing* the cloned `eyelinkio` folder when you run the command above
+
+This package is not currently available on Conda.
 
 ## Example Usage
+
+#### Reading an EDF file
 
 ```python
 
@@ -33,6 +68,37 @@ print(edf_file)
   Calibrations: 1 
   Length: 66.827 seconds 
 ```
+
+#### Inspecting an EDF object
+
+```python
+
+edf_file.keys()
+```
+
+```bash
+Out: dict_keys(['info', 'discrete', 'times', 'samples'])
+```
+
+```python
+
+edf_file["info"].keys()
+```
+
+```bash
+Out: dict_keys(['meas_date', 'version', 'camera', 'serial', 'camera_config', 'sfreq', 'ps_units', 'eye', 'sample_fields', 'edfapi_version', 'screen_coords', 'calibrations', 'filename'])
+```
+
+```python
+
+edf_file["discrete"].keys()
+```
+
+```bash
+Out: dict_keys(['messages', 'buttons', 'inputs', 'blinks', 'saccades', 'fixations'])
+```
+
+### Exporting an EDF object to Pandas or MNE-Python
 
 ```python
 # Convert to a pandas DataFrame or an MNE Raw instance
