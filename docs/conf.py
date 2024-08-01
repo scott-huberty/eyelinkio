@@ -34,7 +34,7 @@ extensions = ["numpydoc",
               "sphinx.ext.intersphinx",
               "sphinx.ext.todo",
               "sphinxemoji.sphinxemoji",
-              "sphinxcontrib.towncrier.ext",
+              # "sphinxcontrib.towncrier.ext",
               ]
 
 templates_path = ['_templates']
