@@ -3,32 +3,59 @@
 User Guide
 ==========
 
+.. important::
+   - You must have the `EyeLink Software Development Kit <https://www.sr-research.com/support/forum-3.html>`_ installed on your computer
+   - You must register an account on the forum to access the download (registration is free)
+
+
 Installation
 ------------
 
-This package is not yet available on PyPI, so you must install it from source. You can do
-this by cloning the repository and running the following command in the root directory:
+.. note::
+   This package is not yet available on conda-forge.
+
+1. Stable Installation
+~~~~~~~~~~~~~~~~~~~~~~~
+
+You can install the latest stable version of the package from PyPI using pip:
 
 .. code:: bash
 
-   pip install --editable .
+   pip install eyelinkio
 
-This will install the package in "editable" mode, meaning that changes to the source code
-will be reflected in the installed package. This is useful for development purposes.
 
-Or you can install a static version of the package directly from GitHub:
+2. **Development Installation** (Static)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+For those who need features or bugfixes that aren't released yet:
 
 .. code:: bash
 
    pip install git+https://github.com/scott-huberty/eyelinkio
 
 
+3. **Development Installation** (Dynamic)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+For contributors to EyeLinkIO:
+
+.. code:: bash
+
+   pip install --editable ./eyelinkio
+
+.. important::
+   - Fork the repository on GitHub first.
+   - Clone your forked repository to your computer.
+   - Make sure you're in the directory *containing* the cloned ``eyelinkio`` folder when you run the command above.
+
+Example Usage
+-------------
 
 Reading an EDF file
--------------------
+~~~~~~~~~~~~~~~~~~~
 
-You can read EyeLink EDF files using the :func:`~eyelinkio.io.edf.read_edf` function, which
-returns an :class:`~eyelinkio.io.EDF` instance.
+You can read EyeLink EDF files using the :func:`~eyelinkio.edf.read_edf` function, which
+returns an :class:`~eyelinkio.EDF` instance.
 
 .. code:: python
 
@@ -49,18 +76,59 @@ returns an :class:`~eyelinkio.io.EDF` instance.
    Calibrations: 1 
    Length: 66.827 seconds 
 
+Inspecting an EDF object
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+An EDF object inherits from a dictionary, so you can index it like a dictionary, and inspect its keys.
+
+.. code:: python
+
+   # Inspect the EDF object
+   edf_file.keys()
+
+
+.. code:: console
+   
+      dict_keys(['info', 'discrete', 'times', 'samples'])
+
+
+.. code:: python
+
+   # Inspect the info
+   edf_file['info'].keys()
+
+
+.. code:: console
+
+   dict_keys(['meas_date', 'version', 'camera', 'serial', 'camera_config', 'sfreq', 'ps_units', 'eye', 'sample_fields', 'edfapi_version', 'screen_coords', 'calibrations', 'filename'])
+
+.. code:: python
+
+   # Inspect the events
+   edf_file["discrete"].keys()
+
+.. code:: console
+
+   dict_keys(['messages', 'buttons', 'inputs', 'blinks', 'saccades', 'fixations'])
+
+.. code:: python
+
+
+   # Inspect the calibrations
+   edf_file['info']['calibrations']
+
 
 Converting to a DataFrame or MNE Raw instance
-----------------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You can convert an instance of EDF to a pandas DataFrame or an MNE Raw instance using the
-``to_pandas`` and ``to_mne`` methods, respectively.
+:meth:`~eyelinkio.EDF.to_pandas` and :meth:`~eyelinkio.EDF.to_mne` methods, respectively.
 
 .. code:: python
 
    # Convert to a pandas DataFrame or an MNE Raw instance
    dfs = edf_file.to_pandas()
-   raw, calibration = edf_file.to_mne()
+   raw, calibrations = edf_file.to_mne()
 
 
 .. seealso::
