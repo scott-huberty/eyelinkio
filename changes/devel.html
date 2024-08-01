@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Version (development) (2024-07-24) &#8212; EyeLinkIO 👀</title>
+    <title>0.2.0 (2024-08-01) 📦 &#8212; EyeLinkIO 👀</title>
   
   
   
@@ -36,7 +36,7 @@
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/documentation_options.js?v=97800097"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'changes/devel';</script>
@@ -316,7 +316,7 @@ document.write(`
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Version  (development) (2024-07-24)</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">0.2.0 (2024-08-01) 📦</a></li>
 </ul>
 </div>
 </nav></div>
@@ -357,7 +357,7 @@ document.write(`
     
     <li class="breadcrumb-item"><a href="../whats_new.html" class="nav-link">What’s new</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page">Version ...</li>
+    <li class="breadcrumb-item active" aria-current="page">0.2.0 (2024-08-01) 📦</li>
   </ul>
 </nav>
 </div>
@@ -374,15 +374,27 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="version-release-development-2024-07-24">
-<span id="current"></span><h1>Version  (development) (2024-07-24)<a class="headerlink" href="#version-release-development-2024-07-24" title="Link to this heading">#</a></h1>
+  <section id="id1">
+<h1>0.2.0 (2024-08-01) 📦<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
 <section id="new-features">
-<h2>New features<a class="headerlink" href="#new-features" title="Link to this heading">#</a></h2>
+<h2>New features 🚀<a class="headerlink" href="#new-features" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p>Setup a changelog, using <a class="reference external" href="https://towncrier.readthedocs.io/en/stable/index.html">towncrier</a>. by <a class="reference external" href="https://github.com/scott-huberty">Scott Huberty</a> (<a class="reference external" href="https://github.com/scott-huberty/eyelinkio/pulls/6">#6</a>)</p>
-</li>
+<li><p>Added support for reading binocular data by <a class="reference external" href="https://github.com/scott-huberty">Scott Huberty</a> and <a class="reference external" href="https://github.com/ttngu207">Thinh Nguyen</a>. (<a class="reference external" href="https://github.com/scott-huberty/eyelinkio/pulls/5">#5</a>)</p></li>
+<li><p>Setup a changelog, using <a class="reference external" href="https://towncrier.readthedocs.io/en/stable/index.html">towncrier</a>. by <a class="reference external" href="https://github.com/scott-huberty">Scott Huberty</a> (<a class="reference external" href="https://github.com/scott-huberty/eyelinkio/pulls/6">#6</a>)</p></li>
 </ul>
 </section>
+<section id="bugfixes">
+<h2>Bugfixes 🐞<a class="headerlink" href="#bugfixes" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Gracefully handle the case where an EDF file does not contain an expected event type (.e.g blinks, fixations, etc.) by <a class="reference external" href="https://github.com/ttngu207">Thinh Nguyen</a>. (<a class="reference external" href="https://github.com/scott-huberty/eyelinkio/pull/7">#7</a>)</p></li>
+</ul>
+</section>
+<section id="api-changes">
+<h2>API changes ⚠️<a class="headerlink" href="#api-changes" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">edf['info']['calibrations']</span></code> key in an <a class="reference external" href="file:///Users/scotterik/devel/repos/eyelinkio/docs/_build/html/API.html#edf-class">EDF</a> object is no longer a single numpy array. It is now a dictionary, where the aforementioned array is stored under the sub-key <code class="docutils literal notranslate"><span class="pre">&quot;validation&quot;</span></code>, .e.g <code class="docutils literal notranslate"><span class="pre">my_edf['info']['calibrations']['validation']</span></code>.</p></li>
+</ul>
+<span class="target" id="current"></span></section>
 </section>
 
 
@@ -422,7 +434,9 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#new-features">New features</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#new-features">New features 🚀</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bugfixes">Bugfixes 🐞</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#api-changes">API changes ⚠️</a></li>
 </ul>
   </nav></div>
 
@@ -469,7 +483,7 @@ document.write(`
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.0.2.
     <br/>
   </p>
 </div>

@@ -36,7 +36,7 @@
 <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/documentation_options.js?v=97800097"></script>
     <script src="_static/doctools.js?v=9a2dae69"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'roadmap';</script>
@@ -375,14 +375,6 @@ document.write(`
 items in need of discussion.</p>
 <ul class="simple">
 <li><dl class="simple">
-<dt><strong>Support for Binocular data</strong>:</dt><dd><p>The current implementation does not support
-reading binocular data. Adding this support likely will not be trivial.
-See <a class="reference external" href="https://github.com/scott-huberty/eyelinkio/issues/4">this issue</a> for more
-information.</p>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
 <dt><strong>Support for all sample fields</strong>:</dt><dd><p>The current implementation only supports
 reading <code class="docutils literal notranslate"><span class="pre">xpos</span></code>, <code class="docutils literal notranslate"><span class="pre">ypos</span></code>, and <code class="docutils literal notranslate"><span class="pre">pupil</span> <span class="pre">size</span></code> sample fields. We should add support for
 reading other sample fields, such as head position, velocity, etc. This shouldn’t be
@@ -409,10 +401,10 @@ before changing it.</p>
 </dl>
 </li>
 <li><dl class="simple">
-<dt><strong>Use of Named Arrays</strong>:</dt><dd><p>The current implementation stores data in named Numpy
+<dt><strong>Use of structured Arrays</strong>:</dt><dd><p>The current implementation stores data in structured Numpy
 arrays, so that for example you can do <code class="docutils literal notranslate"><span class="pre">edf[&quot;discrete&quot;][&quot;messages&quot;][&quot;msg&quot;]</span></code> to get
 an array of the message strings. This was inherited from the original pyeparse
-implementation. Named arrays are nice but add some complexity (and most users
+implementation. Structured arrays are nice but add some complexity (and most users
 probably aren’t familiar with them?). I’m not sure if we should keep them, or just
 use dictionaries instead. I will wait to see if anyone provides feedback on this.</p>
 </dd>
@@ -509,7 +501,7 @@ from MNE-Python, such that MNE calls our function to read ASCII data).</p>
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.0.2.
     <br/>
   </p>
 </div>
