@@ -53,7 +53,11 @@ doc = [
 ]
 
 full = ["pandas", "mne"]
-dev = ["eyelinkio[test,doc,full]"]
+build = [
+  'build',
+  'twine',
+]
+dev = ["eyelinkio[test,doc,build,full]"]
 
 # [project.urls]
 # Homepage = "https://mne.tools/"
