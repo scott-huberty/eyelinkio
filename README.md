@@ -59,7 +59,7 @@ edf_file = read_edf(fname)
 print(edf_file)
 ```
 
-```bash
+```console
 <EDF | test_raw.edf> 
   Version: EYELINK II 1 
   Eye: LEFT_EYE 
@@ -76,7 +76,7 @@ print(edf_file)
 edf_file.keys()
 ```
 
-```bash
+```console
 Out: dict_keys(['info', 'discrete', 'times', 'samples'])
 ```
 
@@ -85,7 +85,7 @@ Out: dict_keys(['info', 'discrete', 'times', 'samples'])
 edf_file["info"].keys()
 ```
 
-```bash
+```console
 Out: dict_keys(['meas_date', 'version', 'camera', 'serial', 'camera_config', 'sfreq', 'ps_units', 'eye', 'sample_fields', 'edfapi_version', 'screen_coords', 'calibrations', 'filename'])
 ```
 
@@ -94,7 +94,7 @@ Out: dict_keys(['meas_date', 'version', 'camera', 'serial', 'camera_config', 'sf
 edf_file["discrete"].keys()
 ```
 
-```bash
+```console
 Out: dict_keys(['messages', 'buttons', 'inputs', 'blinks', 'saccades', 'fixations'])
 ```
 
