@@ -1,3 +1,5 @@
+from unittest.mock import patch
+
 import numpy as np
 import pytest
 
@@ -163,3 +165,8 @@ def test_to_mne():
             np.testing.assert_equal(raw.ch_names, want_chs)
         else:
             raise ValueError(f"Unexpected file: {fname}")
+
+def test_edfapi_not_installed():
+    with patch("eyelinkio.edf.read.has_edfapi", False):
+            with pytest.raises(OSError, match="Could not load EDF api"):
+                read_edf(fnames[0])
