@@ -35,6 +35,7 @@ except OSError as exp:
     ) = [None] * 8
     has_edfapi = False
     why_not = str(exp)
+    assert 1 == 0
 
 from . import _defines as defines
 from ._defines import event_constants
