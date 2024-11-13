@@ -167,6 +167,7 @@ def test_to_mne():
             raise ValueError(f"Unexpected file: {fname}")
 
 def test_edfapi_not_installed():
+    """Test that an error is raised if SR Research's edfapi is not installed."""
     with patch("eyelinkio.edf.read.has_edfapi", False):
             with pytest.raises(OSError, match="Could not load EDF api"):
                 read_edf(fnames[0])
