@@ -8,7 +8,7 @@ for class names.
 Reading EDF files
 -----------------
 
-.. automodule:: eyelinkio.edf.read_edf
+.. automodule:: eyelinkio.edf.read
    :members:
    :exclude-members: EDF
 
