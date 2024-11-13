@@ -32,7 +32,7 @@ except OSError as exp:
         edf_get_preamble_text_length,
         edf_get_version,
         edf_get_float_data,
-    ) = [None] * 8
+    ) = [None] * 7
     has_edfapi = False
     why_not = str(exp)
 
