@@ -1,0 +1,2 @@
+# We don't want to parse these files and we should never make any changes to them.
+libedfapi/* binary
