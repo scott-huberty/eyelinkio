@@ -21,7 +21,8 @@ jobs:
             sudo ldconfig
             python -m pip install --upgrade pip
             pip install -e ".[dev]"
-          name: Setup environment
+          name: Set environment variables
+          command: |
             export EYELINKIO_USE_INSTALLED_EDFAPI=true
 
       - run:
