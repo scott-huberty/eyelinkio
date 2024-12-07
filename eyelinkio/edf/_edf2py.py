@@ -43,7 +43,13 @@ def get_lib_path():
         else:  # 32 bit
             lib_path = lib_path / "win32" / "edfapi.dll"
     elif sys.platform.startswith('darwin'):
-        lib_path = (lib_path / "macos" / "edfapi.framework" / "edfapi")
+        lib_path = (lib_path /
+                    "macos" /
+                    "edfapi.framework" /
+                    "Versions" /
+                    "Current" /
+                    "edfapi"
+                    )
     elif sys.platform.startswith('linux'):
         lib_path = lib_path / "linux" / "libedfapi.so"
     else:
