@@ -33,8 +33,7 @@ jobs:
   
   test-macos:
     macos:
-      xcode: "latest" 
-
+      xcode: 14.2.0
     steps:
       - checkout
 
