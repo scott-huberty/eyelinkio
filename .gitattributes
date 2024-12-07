@@ -1,2 +1,2 @@
-# We don't want to parse these files and we should never make any changes to them.
-libedfapi/macos/*** binary
+# We don't want git to parse these files and we should never make any changes to them.
+libedfapi/macos/**/* binary
