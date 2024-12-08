@@ -1,7 +1,7 @@
 version: 2.1
 
 jobs:
-  test:
+  Test-Linux-SDK:
     docker:
       - image: circleci/python:3.10
 
@@ -31,9 +31,8 @@ jobs:
           command: |
             pytest
   
-  test-macos:
+  Test-macos:
     macos:
-      xcode: 14.2.0
     steps:
       - checkout
 
@@ -103,9 +102,9 @@ workflows:
   version: 2
   test:
     jobs:
-      - test
+      - Test-Linux-SDK
       - build-docs
-      - test-macos
+      - Test-macos
       - docs-deploy:
           requires:
             - test
