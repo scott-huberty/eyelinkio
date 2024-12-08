@@ -1,6 +1,10 @@
 [build-system]
-requires = ["hatchling", "hatch-vcs"]
-build-backend = "hatchling.build"
+requires = ["setuptools >= 64.0.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+# These are the folders that we want to include in the package
+packages = ["eyelinkio", "libedfapi"]
 
 [project]
 name = "eyelinkio"
