@@ -3,8 +3,7 @@ requires = ["setuptools >= 64.0.0"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools]
-# These are the folders that we want to include in the package
-packages = ["eyelinkio", "libedfapi"]
+package-dir = {""= "src"}
 
 [project]
 name = "eyelinkio"
