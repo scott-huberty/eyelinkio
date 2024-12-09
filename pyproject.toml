@@ -70,30 +70,6 @@ dev = ["eyelinkio[test,doc,build,full]"]
 # Forum = "https://mne.discourse.group/"
 # "Source Code" = "https://github.com/mne-tools/mne-python/"
 
-[tool.hatch.build]
-exclude = [
-    "/.*",
-    "/*.yml",
-    "/*.yaml",
-    "/*.toml",
-    "/*.txt",
-    "/eyelinkio/**/tests",
-    "/logo",
-    "/doc",
-    "/tools",
-    "/tutorials",
-    "/examples",
-    "/codemeta.json",
-    "/ignore_words.txt",
-    "/Makefile",
-    "/CITATION.cff",
-    "/CONTRIBUTING.md",
-] # tracked by git, but we don't want to ship those files
-
-[tool.hatch.version]
-source = "vcs"
-raw-options = { version_scheme = "release-branch-semver" }
-
 [tool.codespell]
 ignore-words = "ignore_words.txt"
 builtin = "clear,rare,informal,names,usage"
