@@ -39,9 +39,9 @@ def get_lib_path():
     lib_path = Path(__file__).parent.parent.parent / "libedfapi"
     if sys.platform.startswith('win'):
         if (8 * struct.calcsize("P") == 64):  # 64 bit
-            lib_path = lib_path / "win64" / "edfapi64.dll"
+            lib_path = lib_path / "windows" / "win64" / "edfapi64.dll"
         else:  # 32 bit
-            lib_path = lib_path / "win32" / "edfapi.dll"
+            lib_path = lib_path / "windows" / "win32" / "edfapi.dll"
     elif sys.platform.startswith('darwin'):
         lib_path = (lib_path / "macos" / "edfapi.framework" / "edfapi")
     elif sys.platform.startswith('linux'):

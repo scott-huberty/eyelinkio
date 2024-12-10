@@ -17,6 +17,7 @@ jobs:
           - ubuntu-latest
           - macos-latest  # Latest Apple Silicon macOS
           - macos-13  # Latest Intel-based macOS
+          - windows-latest
         python-version: ['3.10']
 
     steps:
