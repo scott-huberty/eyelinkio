@@ -57,7 +57,7 @@ if os.environ.get("EYELINKIO_USE_INSTALLED_EDFAPI") == "true":
     fname = find_installed_library()
 else:
     # Otherwise we will use the edfapi that we ship with eyelinkio
-    fname = get_lib_path()
+    fname = str(get_lib_path())
 edfapi = CDLL(fname)
 
 
