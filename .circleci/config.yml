@@ -1,7 +1,11 @@
 version: 2.1
 
+
+orbs:
+  win: circleci/windows@4.1.1 # The Windows orb gives you everything you need to start using the Windows executor
+
 jobs:
-  test:
+  Test-Installed-SDK:
     docker:
       - image: circleci/python:3.10
 
@@ -21,12 +25,54 @@ jobs:
             sudo ldconfig
             python -m pip install --upgrade pip
             pip install -e ".[dev]"
+      - run:
+          name: Set environment variables
+          command: |
+            export EYELINKIO_USE_INSTALLED_EDFAPI=true
 
       - run:
           name: Run tests
           command: |
             pytest
   
+  test-macos:
+    macos:
+      xcode: 14.2.0
+    steps:
+      - checkout
+
+      - run:
+          name: Install dependencies
+          command: |
+            python -m pip install --upgrade pip
+            pip install -e ".[dev]"
+      - run:
+          name: Set environment variables
+          command: |
+            export EYELINKIO_USE_INSTALLED_EDFAPI=false
+      - run:
+          name: Run tests
+          command: |
+            pytest
+
+  test-windows:
+    executor: win/server-2022
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: |
+            python -m pip install --upgrade pip
+            pip install -e ".[dev]"
+      - run:
+          name: Set environment variables
+          command: |
+            set EYELINKIO_USE_INSTALLED_EDFAPI=false
+      - run:
+          name: Run tests
+          command: |
+            pytest
+
   build-docs:
     docker:
       - image: circleci/python:3.10
@@ -35,14 +81,6 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            sudo apt-get update
-            sudo apt install software-properties-common
-            sudo apt-get update
-            sudo add-apt-repository "deb http://download.sr-support.com/software SRResearch main"
-            wget -O - "http://download.sr-support.com/software/SRResearch_key" | sudo apt-key add -
-            sudo apt-get update
-            sudo apt-get install eyelink-edfapi
-            sudo ldconfig
             python -m pip install --upgrade pip
             pip install -e ".[dev]"
       - run:
@@ -79,11 +117,13 @@ workflows:
   version: 2
   test:
     jobs:
-      - test
+      - Test-Installed-SDK
       - build-docs
+      - test-macos
+      - test-windows
       - docs-deploy:
           requires:
-            - test
+            - Test-Installed-SDK
             - build-docs
           filters:
             branches:

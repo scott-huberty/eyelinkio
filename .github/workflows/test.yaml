@@ -1,0 +1,42 @@
+name: Run Tests (No SDK)
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+          - macos-latest  # Latest Apple Silicon macOS
+          - macos-13  # Latest Intel-based macOS
+          - windows-latest
+        python-version: ['3.10']
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        python -m pip install -e ".[dev]"
+    
+    - name: Set environment variables On macOS and Linux
+      if: runner.os != 'Windows'
+      run: |
+        export EYELINKIO_USE_INSTALLED_EDFAPI=false
+
+    - name: Run tests
+      run: pytest
