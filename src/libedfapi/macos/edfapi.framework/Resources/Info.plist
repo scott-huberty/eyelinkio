@@ -9,7 +9,7 @@
 	<key>CFBundleExecutable</key>
 	<string>edfapi</string>
 	<key>CFBundleGetInfoString</key>
-	<string>String edfapi version 4.2.762.0, © 2002-2023 SR Research Ltd. All rights reserved. EyeLink and the Eyelink logo are registered trademarks of SR Research Ltd.</string>
+	<string>String edfapi version 4.2.1197.0, © 1996-2024 SR Research Ltd. All rights reserved. EyeLink and the Eyelink logo are registered trademarks of SR Research Ltd.</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.srresearch.edfapi</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -17,7 +17,7 @@
 	<key>CFBundlePackageType</key>
 	<string>FMWK</string>
 	<key>CFBundleShortVersionString</key>
-	<string>4.2.762.0</string>
+	<string>4.2.1197.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleSupportedPlatforms</key>
@@ -25,7 +25,7 @@
 		<string>MacOSX</string>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>4.2.762.0</string>
+	<string>4.2.1197.0</string>
 	<key>CSResourcesFileMapped</key>
 	<true/>
 	<key>DTCompiler</key>
