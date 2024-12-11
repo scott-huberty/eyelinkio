@@ -1,5 +1,11 @@
 version: 2.1
 
+
+executors:
+  windows:
+    machine:
+      image: windows-server-2022-gui
+
 jobs:
   test:
     docker:
@@ -52,11 +58,9 @@ jobs:
             pytest
 
   test-windows:
-    windows:
-      version: 10.0
+    executor: windows
     steps:
       - checkout
-
       - run:
           name: Install dependencies
           command: |
