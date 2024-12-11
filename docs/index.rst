@@ -5,8 +5,7 @@ A lightweight library to import SR Research EDF files into Python.
 
 .. important::
    **This Software is pre-alpha, meaning it is currently being developed**: Changes to the
-   API (function names, etc.) may occur without warning. This library has been tested with
-   MacOS and Linux, but not Windows.
+   API (function names, etc.) may occur without warning.
 
 About the EyeLink Data Format
 =============================
@@ -15,8 +14,10 @@ The EyeLink Data Format (EDF; not to be confused with the
 `European Data Format <https://www.edfplus.info>`_) is used for storing eyetracking data
 from EyeLink eyetrackers. It was put forward by the company
 `SR Research <https://www.sr-research.com>`_. SR Research EDF files store data in a
-binary format, and reading these files currently requires the `eyelink-edfapi` C
-library that is included in the Eyelink Software Developers Kit.
+binary format, and reading these files currently relies on the `eyelink-edfapi` C
+library that is included in the Eyelink Developers Kit. EyeLinkIO includes
+the binary files necessary to read EDF files, so the end-user does not need to install
+the Eyelink Software Developers Kit to use EyeLinkIO.
 
 Dependencies
 ============
