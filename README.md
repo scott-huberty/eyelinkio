@@ -20,7 +20,7 @@ EDF API library that is installed on your computer.
 Strictly speaking, EyeLinkIO only requires Numpy. For converting data to pandas ``DataFrames`` or MNE-Python ``Raw`` instances, you must have those respective packages installed.
 
 > [!NOTE]
-
+>
 > - EyeLinkIO includes the Eyelink EDF API binary files that are needed to read EDF files.
 > - [See](#using-the-eyelink-developers-kit-edf-api-to-read-edf-files) If you want to use the EyeLink Developers Kit's EDF API library that is installed on your computer.
 
@@ -47,8 +47,8 @@ pip install -e ./eyelinkio
 ```
 
 > [!IMPORTANT]  
-To use the editable installation, you should:
-
+> To use the editable installation, you should:
+>
 >- Fork the repository on GitHub first.
 >- Clone your forked repository to your local machine.
 >- Make sure you're in the directory *containing* the cloned `eyelinkio` folder when you run the command provided above
@@ -136,6 +136,11 @@ os.environ["EYELINKIO_USE_INSTALLED_EDFAPI"] = "true"
 import eyelinkio
 edf = eyelinkio.read_edf("path/to/edf/file")
 ```
+
+> [!NOTE]
+>
+> - First download the [EyeLink Software Development Kit](<https://www.sr-research.com/support/forum-3.html>)
+> - You must register an account on the forum to access the download (registration is free)
 
 ## Acknowledgements
 
