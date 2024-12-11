@@ -51,6 +51,26 @@ jobs:
           command: |
             pytest
 
+    test-windows:
+    windows:
+      version: 10.0
+    steps:
+      - checkout
+
+      - run:
+          name: Install dependencies
+          command: |
+            python -m pip install --upgrade pip
+            pip install -e ".[dev]"
+      - run:
+          name: Set environment variables
+          command: |
+            set EYELINKIO_USE_INSTALLED_EDFAPI=false
+      - run:
+          name: Run tests
+          command: |
+            pytest
+
   build-docs:
     docker:
       - image: circleci/python:3.10
