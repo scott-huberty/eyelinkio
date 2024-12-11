@@ -318,8 +318,7 @@
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p><strong>This Software is pre-alpha, meaning it is currently being developed</strong>: Changes to the
-API (function names, etc.) may occur without warning. This library has been tested with
-MacOS and Linux, but not Windows.</p>
+API (function names, etc.) may occur without warning.</p>
 </div>
 </section>
 <section id="about-the-eyelink-data-format">
@@ -328,8 +327,10 @@ MacOS and Linux, but not Windows.</p>
 <a class="reference external" href="https://www.edfplus.info">European Data Format</a>) is used for storing eyetracking data
 from EyeLink eyetrackers. It was put forward by the company
 <a class="reference external" href="https://www.sr-research.com">SR Research</a>. SR Research EDF files store data in a
-binary format, and reading these files currently requires the <cite>eyelink-edfapi</cite> C
-library that is included in the Eyelink Software Developers Kit.</p>
+binary format, and reading these files currently relies on the <cite>eyelink-edfapi</cite> C
+library that is included in the Eyelink Developers Kit. EyeLinkIO includes
+the binary files necessary to read EDF files, so the end-user does not need to install
+the Eyelink Software Developers Kit to use EyeLinkIO.</p>
 </section>
 <section id="dependencies">
 <h1>Dependencies<a class="headerlink" href="#dependencies" title="Link to this heading">#</a></h1>

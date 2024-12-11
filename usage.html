@@ -346,13 +346,6 @@
                   
   <section id="user-guide">
 <span id="id1"></span><h1>User Guide<a class="headerlink" href="#user-guide" title="Link to this heading">#</a></h1>
-<div class="admonition important">
-<p class="admonition-title">Important</p>
-<ul class="simple">
-<li><p>You must have the <a class="reference external" href="https://www.sr-research.com/support/forum-3.html">EyeLink Software Development Kit</a> installed on your computer</p></li>
-<li><p>You must register an account on the forum to access the download (registration is free)</p></li>
-</ul>
-</div>
 <section id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h2>
 <div class="admonition note">
@@ -381,10 +374,11 @@
 </div>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
+<p>To install the package in editable mode, you must:</p>
 <ul class="simple">
 <li><p>Fork the repository on GitHub first.</p></li>
 <li><p>Clone your forked repository to your computer.</p></li>
-<li><p>Make sure you’re in the directory <em>containing</em> the cloned <code class="docutils literal notranslate"><span class="pre">eyelinkio</span></code> folder when you run the command above.</p></li>
+<li><p>Make sure you’re in the directory <em>containing</em> the cloned <code class="docutils literal notranslate"><span class="pre">eyelinkio</span></code> folder when you run the command provided above.</p></li>
 </ul>
 </div>
 </section>
@@ -456,6 +450,29 @@ returns an <a class="reference internal" href="API.html#eyelinkio.EDF" title="ey
 <p><a class="reference external" href="https://mne.tools/stable/auto_tutorials/preprocessing/90_eyetracking_data.html">Working with eyetracking data in MNE</a></p>
 </div>
 </section>
+<section id="using-the-edf-api-library-installed-on-your-system">
+<h3>Using the EDF API Library installed on your system<a class="headerlink" href="#using-the-edf-api-library-installed-on-your-system" title="Link to this heading">#</a></h3>
+<p>If you have the EDF API Library installed on your system, you can explicitly direct
+EyeLinkIO to rely on it when reading your EDF files. This can be done by setting the
+<code class="docutils literal notranslate"><span class="pre">EYELINKIO_USE_INSTALLED_EDFAPI</span></code> parameter to <code class="docutils literal notranslate"><span class="pre">true</span></code> before importing EyeLinkIO.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;EYELINKIO_USE_INSTALLED_EDFAPI&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;true&quot;</span>
+
+<span class="kn">from</span> <span class="nn">eyelinkio.io</span> <span class="kn">import</span> <span class="n">read_edf</span>
+
+<span class="n">fname</span> <span class="o">=</span> <span class="n">_get_test_fnames</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># Replace this function with the path to your EDF file</span>
+<span class="n">edf_file</span> <span class="o">=</span> <span class="n">read_edf</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">edf_file</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Otherwise, EyeLinkIO will rely on the EDF API Library that comes with the package.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you want to install the EyeLink Developers Kit, you can download it from the
+<a class="reference external" href="https://www.sr-research.com/support/forum-3.html">SR Research website</a>. You will
+need to register an account to access the download page (registration is free).</p>
+</div>
+</section>
 </section>
 </section>
 
@@ -516,6 +533,7 @@ returns an <a class="reference internal" href="API.html#eyelinkio.EDF" title="ey
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-an-edf-file">Reading an EDF file</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inspecting-an-edf-object">Inspecting an EDF object</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-to-a-dataframe-or-mne-raw-instance">Converting to a DataFrame or MNE Raw instance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-edf-api-library-installed-on-your-system">Using the EDF API Library installed on your system</a></li>
 </ul>
 </li>
 </ul>
