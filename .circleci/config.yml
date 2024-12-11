@@ -5,7 +5,7 @@ orbs:
   win: circleci/windows@4.1.1 # The Windows orb gives you everything you need to start using the Windows executor
 
 jobs:
-  test:
+  Test-Installed-SDK:
     docker:
       - image: circleci/python:3.10
 
@@ -125,7 +125,7 @@ workflows:
   version: 2
   test:
     jobs:
-      - test
+      - Test-Installed-SDK
       - build-docs
       - test-macos
       - test-windows
