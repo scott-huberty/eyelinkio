@@ -1,0 +1,3 @@
+.. _Scott Huberty: https://github.com/scott-huberty
+
+You can now load EDF files without needing to install the EyeLink Developers Kit. Also extended CI to test on Windows and MacOS. By `Scott Huberty`_
