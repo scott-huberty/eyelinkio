@@ -1,9 +1,12 @@
 [build-system]
-requires = ["setuptools >= 64.0.0"]
+requires = ["setuptools >= 64.0.0", "setuptools-scm>=8"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools]
 package-dir = {""= "src"}
+
+# We use setuptools_scm to manage the EyeLinkIO version number
+[tool.setuptools_scm]
 
 [project]
 name = "eyelinkio"
@@ -11,11 +14,12 @@ description = "A lightweight library for reading Eyelink Data Format files in Py
 maintainers = [{ name = "Scott Huberty", email = "seh33@uw.edu" }]
 readme = "README.md"
 requires-python = ">=3.9"
-version = "0.2.0"
+dynamic = ["version"]
 keywords = [
     "neuroscience",
     "eyelink",
     "eyetracking",
+    "SR Research",
 ]
 classifiers = [
     "Intended Audience :: Science/Research",
@@ -62,21 +66,19 @@ build = [
 ]
 dev = ["eyelinkio[test,doc,build,full]"]
 
-# [project.urls]
-# Homepage = "https://mne.tools/"
-# Download = "https://pypi.org/project/mne/#files"
-# "Bug Tracker" = "https://github.com/mne-tools/mne-python/issues/"
-# Documentation = "https://mne.tools/"
-# Forum = "https://mne.discourse.group/"
-# "Source Code" = "https://github.com/mne-tools/mne-python/"
+[project.urls]
+Homepage = "https://scott-huberty.github.io/eyelinkio/"
+Download = "https://pypi.org/project/eyelinkio/#files"
+"Bug Tracker" = "https://github.com/scott-huberty/eyelinkio/issues"
+Documentation = "https://scott-huberty.github.io/eyelinkio/"
+"Source Code" = "https://github.com/scott-huberty/eyelinkio"
 
 [tool.codespell]
 ignore-words = "ignore_words.txt"
 builtin = "clear,rare,informal,names,usage"
-skip = "doc/references.bib"
 
 [tool.ruff]
-exclude = ["__init__.py", "constants.py", "resources.py"]
+exclude = ["__init__.py"]
 
 [tool.ruff.lint]
 select = ["A", "B006", "D", "E", "F", "I", "W", "UP"]
@@ -110,54 +112,6 @@ addopts = """--durations=20 --doctest-modules -rfEXs \
     --ignore=mne/report/js_and_css \
     --color=yes --capture=sys"""
 junit_family = "xunit2"
-
-[tool.bandit.assert_used]
-skips = ["*/test_*.py"] # assert statements are good practice with pytest
-
-[tool.rstcheck]
-report_level = "WARNING"
-ignore_roles = [
-    "attr",
-    "class",
-    "doc",
-    "eq",
-    "exc",
-    "file",
-    "footcite",
-    "footcite:t",
-    "func",
-    "gh",
-    "kbd",
-    "meth",
-    "mod",
-    "newcontrib",
-    "py:mod",
-    "ref",
-    "samp",
-    "term",
-]
-ignore_directives = [
-    "autoclass",
-    "autofunction",
-    "automodule",
-    "autosummary",
-    "bibliography",
-    "cssclass",
-    "currentmodule",
-    "dropdown",
-    "footbibliography",
-    "glossary",
-    "graphviz",
-    "grid",
-    "highlight",
-    "minigallery",
-    "tabularcolumns",
-    "toctree",
-    "rst-class",
-    "tab-set",
-    "towncrier-draft-entries",
-]
-ignore_messages = "^.*(Unknown target name|Undefined substitution referenced)[^`]*$"
 
 [tool.towncrier]
 package = "eyelinkio"
@@ -195,9 +149,3 @@ showcontent = true
 directory = "other"
 name = "Other changes"
 showcontent = true
-
-[tool.changelog-bot]
-[tool.changelog-bot.towncrier_changelog]
-enabled = true
-verify_pr_number = true
-changelog_skip_label = "no-changelog-entry-needed"

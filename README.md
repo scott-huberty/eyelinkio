@@ -1,3 +1,7 @@
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/scott-huberty/eyelinkio/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/scott-huberty/eyelinkio/tree/main)
+[![PyPI version](https://badge.fury.io/py/eyelinkio.svg)](https://badge.fury.io/py/eyelinkio)
+[![PyPI Download count](https://static.pepy.tech/badge/eyelinkio)](https://pepy.tech/project/eyelinkio)
+
 # EyeLinkIO 👀
 
 A lightweight library to import SR Research EDF files into Python.
