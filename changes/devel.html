@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>0.2.0 (2024-08-01) 📦 &#8212; EyeLinkIO 👀</title>
+    <title>0.3 (2024-12-12) 📦 &#8212; EyeLinkIO 👀</title>
   
   
   
@@ -39,7 +39,7 @@
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
 
-    <script src="../_static/documentation_options.js?v=442b20d8"></script>
+    <script src="../_static/documentation_options.js?v=c5a81723"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'changes/devel';</script>
@@ -293,7 +293,8 @@
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">0.2.0 (2024-08-01) 📦</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">0.3 (2024-12-12) 📦</a></li>
+
 </ul>
 </div>
 </nav></div>
@@ -332,7 +333,7 @@
     
     <li class="breadcrumb-item"><a href="../whats_new.html" class="nav-link">What’s new</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">0.2.0 (2024-08-01) 📦</span></li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">0.3 (2024-12-12) 📦</span></li>
   </ul>
 </nav>
 </div>
@@ -350,16 +351,32 @@
                 <article class="bd-article">
                   
   <section id="id1">
-<h1>0.2.0 (2024-08-01) 📦<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<h1>0.3 (2024-12-12) 📦<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<section id="bugfixes">
+<h2>Bugfixes 🐞<a class="headerlink" href="#bugfixes" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Improved error message handling in the case that the EyeLink EDF API is not available. By <a class="reference external" href="https://github.com/WillForan">Will Foran</a> (<a class="reference external" href="https://github.com/scott-huberty/eyelinkio/pull/11">#11</a>)</p></li>
+</ul>
+</section>
 <section id="new-features">
 <h2>New features 🚀<a class="headerlink" href="#new-features" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p>Added support for reading binocular data by <a class="reference external" href="https://github.com/scott-huberty">Scott Huberty</a> and <a class="reference external" href="https://github.com/ttngu207">Thinh Nguyen</a>. (<a class="reference external" href="https://github.com/scott-huberty/eyelinkio/pulls/5">#5</a>)</p></li>
-<li><p>Setup a changelog, using <a class="reference external" href="https://towncrier.readthedocs.io/en/stable/index.html">towncrier</a>. by <a class="reference external" href="https://github.com/scott-huberty">Scott Huberty</a> (<a class="reference external" href="https://github.com/scott-huberty/eyelinkio/pulls/6">#6</a>)</p></li>
+<li><p>You can now load EDF files without needing to install the EyeLink Developers Kit. By <a class="reference external" href="https://github.com/scott-huberty">Scott Huberty</a> (<a class="reference external" href="https://github.com/scott-huberty/eyelinkio/pull/14">#14</a>)</p></li>
+<li><p>Added Continuous Integration (CI) testing for Windows and MacOS. By <a class="reference external" href="https://github.com/scott-huberty">Scott Huberty</a>  (<a class="reference external" href="https://github.com/scott-huberty/eyelinkio/pull/14">#14</a>)</p></li>
 </ul>
 </section>
-<section id="bugfixes">
-<h2>Bugfixes 🐞<a class="headerlink" href="#bugfixes" title="Link to this heading">#</a></h2>
+</section>
+<section id="id2">
+<h1>0.2.0 (2024-08-01) 📦<a class="headerlink" href="#id2" title="Link to this heading">#</a></h1>
+<section id="id3">
+<h2>New features 🚀<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Added support for reading binocular data by <a class="reference external" href="https://github.com/scott-huberty">Scott Huberty</a> and <a class="reference external" href="https://github.com/ttngu207">Thinh Nguyen</a>. (<a class="reference external" href="https://github.com/scott-huberty/eyelinkio/pull/5">#5</a>)</p></li>
+<li><p>Setup a changelog, using <a class="reference external" href="https://towncrier.readthedocs.io/en/stable/index.html">towncrier</a>. by <a class="reference external" href="https://github.com/scott-huberty">Scott Huberty</a> (<a class="reference external" href="https://github.com/scott-huberty/eyelinkio/pull/6">#6</a>)</p></li>
+</ul>
+</section>
+<section id="id4">
+<h2>Bugfixes 🐞<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Gracefully handle the case where an EDF file does not contain an expected event type (.e.g blinks, fixations, etc.) by <a class="reference external" href="https://github.com/ttngu207">Thinh Nguyen</a>. (<a class="reference external" href="https://github.com/scott-huberty/eyelinkio/pull/7">#7</a>)</p></li>
 </ul>
@@ -410,10 +427,19 @@
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#new-features">New features 🚀</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">0.3 (2024-12-12) 📦</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bugfixes">Bugfixes 🐞</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#new-features">New features 🚀</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">0.2.0 (2024-08-01) 📦</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">New features 🚀</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Bugfixes 🐞</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#api-changes">API changes ⚠️</a></li>
 </ul>
+</li>
+</ul>
+
   </nav></div>
 
   <div class="sidebar-secondary-item">
