@@ -1,3 +1,0 @@
-.. _Will Foran: https://github.com/WillForan
-
-Improved error message handling in the case that the EyeLink EDF API is not available. By `Will Foran`_
