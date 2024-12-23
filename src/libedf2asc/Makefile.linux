@@ -1,0 +1,35 @@
+CXX=g++
+CC=gcc
+OPTIMIZE = -O3 -DNDEBUG -fPIC
+CFLAGS = $(OPTIMIZE) -I./include
+CXXFLAGS = $(OPTIMIZE) -I./include
+
+INSTALLDIR=.
+
+OBJ=main.o \
+    printevent.o printrecordinginfo.o printsample.o 
+
+all: libedf2asc.so
+
+clean:
+	rm -rf *.o libedf2asc.so
+
+# Compile object files
+main.o: main.c
+	$(CC) $(CFLAGS) -c -o main.o main.c
+
+printevent.o: printevent.c
+	$(CC) $(CFLAGS) -c -o printevent.o printevent.c
+
+printrecordinginfo.o: printrecordinginfo.c
+	$(CC) $(CFLAGS) -c -o printrecordinginfo.o printrecordinginfo.c
+
+printsample.o: printsample.c
+	$(CC) $(CFLAGS) -c -o printsample.o printsample.c
+
+# Link the shared library
+libedf2asc.so: $(OBJ)
+	$(CXX) $(CXXFLAGS) -shared -o libedf2asc.so $(OBJ) \
+		-L/eyelinkio/src/libedfapi/linux/ \
+		-Wl,-rpath,/eyelinkio/src/libedfapi/linux/ \
+		-ledfapi -lm -lz
