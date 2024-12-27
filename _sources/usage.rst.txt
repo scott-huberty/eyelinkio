@@ -52,7 +52,7 @@ Example Usage
 Reading an EDF file
 ~~~~~~~~~~~~~~~~~~~
 
-You can read EyeLink EDF files using the :func:`~eyelinkio.edf.read_edf` function, which
+You can read EyeLink EDF files using the :func:`~eyelinkio.edf.read.read_edf` function, which
 returns an :class:`~eyelinkio.EDF` instance.
 
 .. code:: python
