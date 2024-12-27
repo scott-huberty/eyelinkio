@@ -1,5 +1,6 @@
 """Wrapper for libedfapi.so."""
 
+import os
 import struct
 import sys
 from ctypes import (
@@ -17,15 +18,46 @@ from ctypes import (
     c_ushort,
     util,
 )
+from pathlib import Path
+
 
 # find and load the library
-if sys.platform.startswith('win') and (8 * struct.calcsize("P") == 64):
-    name = 'edfapi64'  # on windows you can install both
+def find_installed_library():
+    """Try to find edfapi that is installed on the users system."""
+    if sys.platform.startswith('win') and (8 * struct.calcsize("P") == 64):
+        name = 'edfapi64'  # on windows you can install both
+    else:
+        name = 'edfapi'
+    fname = util.find_library(name)
+    if fname is None:
+        raise OSError('edfapi not found')
+    return fname
+
+
+def get_lib_path():
+    """Get the path to the edfapi shared library that we ship with eyelinkio."""
+    lib_path = Path(__file__).parent.parent.parent / "libedfapi"
+    if sys.platform.startswith('win'):
+        if (8 * struct.calcsize("P") == 64):  # 64 bit
+            lib_path = lib_path / "windows" / "win64" / "edfapi64.dll"
+        else:  # 32 bit
+            lib_path = lib_path / "windows" / "win32" / "edfapi.dll"
+    elif sys.platform.startswith('darwin'):
+        lib_path = (lib_path / "macos" / "edfapi.framework" / "edfapi")
+    elif sys.platform.startswith('linux'):
+        lib_path = lib_path / "linux" / "libedfapi.so"
+    else:
+        raise OSError('Unsupported platform')
+    assert lib_path.exists(), f"libedfapi.so not found at {lib_path}"
+    return lib_path.resolve()
+
+
+if os.environ.get("EYELINKIO_USE_INSTALLED_EDFAPI") == "true":
+    # Then we will use the edfapi that is installed on the users system
+    fname = find_installed_library()
 else:
-    name = 'edfapi'
-fname = util.find_library(name)
-if fname is None:
-    raise OSError('edfapi not found')
+    # Otherwise we will use the edfapi that we ship with eyelinkio
+    fname = str(get_lib_path())
 edfapi = CDLL(fname)
 
 

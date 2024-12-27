@@ -31,7 +31,7 @@ following command from the root of the package:
 
 .. code-block:: bash
 
-    $ ruff check eyelinkio
+    $ ruff check src/eyelinkio
 
 To build the docs:
 

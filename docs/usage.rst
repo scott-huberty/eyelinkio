@@ -3,11 +3,6 @@
 User Guide
 ==========
 
-.. important::
-   - You must have the `EyeLink Software Development Kit <https://www.sr-research.com/support/forum-3.html>`_ installed on your computer
-   - You must register an account on the forum to access the download (registration is free)
-
-
 Installation
 ------------
 
@@ -44,9 +39,12 @@ For contributors to EyeLinkIO:
    pip install --editable ./eyelinkio
 
 .. important::
+
+   To install the package in editable mode, you must:
+
    - Fork the repository on GitHub first.
    - Clone your forked repository to your computer.
-   - Make sure you're in the directory *containing* the cloned ``eyelinkio`` folder when you run the command above.
+   - Make sure you're in the directory *containing* the cloned ``eyelinkio`` folder when you run the command provided above.
 
 Example Usage
 -------------
@@ -134,3 +132,30 @@ You can convert an instance of EDF to a pandas DataFrame or an MNE Raw instance 
 .. seealso::
 
    `Working with eyetracking data in MNE <https://mne.tools/stable/auto_tutorials/preprocessing/90_eyetracking_data.html>`_
+
+
+Using the EDF API Library installed on your system
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If you have the EDF API Library installed on your system, you can explicitly direct
+EyeLinkIO to rely on it when reading your EDF files. This can be done by setting the
+``EYELINKIO_USE_INSTALLED_EDFAPI`` parameter to ``true`` before importing EyeLinkIO.
+
+.. code:: python
+
+   import os
+   os.environ["EYELINKIO_USE_INSTALLED_EDFAPI"] = "true"
+
+   from eyelinkio.io import read_edf
+
+   fname = _get_test_fnames()[0]  # Replace this function with the path to your EDF file
+   edf_file = read_edf(fname)
+   print(edf_file)
+
+Otherwise, EyeLinkIO will rely on the EDF API Library that comes with the package.
+
+.. note::
+
+   If you want to install the EyeLink Developers Kit, you can download it from the
+   `SR Research website <https://www.sr-research.com/support/forum-3.html>`_. You will
+   need to register an account to access the download page (registration is free).
