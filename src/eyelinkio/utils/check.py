@@ -3,7 +3,7 @@ from importlib import import_module
 
 def _has_edfapi():
     """Determine if a user has edfapi installed."""
-    from ..edf.read_edf import has_edfapi
+    from ..edf.read import has_edfapi
     return has_edfapi
 
 
