@@ -30,7 +30,7 @@
   <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 <link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=f702e4c1" />
   
   <!-- So that users can add custom icons -->
@@ -39,7 +39,7 @@
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="_static/documentation_options.js?v=ae2a7cd0"></script>
+    <script src="_static/documentation_options.js?v=bc095055"></script>
     <script src="_static/doctools.js?v=9bcbadda"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'usage';</script>
@@ -394,8 +394,8 @@
 <h3>Reading an EDF file<a class="headerlink" href="#reading-an-edf-file" title="Link to this heading">#</a></h3>
 <p>You can read EyeLink EDF files using the <a class="reference internal" href="API.html#eyelinkio.edf.read.read_edf" title="eyelinkio.edf.read.read_edf"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_edf()</span></code></a> function, which
 returns an <a class="reference internal" href="API.html#eyelinkio.EDF" title="eyelinkio.EDF"><code class="xref py py-class docutils literal notranslate"><span class="pre">EDF</span></code></a> instance.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">eyelinkio.io</span> <span class="kn">import</span> <span class="n">read_edf</span>
-<span class="n">eyelinkio</span><span class="o">.</span><span class="n">utils</span> <span class="kn">import</span> <span class="nn">_get_test_fnames</span>  <span class="c1"># for demonstration purposes only</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">eyelinkio.io</span><span class="w"> </span><span class="kn">import</span> <span class="n">read_edf</span>
+<span class="n">eyelinkio</span><span class="o">.</span><span class="n">utils</span> <span class="kn">import</span><span class="w"> </span><span class="nn">_get_test_fnames</span>  <span class="c1"># for demonstration purposes only</span>
 
 <span class="n">fname</span> <span class="o">=</span> <span class="n">_get_test_fnames</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># Replace this function with the path to your EDF file</span>
 <span class="n">edf_file</span> <span class="o">=</span> <span class="n">read_edf</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
@@ -460,10 +460,10 @@ returns an <a class="reference internal" href="API.html#eyelinkio.EDF" title="ey
 <p>If you have the EDF API Library installed on your system, you can explicitly direct
 EyeLinkIO to rely on it when reading your EDF files. This can be done by setting the
 <code class="docutils literal notranslate"><span class="pre">EYELINKIO_USE_INSTALLED_EDFAPI</span></code> parameter to <code class="docutils literal notranslate"><span class="pre">true</span></code> before importing EyeLinkIO.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;EYELINKIO_USE_INSTALLED_EDFAPI&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;true&quot;</span>
 
-<span class="kn">from</span> <span class="nn">eyelinkio.io</span> <span class="kn">import</span> <span class="n">read_edf</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">eyelinkio.io</span><span class="w"> </span><span class="kn">import</span> <span class="n">read_edf</span>
 
 <span class="n">fname</span> <span class="o">=</span> <span class="n">_get_test_fnames</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># Replace this function with the path to your EDF file</span>
 <span class="n">edf_file</span> <span class="o">=</span> <span class="n">read_edf</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
@@ -578,7 +578,7 @@ need to register an account to access the download page (registration is free).<
 
   <p class="copyright">
     
-      © Copyright 2024, EyeLinkIO Developers.
+      © Copyright 2025, EyeLinkIO Developers.
       <br/>
     
   </p>
