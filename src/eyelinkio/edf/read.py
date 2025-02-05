@@ -72,7 +72,7 @@ class EDF(dict):
 
     def __init__(self, fname):
         if not has_edfapi:
-            raise OSError("Could not load EDF api: %s" % why_not)
+            raise OSError(f"Could not load EDF api: {why_not}")
         info, discrete, times, samples = _read_raw_edf(fname)
         self.info = info
         self.info["filename"] = Path(fname).name
@@ -132,8 +132,7 @@ class _edf_open:
         self.fid = edf_open_file(self.fname, 2, 1, 1, ct.byref(error_code))
         if self.fid is None or error_code.value != 0:
             raise OSError(
-                'Could not open file "%s": (%s, %s)'
-                % (self.fname, self.fid, error_code.value)
+                f"Could not open file {self.fname}: ({self.fid}, {error_code.value})"
             )
         return self.fid
 
@@ -141,7 +140,7 @@ class _edf_open:
         if self.fid is not None:
             result = edf_close_file(self.fid)
             if result != 0:
-                raise OSError('File "%s" could not be closed' % self.fname)
+                raise OSError(f"File {self.fname} could not be closed")
 
 
 _ets2pp = dict(
@@ -158,7 +157,7 @@ _ets2pp = dict(
 def _read_raw_edf(fname):
     """Read data from raw EDF file into pyeparse format."""
     if not op.isfile(fname):
-        raise OSError('File "%s" does not exist' % fname)
+        raise OSError(f"File {fname} does not exist")
 
     #
     # First pass: get the number of each type of sample
@@ -173,7 +172,7 @@ def _read_raw_edf(fname):
         while etype != event_constants.get("NO_PENDING_ITEMS"):
             etype = edf_get_next_data(edf)
             if etype not in event_constants:
-                raise RuntimeError("unknown type %s" % event_constants[etype])
+                raise RuntimeError(f"unknown type {event_constants[etype]}")
             ets = event_constants[etype]
             if ets in _ets2pp:
                 n_samps[_ets2pp[ets]] += 1
@@ -194,13 +193,13 @@ def _read_raw_edf(fname):
         )
         # XXX: pyeparse represented messages as byte strings.
         # XXX: Maybe we should use regular python strings?
-        dtype = [("stime", np.float64), ("msg", "|S%s" % _MAX_MSG_LEN)]
+        dtype = [("stime", np.float64), ("msg", f"|S{_MAX_MSG_LEN}")]
         res["discrete"]["messages"] = np.empty((n_samps["messages"]), dtype=dtype)
         res["eye_idx"] = None  # in case we get input/button before START
         while etype != event_constants.get("NO_PENDING_ITEMS"):
             etype = edf_get_next_data(edf)
             if etype not in event_constants:
-                raise RuntimeError("unknown type %s" % event_constants[etype])
+                raise RuntimeError(f"unknown type {event_constants[etype]}")
             ets = event_constants[etype]
             _element_handlers[ets](edf, res)
         _element_handlers["VERSION"](res)
@@ -521,7 +520,7 @@ def _handle_message(edf, res):
     msg = msg.decode("UTF-8")
     msg = "".join([i if ord(i) < 128 else "" for i in msg])
     if len(msg) > _MAX_MSG_LEN:
-        warnings.warn("Message truncated to %s characters:\n%s" % (_MAX_MSG_LEN, msg))
+        warnings.warn(f"Message truncated to {_MAX_MSG_LEN} characters:\n{msg}")
     off = res["offsets"]["messages"]
     res["discrete"]["messages"]["stime"][off] = e.sttime
     res["discrete"]["messages"]["msg"][off] = msg[:_MAX_MSG_LEN]
@@ -543,7 +542,7 @@ def _handle_end(edf, res, name):
         elif name == "inputs":
             f = ["sttime", "input"]
         else:
-            raise KeyError("Unknown name %s" % name)
+            raise KeyError(f"Unknown name {name}")
         res["edf_fields"][name] = f
         our_names = [_el2pp[field] for field in f]
         dtype = [(ff, np.float64) for ff in our_names]
