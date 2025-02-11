@@ -25,6 +25,10 @@ def test_read_raw():
             # XXX: ideally we should get a binocular file with a calibration
             assert edf_file["info"]["eye"] == "BINOCULAR"
             assert len(edf_file["discrete"]["blinks"]) == 195
+            np.testing.assert_equal(edf_file["discrete"]["starts"]["stime"][0], 0.0)
+            np.testing.assert_almost_equal(
+                edf_file["discrete"]["ends"]["stime"][-1], 199.644
+                )
 
         elif fname.name == "test_2_raw.edf":  # First test file has this property
             for kind in ['saccades', 'fixations', 'blinks']:

@@ -151,6 +151,8 @@ _ets2pp = dict(
     BUTTONEVENT="buttons",
     INPUTEVENT="inputs",
     MESSAGEEVENT="messages",
+    STARTEVENTS="starts",
+    ENDEVENTS="ends",
 )
 
 
@@ -209,7 +211,16 @@ def _read_raw_edf(fname):
     #
     discrete = res["discrete"]
     info = res["info"]
-    event_types = ("saccades", "fixations", "blinks", "buttons", "inputs", "messages")
+    event_types = (
+        "saccades",
+        "fixations",
+        "blinks",
+        "buttons",
+        "inputs",
+        "messages",
+        "starts",
+        "ends",
+        )
     info["sample_fields"] = info["sample_fields"][1:]  # omit time
 
     #
@@ -541,6 +552,10 @@ def _handle_end(edf, res, name):
             f = ["sttime", "buttons"]
         elif name == "inputs":
             f = ["sttime", "input"]
+        elif name == "starts":
+            f = ["sttime"]
+        elif name == "ends":
+            f = ["sttime"]
         else:
             raise KeyError(f"Unknown name {name}")
         res["edf_fields"][name] = f
@@ -592,7 +607,7 @@ _element_handlers = dict(
     BREAKPARSE=_handle_pass,
     STARTSAMPLES=_handle_pass,
     ENDSAMPLES=_handle_pass,
-    STARTEVENTS=_handle_pass,
-    ENDEVENTS=_handle_pass,
+    STARTEVENTS=partial(_handle_end, name="starts"),
+    ENDEVENTS=partial(_handle_end, name="ends"),
     VERSION=_handle_version,
 )
