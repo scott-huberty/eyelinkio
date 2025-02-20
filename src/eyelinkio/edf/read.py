@@ -68,6 +68,184 @@ class EDF(dict):
     ----------
     fname : str
         The name of the EDF file.
+
+    Attributes
+    ----------
+    info : dict
+        A :class:`dict` containing information about the EDF file, with keys:
+
+        filename: str
+            The name of the file.
+        meas_date : datetime
+            The date and time that the data was recorded. This datetime is
+            timezone-naive, as the timezone is not stored in the EDF file.
+        version : str
+            The EyeLink tracker version that was used to record the data.
+            For example, ``"EYELINK II 1"``, or
+            ``"EYELINK REVISION 2.10 (Jun 13 2002)"``. This is extracted from
+            the EDF file preamble, and corresponds to the line beginning with
+            ``"** VERSION:`` in an ASCII (``.asc``) converted file.
+        edfapi_version : str
+            The version of the EDF API that was used to read the data from the
+            EDF file. This is extracted from the EDF file preamble, and corresponds
+            to the line beginning with ``"** CONVERTED FROM"`` in an ASCII (``.asc``)
+            converted file.
+            For example, ``"4.2.1197.0 MacOS X   standalone Sep 27 2024"``.
+        camera : str
+            The camera type that was used to record the data. This is extracted
+            from the EDF file preamble, and corresponds to the line beginning with
+            ``"** CAMERA:`` in an ASCII (``.asc``) converted file. Below are a few
+            possible values (non-exhaustive):
+
+                - ``"EYELINK II CL v5.15 Jan 24 2018"``
+                - ``"Eyelink GL Version 1.2 Sensor=AJ7"``
+                - ``"EyeLink CL Version 1.4 Sensor=BG5"``
+                - ``"EyeLink CL-OL BASE Version 1.0 Sensor=AH7"``
+                - ``"EyeLink CL-OL HEAD Version 1.0 Sensor=BGC"``
+
+        serial : str
+            The serial number of the EyeLink tracker that was used to record the
+            data, usually in the form of ``"CLG-XXXX"``. This is extracted from the
+            EDF file preamble, and corresponds to the line beginning with
+            ``"** SERIAL NUMBER:`` in an ASCII (``.asc``) converted file.
+        camera_config : str
+            The camera configuration that was used to record the data, for example,
+            ``"ACA32140.SCD"``. This is extracted from the EDF file preamble, and
+            corresponds to the line beginning with ``"** CAMERA_CONFIG:`` in an ASCII
+            (``.asc``) converted file.
+        sfreq : float
+            The sampling frequency of the data, in Hz.
+        ps_units :
+            The unit used to measure pupil size. This will be either ``"PUPIL_AREA"``,
+            or ``"PUPIL_DIAMETER"``, depending on whether pupil size was measured
+            as the total number of pixels within the detected pupil boundary (area), or
+            the diameter of the circle fitted to the pupil boundary (diameter).
+        eye : str
+            The eye that was recorded. This will be either ``"LEFT_EYE"``,
+            ``"RIGHT_EYE"``, or ``"BINOCULAR"`` if both eyes were recorded.
+        sample_fields : list of str
+            A list describing the data types and units of the extracted samples from the
+            EDF file. Currently this will be:
+            ``["xpos", "ypos", "ps"]`` for a monocular file, which corresponds to
+            x and y eyegaze coordinates in screen-pixels, and the pupil size.
+            For a binocular file, this will include separate fields for each eye:
+            ``["xpos_left", "ypos_left", ... "xpos_right", "ypos_right", "ps_right"]``.
+
+            In the future, options may be added to extract additional data types,
+            such as head position or eye velocity. There may also be options to extract
+            eyegaze data in different coordinate frames, such as
+            head-referenced-eye-angle (HREF), or raw pupil position.
+        screen_coords : list of int
+            The screen resolution in pixels of the monitor used in the eye-tracking
+            experiment, in the form ``[width, height]``, for example, ``[1920, 1080]``.
+        calibrations : list of dict
+            A list of dictionaries, each containing information about a calibration
+            that was performed during the experiment. Each dictionary has the following
+            keys:
+
+                - ``onset``: The time (in seconds) at which the calibration started.
+                - ``eye``: The eye that was calibrated, e.g. ``"left"`` or ``"right"``.
+                - ``model``: The calibration model used, for example, ``"HV5"``.
+                - ``validation``:
+                    A structured :class:`numpy.ndarray` with 5 columns and
+                    ``n`` rows, where n is the number of validation points. For example,
+                    an HV5 calibration has 5 validation points and thus 5 rows.
+                    Each row contains the following fields:
+
+                    - ``point_x``: The x position of the validation point on the screen,
+                      in pixels.
+                    - ``point_y``: The y position of the validation point on the screen,
+                      in pixels.
+                    - ``offset``: The offset between the validation point and the gaze
+                      position, in pixels.
+                    - ``diff_x``: The difference between the x position of the gaze and
+                      the validation point, in pixels.
+                    - ``diff_y``: The difference between the y position of the gaze and
+                      the validation point, in pixels.
+    discrete : dict
+        A dictionary containing ocular and stimulus events from the EDF file, with keys:
+
+            - ``saccades``:
+                A structured :class:`numpy.ndarray` containing saccade
+                events with the following fields:
+
+                - ``eye``: The eye that was recorded, either ``"left"`` or ``"right"``.
+                - ``stime``: The time (in seconds) at which the saccade started.
+                - ``etime``: The time (in seconds) at which the saccade ended.
+                - ``sxp``: The x position of the saccade start, in pixels.
+                - ``syp``: The y position of the saccade start, in pixels.
+                - ``exp``: The x position of the saccade end, in pixels.
+                - ``eyp``: The y position of the saccade end, in pixels.
+                - ``pv``: The average velocity of the saccade, in pixels per second.
+
+            - ``fixations``:
+                A structured :class:`numpy.ndarray` containing fixation
+                events with the following fields:
+
+                - ``eye``: The eye that was recorded, either ``"left"`` or ``"right"``.
+                - ``stime``: The time (in seconds) at which the fixation started.
+                - ``etime``: The time (in seconds) at which the fixation ended.
+                - ``axp``: The x position of the fixation, in pixels.
+                - ``ayp``: The y position of the fixation, in pixels.
+
+            - ``blinks``:
+                a structured :class:`numpy.ndarray` containing blink events
+                with the following fields:
+
+                - ``eye``: The eye that was recorded, either ``"left"`` or ``"right"``.
+                - ``stime``: The time (in seconds) at which the blink started.
+                - ``etime``: The time (in seconds) at which the blink ended.
+
+            - ``messages``:
+                a structured :class:`numpy.ndarray` containing stimulus
+                presentation events, with the following fields:
+
+                - ``stime``: The time (in seconds) at which the message was sent.
+                - ``msg``: The message that was sent, as a byte string.
+
+            - ``buttons``:
+                A structured :class:`numpy.ndarray` containing button press
+                events, with the following fields:
+
+                - ``stime``: The time (in seconds) at which the button was pressed.
+                - ``buttons``: The button that was pressed, as a bitmask.
+
+            - ``inputs``:
+                A structured :class:`numpy.ndarray` containing input events,
+                with the following fields:
+
+                - ``stime``: The time (in seconds) at which the input was received.
+                - ``input``: The input that was received, as a bitmask.
+
+                For example, this can be used to track the ground-truth stimulus
+                presentation times using a photodiode, by sending a pulse to the
+                Eyelink tracker's input port.
+
+            - ``starts``:
+                A structured :class:`numpy.ndarray` containing start events,
+                which indicate the start of a recording period, with the following
+                fields:
+
+                - ``stime``: The time in seconds that the recording period started.
+
+            - ``ends``:
+                A structured :class:`numpy.ndarray` containing end events, which
+                indicate the end of a recording period, with the following fields:
+
+                - ``stime``: The time in seconds that the recording period ended.
+
+    Examples
+    --------
+    >>> import eyelinkio
+    >>> fname = eyelinkio.utils._get_test_fnames()[0]
+    >>> edf = eyelinkio.read_edf(fname)
+    >>> keys = edf.keys() # ['info', 'discrete', 'times', 'samples']
+    >>> edf['info']['eye']
+    'LEFT_EYE'
+    >>> first_saccade = edf['discrete']['saccades'][0] # first saccade
+    >>> edf['discrete']['saccades']['stime'][:3] # First 3 saccades start times
+    array([0.077, 0.226, 0.391])
+    >>> messages = edf['discrete']['messages']['msg'] # stimulus presentation messages
     """
 
     def __init__(self, fname):
@@ -103,6 +281,13 @@ class EDF(dict):
         df_samples : dict of DataFrame
             A dictionary of :class:`~pandas.DataFrame`'s, containing the samples,
             blinks, saccades, fixations, messages, and calibrations.
+
+        Examples
+        --------
+        >>> import eyelinkio
+        >>> fname = eyelinkio.utils._get_test_fnames()[0]
+        >>> edf = eyelinkio.read_edf(fname)
+        >>> dfs = edf.to_pandas()
         """
         from ..utils import to_pandas
         return to_pandas(self)
@@ -116,6 +301,15 @@ class EDF(dict):
             An instance of Raw.
         calibrations : list of Calibration
             A list of Calibration objects.
+
+        Examples
+        --------
+        >>> import eyelinkio
+        >>> import mne
+        >>> mne.set_log_level("WARNING")
+        >>> fname = eyelinkio.utils._get_test_fnames()[0]
+        >>> edf = eyelinkio.read_edf(fname)
+        >>> raw, cals = edf.to_mne()
         """
         from ..utils import to_mne
         return to_mne(self)
