@@ -39,7 +39,7 @@
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="_static/documentation_options.js?v=3a37ca16"></script>
+    <script src="_static/documentation_options.js?v=25c314cd"></script>
     <script src="_static/doctools.js?v=9bcbadda"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'API';</script>
@@ -393,6 +393,208 @@ dictionary. To see the available keys, use the <code class="docutils literal not
 </dd>
 </dl>
 </dd>
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
+<dd class="field-even"><dl>
+<dt><strong>info</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><code class="docutils literal notranslate"><span class="pre">dict</span></code></a></span></dt><dd><p>A <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a> containing information about the EDF file, with keys:</p>
+<dl>
+<dt>filename: str</dt><dd><p>The name of the file.</p>
+</dd>
+<dt>meas_date<span class="classifier">datetime</span></dt><dd><p>The date and time that the data was recorded. This datetime is
+timezone-naive, as the timezone is not stored in the EDF file.</p>
+</dd>
+<dt>version<span class="classifier">str</span></dt><dd><p>The EyeLink tracker version that was used to record the data.
+For example, <code class="docutils literal notranslate"><span class="pre">&quot;EYELINK</span> <span class="pre">II</span> <span class="pre">1&quot;</span></code>, or
+<code class="docutils literal notranslate"><span class="pre">&quot;EYELINK</span> <span class="pre">REVISION</span> <span class="pre">2.10</span> <span class="pre">(Jun</span> <span class="pre">13</span> <span class="pre">2002)&quot;</span></code>. This is extracted from
+the EDF file preamble, and corresponds to the line beginning with
+<code class="docutils literal notranslate"><span class="pre">&quot;**</span> <span class="pre">VERSION:</span></code> in an ASCII (<code class="docutils literal notranslate"><span class="pre">.asc</span></code>) converted file.</p>
+</dd>
+<dt>edfapi_version<span class="classifier">str</span></dt><dd><p>The version of the EDF API that was used to read the data from the
+EDF file. This is extracted from the EDF file preamble, and corresponds
+to the line beginning with <code class="docutils literal notranslate"><span class="pre">&quot;**</span> <span class="pre">CONVERTED</span> <span class="pre">FROM&quot;</span></code> in an ASCII (<code class="docutils literal notranslate"><span class="pre">.asc</span></code>)
+converted file.
+For example, <code class="docutils literal notranslate"><span class="pre">&quot;4.2.1197.0</span> <span class="pre">MacOS</span> <span class="pre">X</span>&#160;&#160; <span class="pre">standalone</span> <span class="pre">Sep</span> <span class="pre">27</span> <span class="pre">2024&quot;</span></code>.</p>
+</dd>
+<dt>camera<span class="classifier">str</span></dt><dd><p>The camera type that was used to record the data. This is extracted
+from the EDF file preamble, and corresponds to the line beginning with
+<code class="docutils literal notranslate"><span class="pre">&quot;**</span> <span class="pre">CAMERA:</span></code> in an ASCII (<code class="docutils literal notranslate"><span class="pre">.asc</span></code>) converted file. Below are a few
+possible values (non-exhaustive):</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;EYELINK</span> <span class="pre">II</span> <span class="pre">CL</span> <span class="pre">v5.15</span> <span class="pre">Jan</span> <span class="pre">24</span> <span class="pre">2018&quot;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;Eyelink</span> <span class="pre">GL</span> <span class="pre">Version</span> <span class="pre">1.2</span> <span class="pre">Sensor=AJ7&quot;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;EyeLink</span> <span class="pre">CL</span> <span class="pre">Version</span> <span class="pre">1.4</span> <span class="pre">Sensor=BG5&quot;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;EyeLink</span> <span class="pre">CL-OL</span> <span class="pre">BASE</span> <span class="pre">Version</span> <span class="pre">1.0</span> <span class="pre">Sensor=AH7&quot;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;EyeLink</span> <span class="pre">CL-OL</span> <span class="pre">HEAD</span> <span class="pre">Version</span> <span class="pre">1.0</span> <span class="pre">Sensor=BGC&quot;</span></code></p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>serial<span class="classifier">str</span></dt><dd><p>The serial number of the EyeLink tracker that was used to record the
+data, usually in the form of <code class="docutils literal notranslate"><span class="pre">&quot;CLG-XXXX&quot;</span></code>. This is extracted from the
+EDF file preamble, and corresponds to the line beginning with
+<code class="docutils literal notranslate"><span class="pre">&quot;**</span> <span class="pre">SERIAL</span> <span class="pre">NUMBER:</span></code> in an ASCII (<code class="docutils literal notranslate"><span class="pre">.asc</span></code>) converted file.</p>
+</dd>
+<dt>camera_config<span class="classifier">str</span></dt><dd><p>The camera configuration that was used to record the data, for example,
+<code class="docutils literal notranslate"><span class="pre">&quot;ACA32140.SCD&quot;</span></code>. This is extracted from the EDF file preamble, and
+corresponds to the line beginning with <code class="docutils literal notranslate"><span class="pre">&quot;**</span> <span class="pre">CAMERA_CONFIG:</span></code> in an ASCII
+(<code class="docutils literal notranslate"><span class="pre">.asc</span></code>) converted file.</p>
+</dd>
+<dt>sfreq<span class="classifier">float</span></dt><dd><p>The sampling frequency of the data, in Hz.</p>
+</dd>
+<dt>ps_units :</dt><dd><p>The unit used to measure pupil size. This will be either <code class="docutils literal notranslate"><span class="pre">&quot;PUPIL_AREA&quot;</span></code>,
+or <code class="docutils literal notranslate"><span class="pre">&quot;PUPIL_DIAMETER&quot;</span></code>, depending on whether pupil size was measured
+as the total number of pixels within the detected pupil boundary (area), or
+the diameter of the circle fitted to the pupil boundary (diameter).</p>
+</dd>
+<dt>eye<span class="classifier">str</span></dt><dd><p>The eye that was recorded. This will be either <code class="docutils literal notranslate"><span class="pre">&quot;LEFT_EYE&quot;</span></code>,
+<code class="docutils literal notranslate"><span class="pre">&quot;RIGHT_EYE&quot;</span></code>, or <code class="docutils literal notranslate"><span class="pre">&quot;BINOCULAR&quot;</span></code> if both eyes were recorded.</p>
+</dd>
+<dt>sample_fields<span class="classifier">list of str</span></dt><dd><p>A list describing the data types and units of the extracted samples from the
+EDF file. Currently this will be:
+<code class="docutils literal notranslate"><span class="pre">[&quot;xpos&quot;,</span> <span class="pre">&quot;ypos&quot;,</span> <span class="pre">&quot;ps&quot;]</span></code> for a monocular file, which corresponds to
+x and y eyegaze coordinates in screen-pixels, and the pupil size.
+For a binocular file, this will include separate fields for each eye:
+<code class="docutils literal notranslate"><span class="pre">[&quot;xpos_left&quot;,</span> <span class="pre">&quot;ypos_left&quot;,</span> <span class="pre">...</span> <span class="pre">&quot;xpos_right&quot;,</span> <span class="pre">&quot;ypos_right&quot;,</span> <span class="pre">&quot;ps_right&quot;]</span></code>.</p>
+<p>In the future, options may be added to extract additional data types,
+such as head position or eye velocity. There may also be options to extract
+eyegaze data in different coordinate frames, such as
+head-referenced-eye-angle (HREF), or raw pupil position.</p>
+</dd>
+<dt>screen_coords<span class="classifier">list of int</span></dt><dd><p>The screen resolution in pixels of the monitor used in the eye-tracking
+experiment, in the form <code class="docutils literal notranslate"><span class="pre">[width,</span> <span class="pre">height]</span></code>, for example, <code class="docutils literal notranslate"><span class="pre">[1920,</span> <span class="pre">1080]</span></code>.</p>
+</dd>
+<dt>calibrations<span class="classifier">list of dict</span></dt><dd><p>A list of dictionaries, each containing information about a calibration
+that was performed during the experiment. Each dictionary has the following
+keys:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">onset</span></code>: The time (in seconds) at which the calibration started.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">eye</span></code>: The eye that was calibrated, e.g. <code class="docutils literal notranslate"><span class="pre">&quot;left&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;right&quot;</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">model</span></code>: The calibration model used, for example, <code class="docutils literal notranslate"><span class="pre">&quot;HV5&quot;</span></code>.</p></li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">validation</span></code>:</dt><dd><p>A structured <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a> with 5 columns and
+<code class="docutils literal notranslate"><span class="pre">n</span></code> rows, where n is the number of validation points. For example,
+an HV5 calibration has 5 validation points and thus 5 rows.
+Each row contains the following fields:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">point_x</span></code>: The x position of the validation point on the screen,
+in pixels.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">point_y</span></code>: The y position of the validation point on the screen,
+in pixels.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">offset</span></code>: The offset between the validation point and the gaze
+position, in pixels.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">diff_x</span></code>: The difference between the x position of the gaze and
+the validation point, in pixels.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">diff_y</span></code>: The difference between the y position of the gaze and
+the validation point, in pixels.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+</dd>
+</dl>
+</dd>
+<dt><strong>discrete</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><code class="docutils literal notranslate"><span class="pre">dict</span></code></a></span></dt><dd><p>A dictionary containing ocular and stimulus events from the EDF file, with keys:</p>
+<blockquote>
+<div><ul>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">saccades</span></code>:</dt><dd><p>A structured <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a> containing saccade
+events with the following fields:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">eye</span></code>: The eye that was recorded, either <code class="docutils literal notranslate"><span class="pre">&quot;left&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;right&quot;</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">stime</span></code>: The time (in seconds) at which the saccade started.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">etime</span></code>: The time (in seconds) at which the saccade ended.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sxp</span></code>: The x position of the saccade start, in pixels.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">syp</span></code>: The y position of the saccade start, in pixels.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">exp</span></code>: The x position of the saccade end, in pixels.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">eyp</span></code>: The y position of the saccade end, in pixels.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pv</span></code>: The average velocity of the saccade, in pixels per second.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">fixations</span></code>:</dt><dd><p>A structured <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a> containing fixation
+events with the following fields:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">eye</span></code>: The eye that was recorded, either <code class="docutils literal notranslate"><span class="pre">&quot;left&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;right&quot;</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">stime</span></code>: The time (in seconds) at which the fixation started.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">etime</span></code>: The time (in seconds) at which the fixation ended.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">axp</span></code>: The x position of the fixation, in pixels.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ayp</span></code>: The y position of the fixation, in pixels.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">blinks</span></code>:</dt><dd><p>a structured <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a> containing blink events
+with the following fields:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">eye</span></code>: The eye that was recorded, either <code class="docutils literal notranslate"><span class="pre">&quot;left&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;right&quot;</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">stime</span></code>: The time (in seconds) at which the blink started.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">etime</span></code>: The time (in seconds) at which the blink ended.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">messages</span></code>:</dt><dd><p>a structured <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a> containing stimulus
+presentation events, with the following fields:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">stime</span></code>: The time (in seconds) at which the message was sent.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">msg</span></code>: The message that was sent, as a byte string.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">buttons</span></code>:</dt><dd><p>A structured <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a> containing button press
+events, with the following fields:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">stime</span></code>: The time (in seconds) at which the button was pressed.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">buttons</span></code>: The button that was pressed, as a bitmask.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt><code class="docutils literal notranslate"><span class="pre">inputs</span></code>:</dt><dd><p>A structured <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a> containing input events,
+with the following fields:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">stime</span></code>: The time (in seconds) at which the input was received.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">input</span></code>: The input that was received, as a bitmask.</p></li>
+</ul>
+<p>For example, this can be used to track the ground-truth stimulus
+presentation times using a photodiode, by sending a pulse to the
+Eyelink tracker’s input port.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">starts</span></code>:</dt><dd><p>A structured <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a> containing start events,
+which indicate the start of a recording period, with the following
+fields:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">stime</span></code>: The time in seconds that the recording period started.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">ends</span></code>:</dt><dd><p>A structured <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a> containing end events, which
+indicate the end of a recording period, with the following fields:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">stime</span></code>: The time in seconds that the recording period ended.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+</dd>
+</dl>
+</dd>
 </dl>
 <p class="rubric">Methods</p>
 <div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
@@ -405,6 +607,19 @@ dictionary. To see the available keys, use the <code class="docutils literal not
 </tr>
 </tbody>
 </table>
+</div>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">eyelinkio</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fname</span> <span class="o">=</span> <span class="n">eyelinkio</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">_get_test_fnames</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">edf</span> <span class="o">=</span> <span class="n">eyelinkio</span><span class="o">.</span><span class="n">read_edf</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">keys</span> <span class="o">=</span> <span class="n">edf</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="c1"># [&#39;info&#39;, &#39;discrete&#39;, &#39;times&#39;, &#39;samples&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">edf</span><span class="p">[</span><span class="s1">&#39;info&#39;</span><span class="p">][</span><span class="s1">&#39;eye&#39;</span><span class="p">]</span>
+<span class="go">&#39;LEFT_EYE&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">first_saccade</span> <span class="o">=</span> <span class="n">edf</span><span class="p">[</span><span class="s1">&#39;discrete&#39;</span><span class="p">][</span><span class="s1">&#39;saccades&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># first saccade</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">edf</span><span class="p">[</span><span class="s1">&#39;discrete&#39;</span><span class="p">][</span><span class="s1">&#39;saccades&#39;</span><span class="p">][</span><span class="s1">&#39;stime&#39;</span><span class="p">][:</span><span class="mi">3</span><span class="p">]</span> <span class="c1"># First 3 saccades start times</span>
+<span class="go">array([0.077, 0.226, 0.391])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">messages</span> <span class="o">=</span> <span class="n">edf</span><span class="p">[</span><span class="s1">&#39;discrete&#39;</span><span class="p">][</span><span class="s1">&#39;messages&#39;</span><span class="p">][</span><span class="s1">&#39;msg&#39;</span><span class="p">]</span> <span class="c1"># stimulus presentation messages</span>
+</pre></div>
 </div>
 <dl class="py method">
 <dt class="sig sig-object py" id="eyelinkio.EDF.to_mne">
@@ -420,6 +635,15 @@ dictionary. To see the available keys, use the <code class="docutils literal not
 </dl>
 </dd>
 </dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">eyelinkio</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">mne</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mne</span><span class="o">.</span><span class="n">set_log_level</span><span class="p">(</span><span class="s2">&quot;WARNING&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fname</span> <span class="o">=</span> <span class="n">eyelinkio</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">_get_test_fnames</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">edf</span> <span class="o">=</span> <span class="n">eyelinkio</span><span class="o">.</span><span class="n">read_edf</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">raw</span><span class="p">,</span> <span class="n">cals</span> <span class="o">=</span> <span class="n">edf</span><span class="o">.</span><span class="n">to_mne</span><span class="p">()</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -435,6 +659,13 @@ blinks, saccades, fixations, messages, and calibrations.</p>
 </dl>
 </dd>
 </dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">eyelinkio</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fname</span> <span class="o">=</span> <span class="n">eyelinkio</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">_get_test_fnames</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">edf</span> <span class="o">=</span> <span class="n">eyelinkio</span><span class="o">.</span><span class="n">read_edf</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dfs</span> <span class="o">=</span> <span class="n">edf</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span>
+</pre></div>
+</div>
 </dd></dl>
 
 </dd></dl>
