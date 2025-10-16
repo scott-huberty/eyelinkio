@@ -39,7 +39,7 @@
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="_static/documentation_options.js?v=25c314cd"></script>
+    <script src="_static/documentation_options.js?v=7ee9836c"></script>
     <script src="_static/doctools.js?v=9bcbadda"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'API';</script>
@@ -364,7 +364,7 @@ for class names.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
-<dt><strong>fname</strong><span class="classifier"><a class="reference external" href="https://mne.tools/dev/documentation/glossary.html#term-path-like" title="(in MNE v1.10)"><span class="xref std std-term">path-like</span></a></span></dt><dd><p>The name of the EDF file.</p>
+<dt><strong>fname</strong><span class="classifier"><a class="reference external" href="https://mne.tools/dev/documentation/glossary.html#term-path-like" title="(in MNE v1.11)"><span class="xref std std-term">path-like</span></a></span></dt><dd><p>The name of the EDF file.</p>
 </dd>
 </dl>
 </dd>
@@ -384,18 +384,18 @@ for class names.</p>
 <dt class="sig sig-object py" id="eyelinkio.EDF">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">eyelinkio.</span></span><span class="sig-name descname"><span class="pre">EDF</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fname</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#eyelinkio.EDF" title="Link to this definition">#</a></dt>
 <dd><p>Represent EyeLink EDF files in Python.</p>
-<p>This class is a subclass of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>, and so can be indexed like a
+<p>This class is a subclass of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>, and so can be indexed like a
 dictionary. To see the available keys, use the <code class="docutils literal notranslate"><span class="pre">keys()</span></code> method.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
-<dt><strong>fname</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="docutils literal notranslate"><span class="pre">str</span></code></a></span></dt><dd><p>The name of the EDF file.</p>
+<dt><strong>fname</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">str</span></code></a></span></dt><dd><p>The name of the EDF file.</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Attributes<span class="colon">:</span></dt>
 <dd class="field-even"><dl>
-<dt><strong>info</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><code class="docutils literal notranslate"><span class="pre">dict</span></code></a></span></dt><dd><p>A <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a> containing information about the EDF file, with keys:</p>
+<dt><strong>info</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">dict</span></code></a></span></dt><dd><p>A <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a> containing information about the EDF file, with keys:</p>
 <dl>
 <dt>filename: str</dt><dd><p>The name of the file.</p>
 </dd>
@@ -471,7 +471,7 @@ keys:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">eye</span></code>: The eye that was calibrated, e.g. <code class="docutils literal notranslate"><span class="pre">&quot;left&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;right&quot;</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">model</span></code>: The calibration model used, for example, <code class="docutils literal notranslate"><span class="pre">&quot;HV5&quot;</span></code>.</p></li>
 <li><dl class="simple">
-<dt><code class="docutils literal notranslate"><span class="pre">validation</span></code>:</dt><dd><p>A structured <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a> with 5 columns and
+<dt><code class="docutils literal notranslate"><span class="pre">validation</span></code>:</dt><dd><p>A structured <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a> with 5 columns and
 <code class="docutils literal notranslate"><span class="pre">n</span></code> rows, where n is the number of validation points. For example,
 an HV5 calibration has 5 validation points and thus 5 rows.
 Each row contains the following fields:</p>
@@ -495,11 +495,11 @@ the validation point, in pixels.</p></li>
 </dd>
 </dl>
 </dd>
-<dt><strong>discrete</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><code class="docutils literal notranslate"><span class="pre">dict</span></code></a></span></dt><dd><p>A dictionary containing ocular and stimulus events from the EDF file, with keys:</p>
+<dt><strong>discrete</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">dict</span></code></a></span></dt><dd><p>A dictionary containing ocular and stimulus events from the EDF file, with keys:</p>
 <blockquote>
 <div><ul>
 <li><dl class="simple">
-<dt><code class="docutils literal notranslate"><span class="pre">saccades</span></code>:</dt><dd><p>A structured <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a> containing saccade
+<dt><code class="docutils literal notranslate"><span class="pre">saccades</span></code>:</dt><dd><p>A structured <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a> containing saccade
 events with the following fields:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">eye</span></code>: The eye that was recorded, either <code class="docutils literal notranslate"><span class="pre">&quot;left&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;right&quot;</span></code>.</p></li>
@@ -515,7 +515,7 @@ events with the following fields:</p>
 </dl>
 </li>
 <li><dl class="simple">
-<dt><code class="docutils literal notranslate"><span class="pre">fixations</span></code>:</dt><dd><p>A structured <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a> containing fixation
+<dt><code class="docutils literal notranslate"><span class="pre">fixations</span></code>:</dt><dd><p>A structured <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a> containing fixation
 events with the following fields:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">eye</span></code>: The eye that was recorded, either <code class="docutils literal notranslate"><span class="pre">&quot;left&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;right&quot;</span></code>.</p></li>
@@ -528,7 +528,7 @@ events with the following fields:</p>
 </dl>
 </li>
 <li><dl class="simple">
-<dt><code class="docutils literal notranslate"><span class="pre">blinks</span></code>:</dt><dd><p>a structured <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a> containing blink events
+<dt><code class="docutils literal notranslate"><span class="pre">blinks</span></code>:</dt><dd><p>a structured <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a> containing blink events
 with the following fields:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">eye</span></code>: The eye that was recorded, either <code class="docutils literal notranslate"><span class="pre">&quot;left&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;right&quot;</span></code>.</p></li>
@@ -539,7 +539,7 @@ with the following fields:</p>
 </dl>
 </li>
 <li><dl class="simple">
-<dt><code class="docutils literal notranslate"><span class="pre">messages</span></code>:</dt><dd><p>a structured <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a> containing stimulus
+<dt><code class="docutils literal notranslate"><span class="pre">messages</span></code>:</dt><dd><p>a structured <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a> containing stimulus
 presentation events, with the following fields:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">stime</span></code>: The time (in seconds) at which the message was sent.</p></li>
@@ -549,7 +549,7 @@ presentation events, with the following fields:</p>
 </dl>
 </li>
 <li><dl class="simple">
-<dt><code class="docutils literal notranslate"><span class="pre">buttons</span></code>:</dt><dd><p>A structured <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a> containing button press
+<dt><code class="docutils literal notranslate"><span class="pre">buttons</span></code>:</dt><dd><p>A structured <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a> containing button press
 events, with the following fields:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">stime</span></code>: The time (in seconds) at which the button was pressed.</p></li>
@@ -559,7 +559,7 @@ events, with the following fields:</p>
 </dl>
 </li>
 <li><dl>
-<dt><code class="docutils literal notranslate"><span class="pre">inputs</span></code>:</dt><dd><p>A structured <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a> containing input events,
+<dt><code class="docutils literal notranslate"><span class="pre">inputs</span></code>:</dt><dd><p>A structured <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a> containing input events,
 with the following fields:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">stime</span></code>: The time (in seconds) at which the input was received.</p></li>
@@ -572,7 +572,7 @@ Eyelink tracker’s input port.</p>
 </dl>
 </li>
 <li><dl class="simple">
-<dt><code class="docutils literal notranslate"><span class="pre">starts</span></code>:</dt><dd><p>A structured <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a> containing start events,
+<dt><code class="docutils literal notranslate"><span class="pre">starts</span></code>:</dt><dd><p>A structured <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a> containing start events,
 which indicate the start of a recording period, with the following
 fields:</p>
 <ul class="simple">
@@ -582,7 +582,7 @@ fields:</p>
 </dl>
 </li>
 <li><dl class="simple">
-<dt><code class="docutils literal notranslate"><span class="pre">ends</span></code>:</dt><dd><p>A structured <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a> containing end events, which
+<dt><code class="docutils literal notranslate"><span class="pre">ends</span></code>:</dt><dd><p>A structured <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a> containing end events, which
 indicate the end of a recording period, with the following fields:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">stime</span></code>: The time in seconds that the recording period ended.</p></li>
@@ -628,9 +628,9 @@ indicate the end of a recording period, with the following fields:</p>
 <dl class="field-list">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
-<dt><strong>raw</strong><span class="classifier"><a class="reference external" href="https://mne.tools/dev/generated/mne.io.Raw.html#mne.io.Raw" title="(in MNE v1.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RawEyelink</span></code></a></span></dt><dd><p>An instance of Raw.</p>
+<dt><strong>raw</strong><span class="classifier"><a class="reference external" href="https://mne.tools/dev/generated/mne.io.Raw.html#mne.io.Raw" title="(in MNE v1.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RawEyelink</span></code></a></span></dt><dd><p>An instance of Raw.</p>
 </dd>
-<dt><strong>calibrations</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><code class="docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference external" href="https://mne.tools/dev/generated/mne.preprocessing.eyetracking.Calibration.html#mne.preprocessing.eyetracking.Calibration" title="(in MNE v1.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Calibration</span></code></a></span></dt><dd><p>A list of Calibration objects.</p>
+<dt><strong>calibrations</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference external" href="https://mne.tools/dev/generated/mne.preprocessing.eyetracking.Calibration.html#mne.preprocessing.eyetracking.Calibration" title="(in MNE v1.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Calibration</span></code></a></span></dt><dd><p>A list of Calibration objects.</p>
 </dd>
 </dl>
 </dd>
@@ -653,7 +653,7 @@ indicate the end of a recording period, with the following fields:</p>
 <dl class="field-list">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
-<dt><strong>df_samples</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><code class="docutils literal notranslate"><span class="pre">dict</span></code></a> of <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.3)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame</span></code></a></span></dt><dd><p>A dictionary of <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>’s, containing the samples,
+<dt><strong>df_samples</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">dict</span></code></a> of <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.3.3)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame</span></code></a></span></dt><dd><p>A dictionary of <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.3.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>’s, containing the samples,
 blinks, saccades, fixations, messages, and calibrations.</p>
 </dd>
 </dl>
