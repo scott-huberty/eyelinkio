@@ -1,3 +1,5 @@
+#this is the original Scott's readme file, only works with edfapi.dll and ctypgen properiety software libaries
+
 The edf2pygen folder contains the files needed to use ctypesgen to create a
 Python wrapper of the C EDF Access API. This directory is not needed as part
 of a end user build / distribution.

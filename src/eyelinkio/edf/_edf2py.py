@@ -48,7 +48,8 @@ def get_lib_path():
         lib_path = lib_path / "linux" / "libedfapi.so"
     else:
         raise OSError('Unsupported platform')
-    assert lib_path.exists(), f"libedfapi.so not found at {lib_path}"
+    if not lib_path.exists():
+        raise OSError(f"libedfapi not found at {lib_path}")
     return lib_path.resolve()
 
 

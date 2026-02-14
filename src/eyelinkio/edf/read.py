@@ -1,4 +1,4 @@
-"""Functions for reading Eyelink EDF Files."""
+"""reading Eyelink EDF Files."""
 
 import ctypes as ct
 import re
@@ -254,6 +254,7 @@ class EDF(dict):
         info, discrete, times, samples = _read_raw_edf(fname)
         self.info = info
         self.info["filename"] = Path(fname).name
+        self._fpath = Path(fname).resolve()
         self.discrete = discrete
         self._times = times
         self._samples = samples
@@ -313,6 +314,25 @@ class EDF(dict):
         """
         from ..utils import to_mne
         return to_mne(self)
+
+    def to_asc(self, asc_path=None, **kwargs):
+        """Convert the EDF file to ASCII (.asc) format.
+
+        Parameters
+        ----------
+        asc_path : path-like or None
+            The output path for the ASCII file. If None, the EDF
+            file extension is replaced with '.asc'.
+        **kwargs
+            Additional keyword arguments passed to :func:`to_asc`.
+
+        Returns
+        -------
+        asc_path : Path
+            The path to the generated ASCII file.
+        """
+        from .to_asc import to_asc
+        return to_asc(self._fpath, asc_path, **kwargs)
 
 class _edf_open:
     """Context manager for opening EDF files."""
