@@ -323,7 +323,7 @@ class _edf_open:
 
     def __enter__(self):
         error_code = ct.c_int(1)
-        self.fid = edf_open_file(self.fname, 2, 1, 1, ct.byref(error_code))
+        self.fid = edf_open_file(self.fname, 0, 1, 1, ct.byref(error_code))
         if self.fid is None or error_code.value != 0:
             raise OSError(
                 f"Could not open file {self.fname}: ({self.fid}, {error_code.value})"
